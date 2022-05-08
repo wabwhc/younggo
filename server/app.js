@@ -42,9 +42,9 @@ app.get('/main', (req, res) => {
     res.render('main.html', {useremail : req.user})
 })
 app.get('/board', (req, res) => {
-    let sql = 'select article_title, useremail from articles'
+    let sql = 'select article_id, article_title, useremail from articles'
     conn.query(sql, (err, result, filed) => {
-        res.render('board.html', {article : JSON.stringify(result)});
+        res.render('board.html', {article : result});
     })
 })
 
