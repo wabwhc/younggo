@@ -39,10 +39,29 @@ app.get('/', (req, res) => {
     res.render('main.html');
 })
 app.get('/main', (req, res) => {
-    res.render('main.html', {useremail : req.user})
+    let  isLogin
+    if(req.user === undefined){
+        isLogin = false;
+    }else{
+        isLogin = true;
+    }
+    res.render('main.html', {useremail : req.user, isLogin : isLogin})
 })
+
+app.get('/profile', (req, res) => {
+    if(req.user === undefined){
+        res.redirect('/login')
+    }else{
+        let sql = 'select * from users where useremail = ?'
+        conn.query(sql, [req.user],(err, result, filed) => {
+            console.log(result)
+            res.render('profile.html', {user : result[0]});
+        })
+    }
+})
+
 app.get('/board', (req, res) => {
-    let sql = 'select article_id, article_title, useremail from articles'
+    let sql = 'select article_id, article_title, useremail, category from articles'
     conn.query(sql, (err, result, filed) => {
         res.render('board.html', {article : result});
     })
@@ -55,9 +74,25 @@ app.post('/login', passport.authenticate('local', {
 }))
 
 app.get('/login', (req, res) => {
-    res.render('login.html',{ message : req.flash("error")});
+    if(req.user === undefined){
+        res.render('login.html',{ message : req.flash("error")});
+    }else{
+        res.redirect('/main')
+    }
 })
 
+app.get('/subjects', (req, res) => {
+    let sql1 = 'select * from lessons'
+    let sql2 = 'select * from studys'
+    let results = {}
+    conn.query(sql1, (err, result1, field1) => {
+        results.lessons = result1;
+        conn.query(sql2, (err, result2, field2) => {
+            results.studys = result2;
+        })
+        res.render('subjects.html', {results})
+    })
+})
 
 app.listen(8080, () => {
     console.log('8080 conn')
