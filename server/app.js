@@ -32,7 +32,7 @@ nunjucks.configure('views', {
 pass()
 app.use(flash())
 
-app.use('/public', express.static(path.join(__dirname, '../public')))
+app.use('/public', express.static(path.join(__dirname, '../views/public')))
 
 
 app.get('/', (req, res) => {
