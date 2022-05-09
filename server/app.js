@@ -82,15 +82,17 @@ app.get('/login', (req, res) => {
 })
 
 app.get('/subjects', (req, res) => {
-    let sql1 = 'select * from lessons'
-    let sql2 = 'select * from studys'
+
+    let sql1 = 'select * from lessons a join (select count(useremail) count, lesson_id from apply_lesson group by lesson_id) b on a.lesson_id = b.lesson_id';
+    let sql2 = 'select * from studys a join (select count(useremail) count, study_id from apply_study group by study_id) b on a.study_id = b.study_id';
+
     let results = {}
     conn.query(sql1, (err, result1, field1) => {
         results.lessons = result1;
         conn.query(sql2, (err, result2, field2) => {
             results.studys = result2;
+            res.render('subjects.html', {results})
         })
-        res.render('subjects.html', {results})
     })
 })
 
