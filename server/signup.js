@@ -17,7 +17,7 @@ router.post('/', (req, res) => {
     let usercode = req.body.usercode;
     let phonenum = req.body.phonenum;
     let usercomment = req.body.usercomment;
-    if(usercode !== process.env.usercode){
+    if(usercode !== process.env.usercode && usercode !== ''){
         res.send('유저코드이상')
     }else{
         let sql = 'select * from users where useremail = ?';
