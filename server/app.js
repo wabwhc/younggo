@@ -36,7 +36,7 @@ app.use('/public', express.static(path.join(__dirname, '../views/public')))
 
 
 app.get('/', (req, res) => {
-    res.render('main.html');
+    res.redirect('/main')
 })
 app.get('/main', (req, res) => {
     let  isLogin
