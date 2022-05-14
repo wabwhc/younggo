@@ -1,13 +1,29 @@
 {% extends 'layout.html' %}
 
 {% block content%}
-    <login><h1>로그인입니다.</h1></login>
-{{message}}
-    <form action="/login" method="post">
-        <input type="text" name="useremail" placeholder="이메일">
-        <span id="loginEmailCheck"></span>
-        <input type="password" name="password" placeholder="비밀번호">
-        <span id="loginPasswordCheck"></span>
-        <button>버튼</button>
-    </form>
+<login><h1>로그인입니다.</h1></login>
+<form action="/login" method="post">
+    <table>
+        <tr>
+            <td>이메일</td>
+            <td><input type="text" name="useremail" placeholder="이메일"></td>
+            <td><span id="loginEmailCheck">id가 다를때 입력되는 메시지 : {{message}}</span></td>
+        </tr>
+        <tr>
+            <td>비밀번호</td>
+            <td><input type="password" name="password" placeholder="비밀번호"></td>
+            <td><span id="loginPasswordCheck">pw가 다를때 입력되는 메시지 : {{message}}</span></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td><span>만약 아무것도 입력하지 않았을경우 Missing credentials 대신 입력해달라고 나오도록 수정 필요</span></td>
+        </tr>
+        <tr>
+            <td>
+                <button>버튼</button>
+            </td>
+        </tr>
+    </table>
+</form>
 {% endblock %}
