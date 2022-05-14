@@ -3,14 +3,14 @@
 {% block content%}
     <form action="/signup" method="post">
         <input type="text" name="useremail" placeholder="이메일" onchange="">
-        <span id="emailCheck"></span>
+        <span id="emailCheck">이메일 중복확인 문구 출력</span>
         <input type="password" name="password" id="pw1" placeholder="비밀번호" onchange="">
         <input type="password" name="password2" id="pw2" placeholder="비밀번호 확인" onchange="">
-        <span id="passwordCheck"></span>
+        <span id="passwordCheck">비밀번호가 같은지 확인 문구 출력</span>
         <input type="text" name="username" placeholder="실명">
         <input type="text" name="usercode" placeholder="유저코드">
         <input type="number" name="phonenum" placeholder="핸드폰번호" onchange="">
-        <span id="phoneCheck"></span>
+        <span id="phoneCheck">휴대폰번호 양식이 맞는지 문구 출력</span>
         <input type="text" name="usercomment" placeholder="코멘트">
         <button>버튼</button>
     </form>
