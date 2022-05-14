@@ -1,0 +1,36 @@
+/*기본적인 초기화 작업들*/
+* {
+    margin: 0;
+    padding: 0;
+}
+a {
+    text-decoration: none;
+}
+li {
+    list-style: none;
+}
+
+/* 전체영역 */
+body {
+    width: 80%;
+    margin: 0 auto;
+    background-position: center;
+}
+#wrap {
+    background-color: skyblue;
+}
+
+/* header영역 */
+#userInfo {
+    display: inline;
+    float: right;
+}
+
+/* footer영역 */
+
+
+/* login영역 */
+
+/* signup영역 */
+
+/* profile영역 */
