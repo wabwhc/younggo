@@ -6,18 +6,19 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{title}}</title>
-    <link rel="stylesheet" href="./index.css"/>
+    <link rel="stylesheet" href="public/css/index.css"/>
 </head>
 <body>
 <div id="wrap">
+
     {% include 'header.html' %}
 
     {% block content%}
     {% endblock %}
 
-
     {% include 'nav.html' %}
     {% include 'footer.html' %}
+
 </div>
 </body>
 </html>
