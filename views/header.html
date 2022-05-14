@@ -1,12 +1,18 @@
 <header>
-    <a href="/main"> 메인페이지로 </a>
+    <a href="/"> 메인페이지로 </a>
     <div id="userInfo">
         {% if isLogin %}
         <a href="/profile">{{username}}님 안녕하세요</a>
-        <a href="/logout"><button>로그아웃</button></a>
-    {% else %}
+        <a href="/logout">
+            <button>로그아웃</button>
+        </a>
+        {% else %}
         <button onclick="location.href='login'">로그인</button>
         <button onclick="location.href='signup'">회원가입</button>
-    {% endif %}
+        {% endif %}
+    </div>
+    <div>
+        <h3>로그인했으면 다른페이지로 가도 로그인이 유지되도록</h3>
+        <h3>로그인시 email이 아니라 username으로 표시되도록 수정</h3>
     </div>
 </header>
