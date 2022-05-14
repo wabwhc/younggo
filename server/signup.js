@@ -4,7 +4,7 @@ const conn = require('./mysqlconn');
 
 router.get('/', (req, res) => {
     if(req.user === undefined){
-        res.render('signup.html')
+        res.render('signup.html', {title: '회원가입'})
     }else{
         res.redirect('/main')
     }
