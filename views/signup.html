@@ -60,11 +60,12 @@
 <script>
 
     async function emailcheck() {
-        let data = await axios.get('/signup/emailCheck?userenmail=${userenmail.value}');
-
+        let useremail = document.querySelector('#useremail');
         let emailCheck = document.querySelector('#emailCheck');
-        login_flag = teru;
-        if(login_flag){
+        let data = await axios.get('/signup/emailCheck?useremail=${useremail.value}');
+
+        login_flag = true;
+        if (login_flag) {
             emailCheck.innerHTML = "사용할수 있는 이메일 입니다.";
             emailCheck.style.color = 'green';
         } else {
@@ -74,6 +75,7 @@
     }
 
     let pwCheck = false;
+
     function pwcheck() {
         let pw1 = document.querySelector('#pw1').value;
         let pw2 = document.querySelector('#pw2').value;
