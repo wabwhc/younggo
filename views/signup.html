@@ -6,15 +6,10 @@
     <table>
         <tr>
             <td>이메일</td>
-            <td><input type="text" name="useremail" placeholder="이메일" onchange=""></td>
+            <td><input type="text" id="useremail" name="useremail" placeholder="이메일" onchange="" required></td>
             <td>
-                <button>중복확인</button>
+                <input type="button" value="중복확인" onclick="emailcheck()"></input>
             </td>
-
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
             <td><span id="emailCheck">axios로 db에 이메일 중복확인 문구 출력</span></td>
         </tr>
         <tr>
@@ -24,21 +19,17 @@
         </tr>
         <tr>
             <td>비밀번호</td>
-            <td><input type="password" name="password" id="pw1" placeholder="비밀번호" onchange=""></td>
+            <td><input type="password" name="password" id="pw1" placeholder="비밀번호" onchange="pwcheck()" required></td>
         </tr>
         <tr>
             <td>비민번호 확인</td>
-            <td><input type="password" name="password2" id="pw2" placeholder="비밀번호 확인" onchange=""></td>
-            <td><span id="passwordCheck">axios로 비밀번호가 같은지 확인 문구 출력</span></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td>비밀번호가 다르면 빨간색으로 비밀번호를 확인해주세요 같으면 파란색으로 일치합니다</td>
+            <td><input type="password" name="password2" id="pw2" placeholder="비밀번호 확인" onchange="pwcheck()" required>
+            </td>
+            <td><span id="passwordCheck">비밀번호가 같은지 확인 문구 출력</span></td>
         </tr>
         <tr>
             <td>이름</td>
-            <td><input type="text" name="username" placeholder="실명"></td>
+            <td><input type="text" name="username" placeholder="실명" required></td>
         </tr>
         <tr>
             <td>유저코드</td>
@@ -46,7 +37,7 @@
         </tr>
         <tr>
             <td>핸드폰번호</td>
-            <td><input type="number" name="phonenum" placeholder="핸드폰번호" onchange=""></td>
+            <td><input type="number" name="phonenum" placeholder="핸드폰번호" onchange="" required></td>
             <td><span id="phoneCheck">axios로 휴대폰번호 양식이 맞는지 문구 출력</span></td>
         </tr>
         <tr>
@@ -57,14 +48,47 @@
         <tr>
             <td>코멘트</td>
             <td><input type="text" name="usercomment" placeholder="코멘트"></td>
-
         </tr>
         <tr>
             <td>
-                <button>버튼</button>
+                <button>회원가입</button>
             </td>
         </tr>
     </table>
     <span id="buttonCheck">입력문구를 안적은 곳이 있는지 표시해줌</span>
 </form>
+<script>
+
+    async function emailcheck() {
+        let data = await axios.get('/signup/emailCheck?userenmail=${userenmail.value}');
+
+        let emailCheck = document.querySelector('#emailCheck');
+        login_flag = teru;
+        if(login_flag){
+            emailCheck.innerHTML = "사용할수 있는 이메일 입니다.";
+            emailCheck.style.color = 'green';
+        } else {
+            emailCheck.innerHTML = "이미 존재하는 이메일 입니다."
+            emailCheck.style.color = 'red';
+        }
+    }
+
+    let pwCheck = false;
+    function pwcheck() {
+        let pw1 = document.querySelector('#pw1').value;
+        let pw2 = document.querySelector('#pw2').value;
+        let passwordCheck = document.querySelector('#passwordCheck');
+        if (pw1 !== '' && pw2 !== '') {
+            if (pw1 === pw2) {
+                passwordCheck.innerHTML = "비밀번호가 일치합니다.";
+                passwordCheck.style.color = 'green';
+                pwCheck = true;
+            } else {
+                passwordCheck.innerHTML = "비밀번호를 확인해주세요.";
+                passwordCheck.style.color = 'red';
+                pwCheck = false;
+            }
+        }
+    }
+</script>
 {% endblock %}
