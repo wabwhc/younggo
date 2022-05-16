@@ -2,20 +2,15 @@
 
 {% block content%}
 <h1>회원가입 입니다.</h1>
-<form action="/signup" metdod="post">
+<form action="/signup" method="post">
     <table>
         <tr>
             <td>이메일</td>
-            <td><input type="text" id="useremail" name="useremail" placeholder="이메일" onchange="" required></td>
+            <td><input type="email" id="useremail" name="useremail" placeholder="이메일" onchange="" required></td>
             <td>
-                <input type="button" value="중복확인" onclick="emailcheck()"></input>
+                <input type="button" onclick="emailcheck()" value="중복확인"></input>
             </td>
-            <td><span id="emailCheck">axios로 db에 이메일 중복확인 문구 출력</span></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td>중복이 있으면 빨간색으로 중복 없으면 파란색으로 사용가능</td>
+            <td><span id="emailMsg"></span></td>
         </tr>
         <tr>
             <td>비밀번호</td>
@@ -25,11 +20,11 @@
             <td>비민번호 확인</td>
             <td><input type="password" name="password2" id="pw2" placeholder="비밀번호 확인" onchange="pwcheck()" required>
             </td>
-            <td><span id="passwordCheck">비밀번호가 같은지 확인 문구 출력</span></td>
+            <td><span id="passwordMsg"></span></td>
         </tr>
         <tr>
             <td>이름</td>
-            <td><input type="text" name="username" placeholder="실명" required></td>
+            <td><input type="text" name="username" id="username" placeholder="실명" required></td>
         </tr>
         <tr>
             <td>유저코드</td>
@@ -37,8 +32,9 @@
         </tr>
         <tr>
             <td>핸드폰번호</td>
-            <td><input type="number" name="phonenum" placeholder="핸드폰번호" onchange="" required></td>
-            <td><span id="phoneCheck">axios로 휴대폰번호 양식이 맞는지 문구 출력</span></td>
+            <td><input type="text" name="phonenum" id="phonenum" placeholder="'-'없이 입력" onchange="phonecheck()"
+                       required></td>
+            <td><span id="phoneMsg">axios로 휴대폰번호 양식이 맞는지 문구 출력</span></td>
         </tr>
         <tr>
             <td></td>
@@ -51,46 +47,99 @@
         </tr>
         <tr>
             <td>
-                <button>회원가입</button>
+                <button type="submit" onclick="signupCheck()">회원가입</button>
             </td>
         </tr>
     </table>
-    <span id="buttonCheck">입력문구를 안적은 곳이 있는지 표시해줌</span>
+    <span id="signupMsg">입력문구를 안적은 곳이 있는지 표시해줌</span>
 </form>
 <script>
+    // 이메일 중복 체크
+    let useremail = document.querySelector('#useremail');
+    let emailCheck = false;
+    emailcheck = async () => {
+        let emailMsg = document.querySelector('#emailMsg');
+        try {
+            if (useremail.value !== '') {
+                let data = await axios.get(`/signup/emailCheck?useremail=${useremail.value}`);
+                console.log(data, '데이터');
 
-    async function emailcheck() {
-        let useremail = document.querySelector('#useremail');
-        let emailCheck = document.querySelector('#emailCheck');
-        let data = await axios.get('/signup/emailCheck?useremail=${useremail.value}');
-
-        login_flag = true;
-        if (login_flag) {
-            emailCheck.innerHTML = "사용할수 있는 이메일 입니다.";
-            emailCheck.style.color = 'green';
-        } else {
-            emailCheck.innerHTML = "이미 존재하는 이메일 입니다."
-            emailCheck.style.color = 'red';
+                login_flag = data.data.login;
+                console.log(login_flag, '로그인플래그');
+                if (login_flag) {
+                    emailMsg.innerHTML = "사용할수 있는 이메일 입니다.";
+                    emailMsg.style.color = 'green';
+                    emailCheck = true;
+                } else {
+                    emailMsg.innerHTML = "이미 존재하는 이메일 입니다."
+                    emailMsg.style.color = 'red';
+                    emailCheck = false;
+                }
+            } else {
+                emailMsg.innerHTML = "이메일을 입력해주세요";
+                emailMsg.style.color = 'red';
+            }
+        } catch (err) {
+            console.error(err);
         }
     }
 
+    // 비밀번호 체크
+    let pw1 = document.querySelector('#pw1');
+    let pw2 = document.querySelector('#pw2');
     let pwCheck = false;
-
-    function pwcheck() {
-        let pw1 = document.querySelector('#pw1').value;
-        let pw2 = document.querySelector('#pw2').value;
-        let passwordCheck = document.querySelector('#passwordCheck');
-        if (pw1 !== '' && pw2 !== '') {
-            if (pw1 === pw2) {
-                passwordCheck.innerHTML = "비밀번호가 일치합니다.";
-                passwordCheck.style.color = 'green';
+    pwcheck = () => {
+        let passwordMsg = document.querySelector('#passwordMsg');
+        if (pw1.value !== '' && pw2.value !== '') {
+            if (pw1.value === pw2.value) {
+                passwordMsg.innerHTML = "비밀번호가 일치합니다.";
+                passwordMsg.style.color = 'green';
                 pwCheck = true;
             } else {
-                passwordCheck.innerHTML = "비밀번호를 확인해주세요.";
-                passwordCheck.style.color = 'red';
+                passwordMsg.innerHTML = "비밀번호를 확인해주세요.";
+                passwordMsg.style.color = 'red';
                 pwCheck = false;
             }
         }
     }
+
+    // 핸드폰번호 체크
+    let phoneCheck = false;
+    phonecheck = () => {
+
+    }
+
+    // 회원가입 체크
+    let username = document.querySelector('#username');
+    let phonenum = document.querySelector('#phonenum');
+    signupCheck = async () => {
+        let signupMsg = document.querySelector('#signupMsg');
+        try {
+            signupMsg.style.color = 'red';
+            if (useremail.value == '') {
+                signupMsg.innerHTML = "이메일을 입력해주세요.";
+            } else if (emailCheck == false) {
+                signupMsg.innerHTML = "이메일 중복확인을 해주세요.";
+            } else if (pw1.value == '' || pw2.value == '') {
+                signupMsg.innerHTML = "비밀번호를 입력해주세요.";
+            } else if (pwCheck == false) {
+                signupMsg.innerHTML = "비밀번호가 다릅니다.";
+            } else if (username.value == '') {
+                signupMsg.innerHTML = "이름을 입력해주세요.";
+            } else if (phonenum.value == '') {
+                signupMsg.innerHTML = "핸드폰번호를 입력해주세요.";
+            } else if (phoneCheck == false) {
+                signupMsg.innerHTML = "핸드폰번호를 확인해주세요";
+            } else {
+                signupMsg.innerHTML = "";
+            }
+
+
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+
 </script>
 {% endblock %}
