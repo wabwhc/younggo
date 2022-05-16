@@ -36,7 +36,6 @@ app.use('/public', express.static(path.join(__dirname, '../views/public')))
 
 //로그인상태 미들웨어
 //어떤 url이든 로그인 여부 확인후 로그인 되면 req.username에 유저이름
-// 아니면 로그인안됨뜸 로그인여부 isLogin에서 username으로 변경
 app.use((req, res, next) => {
     if(req.user === undefined){
         req.username = '로그인안됨';
