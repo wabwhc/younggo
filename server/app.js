@@ -57,12 +57,11 @@ app.get('/main', (req, res) => {
 })
 
 app.get('/profile', (req, res) => {
-    console.log(req.session.passport.user)
-    if(req.user === undefined){
+    if(req.user.username === ''){
         res.redirect('/login')
     }else{
         let sql = 'select * from users where useremail = ?'
-        conn.query(sql, [req.user],(err, result, filed) => {
+        conn.query(sql, [req.user.useremail],(err, result, filed) => {
             console.log(result)
             res.render('profile.html', {user : result[0], username : req.user.username});
         })
