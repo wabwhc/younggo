@@ -3,11 +3,29 @@ const router = express.Router();
 const conn = require('./mysqlconn');
 
 router.get('/', (req, res) => {
-    if(req.user === undefined){
+    if (req.user === undefined) {
         res.render('signup.html', {title: '회원가입'})
-    }else{
+    } else {
         res.redirect('/main')
     }
+})
+let flag = false;
+
+router.get('/emailCheck', (req, res) => {
+    let useremail = req.query.useremail;
+    console.log(useremail);
+    let sql = 'select * from users where useremail = ?';
+    conn.query(sql, [useremail], (err, result, fields) => {
+        if (result.length !== 0) {
+            flag = false;
+        } else {
+            flag = true;
+        }
+        res.json({
+            login: flag,
+            useremail
+        })
+    })
 })
 
 router.post('/', (req, res) => {
@@ -17,23 +35,19 @@ router.post('/', (req, res) => {
     let usercode = req.body.usercode;
     let phonenum = req.body.phonenum;
     let usercomment = req.body.usercomment;
-    if(usercode !== process.env.usercode && usercode !== ''){
+    if (usercode !== process.env.usercode && usercode !== '') {
         res.send('유저코드이상')
-    }else{
-        let sql = 'select * from users where useremail = ?';
-        conn.query(sql, [useremail], (err, result, fields) => {
-            if(result.length !== 0){
-                res.send('이미 존재하는 계정')
-            }else{
-                let  sql2 = 'insert into users (useremail, password, username, usercode, phonenum, usercomment) values (?, ?, ?, ?, ?, ?)';
-                conn.query(sql2, [useremail, password, username, usercode, phonenum, usercomment], (err, result, field) => {
-                    res.redirect('/login')
-                })
-            }
-
-        })
+    } else {
+        if (flag != true) {
+            res.send('계정 중복 확인을 해주세요.')
+        } else {
+            let sql2 = 'insert into users (useremail, password, username, usercode, phonenum, usercomment) values (?, ?, ?, ?, ?, ?)';
+            conn.query(sql2, [useremail, password, username, usercode, phonenum, usercomment], (err, result, field) => {
+                res.redirect('/login')
+            })
+        }
     }
-})
+});
 
 
 module.exports = router;
