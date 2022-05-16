@@ -6,13 +6,12 @@
     <table>
         <tr>
             <td>이메일</td>
-            <td><input type="text" name="useremail" placeholder="이메일"></td>
-            <td><span id="loginEmailCheck">id가 다를때 입력되는 메시지 : {{message}}</span></td>
+            <td><input type="text" name="useremail" id="email" placeholder="이메일"></td>
         </tr>
         <tr>
             <td>비밀번호</td>
-            <td><input type="password" name="password" placeholder="비밀번호"></td>
-            <td><span id="loginPasswordCheck">pw가 다를때 입력되는 메시지 : {{message}}</span></td>
+            <td><input type="password" name="password" id="password" placeholder="비밀번호"></td>
+            <td><span id="loginMsg">pw가 다를때 입력되는 메시지</span></td>
         </tr>
         <tr>
             <td></td>
@@ -21,9 +20,27 @@
         </tr>
         <tr>
             <td>
-                <button>버튼</button>
+                <button type="submit" onclick="loginCheck()" >버튼</button>
             </td>
         </tr>
     </table>
 </form>
+<script>
+    loginCheck = async () => {
+        let useremail = document.querySelector('#email');
+        let password = document.querySelector('#password');
+        let loginMsg = document.querySelector('#loginMsg');
+        try{
+            let emaildata = await axios.get(`/login/emailCheck?useremail=${useremail.value}`);
+            let passworddata = await axios.get(`/login/pwCheck?password=${password.value}`);
+            // 만약 email이 없거나 비밀번호가 틀릴결우 아이디 비밀번호를 확인해달라고 메시지 전달
+            if(emaildata == 없음 || passworddata == 없음){
+                loginMsg.innerHTML = "아이디나 비밀번호를 확인해주세요.";
+                loginMsg.style.color = 'red';
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    }
+</script>
 {% endblock %}
