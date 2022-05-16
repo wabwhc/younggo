@@ -34,21 +34,36 @@ app.use(flash())
 
 app.use('/public', express.static(path.join(__dirname, '../views/public')))
 
+//로그인상태 미들웨어
+//어떤 url이든 로그인 여부 확인후 로그인 되면 req.username에 유저이름
+// 아니면 로그인안됨뜸 로그인여부 isLogin에서 username으로 변경
+app.use((req, res, next) => {
+    if(req.user === undefined){
+        req.username = '로그인안됨';
+        req.isLogin = false;
+        next();
+    }else{
+        let sql = 'select username from users where useremail = ?'
+        conn.query(sql, [req.user], (err, rows, field) => {  
+            let username = rows[0].username;
+            req.username = username;
+            req.isLogin = true;
+            next();
+        })
+    }
+})
 
 app.get('/', (req, res) => {
     res.redirect('/main')
 })
+
 app.get('/main', (req, res) => {
-    let  isLogin
-    if(req.user === undefined){
-        isLogin = false;
-    }else{
-        isLogin = true;
-    }
-    res.render('main.html', {useremail : req.user, isLogin : isLogin})
+    console.log(req.isLogin)
+    res.render('main.html', {username : req.username, isLogin:req.isLogin})
 })
 
 app.get('/profile', (req, res) => {
+    console.log(req.session.passport.user)
     if(req.user === undefined){
         res.redirect('/login')
     }else{
