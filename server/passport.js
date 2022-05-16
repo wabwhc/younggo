@@ -9,7 +9,7 @@ const User = {
 module.exports = () => {
 
     passport.serializeUser((user, done) => {
-        done(null, user.useremail);
+        done(null, user);
     });
 
     passport.deserializeUser((id, done) => {
@@ -23,12 +23,12 @@ module.exports = () => {
         },
         (useremail, password, done) => {
             User.useremail = useremail;
-            User.password = password;
             let sql1 = 'select * from users where useremail = ?'
             conn.query(sql1, [useremail],(err, rows, field) => {
                 let a = rows.length
                 if(a === 1){
                     if(rows[0].password === password){
+                        User.username = rows[0].username;
                         return done(null, User);
                     }else{
                         return done(null, false, { message : '비번이 다름' })
