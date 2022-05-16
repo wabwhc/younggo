@@ -53,7 +53,7 @@ app.get('/', (req, res) => {
 
 app.get('/main', (req, res) => {
     console.log(req.isLogin)
-    res.render('main.html', {username : req.user.user, isLogin:req.isLogin})
+    res.render('main.html', {username : req.user.username, isLogin:req.isLogin})
 })
 
 app.get('/profile', (req, res) => {
@@ -83,7 +83,7 @@ app.post('/login', passport.authenticate('local', {
 }))
 
 app.get('/login', (req, res) => {
-    if(req.user === undefined){
+    if(req.user.username === ''){
         res.render('login.html',{ message : req.flash("error")});
     }else{
         res.redirect('/main')
