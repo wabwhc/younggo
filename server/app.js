@@ -41,12 +41,13 @@ app.get('/', (req, res) => {
 app.get('/main', (req, res) => {
     let isLogin
     if (req.user === undefined) {
+        req.user = '로그인안됨';
         isLogin = false;
     } else {
         isLogin = true;
     }
 
-    res.render('main.html', {title: '메인페이지', username: req.body.username, isLogin: isLogin})
+    res.render('main.html', {title: '메인페이지', username: req.user, isLogin: isLogin})
 })
 
 app.get('/profile', (req, res) => {
@@ -76,7 +77,7 @@ app.post('/login', passport.authenticate('local', {
 
 app.get('/login', (req, res) => {
     if (req.user === undefined) {
-        res.render('login.html', {title: '로그인', message: req.flash("error")});
+        res.render('login.html', {title: '로그인'});
     } else {
         res.redirect('/main')
     }
