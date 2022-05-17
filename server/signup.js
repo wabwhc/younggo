@@ -36,16 +36,20 @@ router.post('/', (req, res) => {
     let phonenum = req.body.phonenum;
     let usercomment = req.body.usercomment;
     if (usercode !== process.env.usercode && usercode !== '') {
-        res.send('유저코드이상')
+        res.send('유저코드이상');
     } else {
-        if (flag != true) {
-            res.send('계정 중복 확인을 해주세요.')
-        } else {
-            let sql2 = 'insert into users (useremail, password, username, usercode, phonenum, usercomment) values (?, ?, ?, ?, ?, ?)';
-            conn.query(sql2, [useremail, password, username, usercode, phonenum, usercomment], (err, result, field) => {
-                res.redirect('/login')
-            })
-        }
+        let sql = 'select * from users where useremail = ?';
+        conn.query(sql, [useremail], (err, result, fields) => {
+            if (result.length !== 0) {
+                res.send('이미 존재하는 계정')
+            } else {
+                let sql2 = 'insert into users (useremail, password, username, usercode, phonenum, usercomment) values (?, ?, ?, ?, ?, ?)';
+                conn.query(sql2, [useremail, password, username, usercode, phonenum, usercomment], (err, result, field) => {
+                    res.redirect('/login')
+                })
+            }
+
+        })
     }
 });
 

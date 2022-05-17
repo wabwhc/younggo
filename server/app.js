@@ -36,46 +36,34 @@ app.use('/public', express.static(path.join(__dirname, '../views/public')))
 
 //로그인상태 미들웨어
 //어떤 url이든 로그인 여부 확인후 로그인 되면 req.username에 유저이름
-// 아니면 로그인안됨뜸 로그인여부 isLogin에서 username으로 변경
 app.use((req, res, next) => {
-    if (req.user === undefined) {
-        req.username = '로그인안됨';
+    if(req.user === undefined){
+        req.user = {username:''};
         req.isLogin = false;
         next();
-    } else {
-        let sql = 'select username from users where useremail = ?';
-        conn.query(sql, [req.user], (err, rows, field) => {
-            let username = rows[0].username;
-            req.username = username;
-            req.isLogin = true;
-            next();
-        })
+    }else{
+        req.isLogin = true;
+        next();
     }
 })
 
 app.get('/', (req, res) => {
-    res.render('main.html', {username: req.username, isLogin: req.isLogin});
+    res.redirect('/main')
 })
-app.get('/main', (req, res) => {
-    let isLogin
-    if (req.user === undefined) {
-        isLogin = false;
-    } else {
-        isLogin = true;
-    }
 
-    res.render('main.html', {title: '메인페이지', username: req.username, isLogin: isLogin})
+app.get('/main', (req, res) => {
+    console.log(req.isLogin)
+    res.render('main.html', {username : req.user.username, isLogin:req.isLogin})
 })
 
 app.get('/profile', (req, res) => {
-    console.log(req.session.passport.user);
-    if (req.user === undefined) {
+    if(req.user.username === ''){
         res.redirect('/login')
-    } else {
-        let sql = 'select * from users where useremail = ?';
-        conn.query(sql, [req.user], (err, result, filed) => {
+    }else{
+        let sql = 'select * from users where useremail = ?'
+        conn.query(sql, [req.user.useremail],(err, result, filed) => {
             console.log(result)
-            res.render('profile.html', {title: '프로필', user: result[0]});
+            res.render('profile.html', {user : result[0], username : req.user.username});
         })
     }
 })
@@ -83,7 +71,7 @@ app.get('/profile', (req, res) => {
 app.get('/board', (req, res) => {
     let sql = 'select article_id, article_title, useremail, category from articles'
     conn.query(sql, (err, result, filed) => {
-        res.render('board.html', {title: '게시판', article: result});
+        res.render('board.html', {article : result, username : req.user.username});
     })
 })
 
@@ -94,9 +82,9 @@ app.post('/login', passport.authenticate('local', {
 }))
 
 app.get('/login', (req, res) => {
-    if (req.user === undefined) {
-        res.render('login.html', {title: '로그인', message: req.flash("error")});
-    } else {
+    if(req.user.username === ''){
+        res.render('login.html',{ message : req.flash("error")});
+    }else{
         res.redirect('/main')
     }
 })
@@ -119,7 +107,7 @@ app.get('/subjects', (req, res) => {
         results.lessons = result1;
         conn.query(sql2, (err, result2, field2) => {
             results.studys = result2;
-            res.render('subjects.html', {results})
+            res.render('subjects.html', {results, username : req.user.username})
         })
     })
 })
