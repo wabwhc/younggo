@@ -64,7 +64,7 @@ app.get('/main', (req, res) => {
         isLogin = true;
     }
 
-    res.render('main.html', {title: '메인페이지', username: req.body.username, isLogin: isLogin})
+    res.render('main.html', {title: '메인페이지', username: req.username, isLogin: isLogin})
 })
 
 app.get('/profile', (req, res) => {
@@ -75,7 +75,7 @@ app.get('/profile', (req, res) => {
         let sql = 'select * from users where useremail = ?';
         conn.query(sql, [req.user], (err, result, filed) => {
             console.log(result)
-            res.render('profile.html', {title: '프로필', user: result[0], username: req.username, isLogin: req.isLogin});
+            res.render('profile.html', {title: '프로필', user: result[0]});
         })
     }
 })
@@ -83,7 +83,7 @@ app.get('/profile', (req, res) => {
 app.get('/board', (req, res) => {
     let sql = 'select article_id, article_title, useremail, category from articles'
     conn.query(sql, (err, result, filed) => {
-        res.render('board.html', {title: '게시판', article: result, username: req.username, isLogin: req.isLogin});
+        res.render('board.html', {title: '게시판', article: result});
     })
 })
 
@@ -119,7 +119,7 @@ app.get('/subjects', (req, res) => {
         results.lessons = result1;
         conn.query(sql2, (err, result2, field2) => {
             results.studys = result2;
-            res.render('subjects.html', {results, username: req.username, isLogin: req.isLogin})
+            res.render('subjects.html', {results})
         })
     })
 })

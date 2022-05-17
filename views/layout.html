@@ -11,9 +11,20 @@
 </head>
 <body>
 <div id="wrap">
-
-    {% include 'header.html' %}
-
+    <header>
+        <a href="/"> 메인페이지로 </a>
+        <div id="userInfo">
+            {% if isLogin %}
+            <a href="/profile">{{username}}님 안녕하세요</a>
+            <a href="/logout">
+                <button>로그아웃</button>
+            </a>
+            {% else %}
+            <button onclick="location.href='login'">로그인</button>
+            <button onclick="location.href='signup'">회원가입</button>
+            {% endif %}
+        </div>
+    </header>
     {% block content%}
     {% endblock %}
 

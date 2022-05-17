@@ -22,43 +22,43 @@
         </tr>
     </table>
 </form>
-<!--<script>-->
-<!--    document.querySelector('#login').addEventListener('submit',-->
-<!--        async (event) => {-->
-<!--            event.preventDefault();-->
-<!--            const useremail = event.target.useremail.value;-->
-<!--            const password = event.target.password.value;-->
-<!--            const loginMsg = document.querySelector('#loginMsg');-->
-<!--            const emailMsg = document.querySelector('#emailMsg');-->
-<!--            const passwordMsg = document.querySelector('#passwordMsg');-->
-<!--            if (useremail && password) {-->
-<!--                try {-->
-<!--                    emailMsg.innerHTML = "";-->
-<!--                    passwordMsg.innerHTML = "";-->
-<!--                    const emaildata = await axios.get(`/login/emailCheck?useremail=${useremail.value}`);-->
-<!--                    const passworddata = await axios.get(`/login/pwCheck?password=${password.value}`);-->
-<!--                    // 만약 email이 없거나 비밀번호가 틀릴결우 아이디 비밀번호를 확인해달라고 메시지 전달-->
-<!--                    if (emaildata == 없음 || passworddata == 틀릴경우) {-->
-<!--                        loginMsg.innerHTML = "이메일이나 비밀번호를 확인해주세요.";-->
-<!--                        loginMsg.style.color = 'red';-->
-<!--                    } else {-->
-<!--                        await axios.post('/login', {useremail, password});-->
-<!--                    }-->
-<!--                } catch (err) {-->
-<!--                    console.error(err);-->
-<!--                }-->
-<!--                event.target.useremail.value = '';-->
-<!--                event.target.password.value = '';-->
-<!--            } else if (useremail == '') {-->
-<!--                emailMsg.innerHTML = "이메일을 입력해주세요.";-->
-<!--                passwordMsg.innerHTML = "";-->
-<!--                emailMsg.style.color = 'red';-->
-<!--            } else if (password == '') {-->
-<!--                passwordMsg.innerHTML = "비밀번호를 입력해주세요.";-->
-<!--                emailMsg.innerHTML = "";-->
-<!--                passwordMsg.style.color = 'red';-->
-<!--            }-->
-<!--        }-->
-<!--    );-->
-<!--</script>-->
+<script>
+    document.querySelector('#login').addEventListener('submit',
+        async (event) => {
+            event.preventDefault();
+            const useremail = event.target.useremail.value;
+            const password = event.target.password.value;
+            const loginMsg = document.querySelector('#loginMsg');
+            const emailMsg = document.querySelector('#emailMsg');
+            const passwordMsg = document.querySelector('#passwordMsg');
+            if (useremail && password) {
+                try {
+                    emailMsg.innerHTML = "";
+                    passwordMsg.innerHTML = "";
+                    const emaildata = await axios.get(`/login/emailCheck?useremail=${useremail.value}`);
+                    const passworddata = await axios.get(`/login/pwCheck?password=${password.value}`);
+                    // 만약 email이 없거나 비밀번호가 틀릴결우 아이디 비밀번호를 확인해달라고 메시지 전달
+                    if (emaildata == 없음 || passworddata == 틀릴경우) {
+                        loginMsg.innerHTML = "이메일이나 비밀번호를 확인해주세요.";
+                        loginMsg.style.color = 'red';
+                    } else {
+                        await axios.post('/login', {useremail, password});
+                    }
+                } catch (err) {
+                    console.error(err);
+                }
+                event.target.useremail.value = '';
+                event.target.password.value = '';
+            } else if (useremail == '') {
+                emailMsg.innerHTML = "이메일을 입력해주세요.";
+                passwordMsg.innerHTML = "";
+                emailMsg.style.color = 'red';
+            } else if (password == '') {
+                passwordMsg.innerHTML = "비밀번호를 입력해주세요.";
+                emailMsg.innerHTML = "";
+                passwordMsg.style.color = 'red';
+            }
+        }
+    );
+</script>
 {% endblock %}
