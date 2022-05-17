@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e55e143f-2117-43b3-9152-6bce0d238be6" name="변경" comment="chanwool">
-      <change afterPath="$PROJECT_DIR$/gitTestWoo.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/passport.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/passport.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/signup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/signup.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +43,7 @@
       <updated>1652092368979</updated>
       <workItem from="1652092370356" duration="2757000" />
       <workItem from="1652095169704" duration="17000" />
-      <workItem from="1652774071491" duration="534000" />
+      <workItem from="1652774071491" duration="1019000" />
     </task>
     <task id="LOCAL-00001" summary="chanwool">
       <created>1652093861233</created>

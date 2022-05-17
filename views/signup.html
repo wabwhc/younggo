@@ -131,7 +131,6 @@
     // 회원가입 체크
     document.querySelector('#userSignup').addEventListener('submit',
         async (event) => {
-            event.preventDefault();
             const useremail = event.target.useremail.value;
             const password = event.target.password.value;
             const password2 = event.target.password2.value;
@@ -152,43 +151,46 @@
             signupUsercodeMsg.style.color = 'red';
             signupPhonenumMsg.style.color = 'red';
             signupMsg.style.color = 'red';
+            if (!useremail || !password || !password2 || !username || !usercode || !phonenum) {
+                event.preventDefault();
+                if (!useremail) {
+                    signupEmailMsg.innerHTML = "이메일을 입력해주세요.";
+                } else if (emailCheck == false) {
+                    signupEmailMsg.innerHTML = "이메일 중복확인을 해주세요.";
+                } else {
+                    signupEmailMsg.innerHTML = "";
+                }
+                if (!password || !password2) {
+                    signupPasswordMsg.innerHTML = "비밀번호를 입력해주세요.";
+                } else if (pwCheck == false) {
+                    signupPasswordMsg.innerHTML = "비밀번호가 다릅니다.";
+                } else {
+                    signupPasswordMsg.innerHTML = "";
+                }
+                if (!username) {
+                    signupNameMsg.innerHTML = "이름을 입력해주세요.";
+                } else {
+                    signupNameMsg.innerHTML = "";
+                }
+                if (!usercode) {
+                    signupUsercodeMsg.innerHTML = "유저코드를 입력해주세요.";
+                } else {
+                    signupUsercodeMsg.innerHTML = "";
+                }
+                if (!phonenum) {
+                    signupPhonenumMsg.innerHTML = "핸드폰번호를 입력해주세요.";
+                } else if (phoneCheck == false) {
+                    signupPhonenumMsg.innerHTML = "핸드폰번호를 확인해주세요";
+                } else {
+                    signupPhonenumMsg.innerHTML = "";
+                }
+            } else {
+                try {
 
-            if (!useremail) {
-                signupEmailMsg.innerHTML = "이메일을 입력해주세요.";
-            } else if (emailCheck == false) {
-                signupEmailMsg.innerHTML = "이메일 중복확인을 해주세요.";
-            } else {
-                signupEmailMsg.innerHTML = "";
-            }
-            if (!password || !password2) {
-                signupPasswordMsg.innerHTML = "비밀번호를 입력해주세요.";
-            } else if (pwCheck == false) {
-                signupPasswordMsg.innerHTML = "비밀번호가 다릅니다.";
-            } else {
-                signupPasswordMsg.innerHTML = "";
-            }
-            if (!username) {
-                signupNameMsg.innerHTML = "이름을 입력해주세요.";
-            } else {
-                signupNameMsg.innerHTML = "";
-            }
-            if (!usercode) {
-                signupUsercodeMsg.innerHTML = "유저코드를 입력해주세요.";
-            } else {
-                signupUsercodeMsg.innerHTML = "";
-            }
-            if (!phonenum) {
-                signupPhonenumMsg.innerHTML = "핸드폰번호를 입력해주세요.";
-            } else if (phoneCheck == false) {
-                signupPhonenumMsg.innerHTML = "핸드폰번호를 확인해주세요";
-            } else {
-                signupPhonenumMsg.innerHTML = "";
-            }
-            try {
-                await axios.post('/signup', {useremail, password, username, usercode, phonenum, usercomment});
-            } catch (err) {
-                signupMsg.innerHTML = "잘못 입력된 정보가 있습니다. 확인해주세요.";
-                console.error(err);
+                } catch (err) {
+                    signupMsg.innerHTML = "잘못 입력된 정보가 있습니다. 확인해주세요.";
+                    console.error(err);
+                }
             }
         });
 
