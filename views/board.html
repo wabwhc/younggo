@@ -4,12 +4,109 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Q&A</title>
 </head>
+<link rel="stylesheet" href="./public/css/board.css">
 <body>
-    {% for a in article %}
-    <h1 id="{{a.article_id}}" class="article">{{a.article_title}}</h1>
-    <H4>{{a.category}}</H4>
-    {% endfor%}
+    <div id="lesson">
+        <h1>레슨</h1>
+        <ul class="qna">
+            <li>
+                <input type="checkbox" id="qna-1">
+                <label for="qna-1">레슨은 어떤 서비스인가요?</label>
+                <div>
+                    <p>답변</p>
+                </div>
+            </li>
+            <li>
+                <input type="checkbox" id="qna-2">
+                <label for="qna-2">레슨은 누구나 개설할 수 있나요?</label>
+                <div>
+                    <p>답변</p>
+                </div>
+            </li>
+            <li>
+                <input type="checkbox" id="qna-3">
+                <label for="qna-3">레슨 개설에 인원제한 등이 있나요?</label>
+                <div>
+                    <p>답변</p>
+                </div>
+            </li>
+            <li>
+                <input type="checkbox" id="qna-4">
+                <label for="qna-4">레슨 가입은 누구나 할 수 있나요?</label>
+                <div>
+                    <p>답변</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div id="study">
+        <h1>스터디</h1>
+        <ul class="qna">
+            <li>
+                <input type="checkbox" id="qna-1">
+                <label for="qna-1">스터디는 어떤 서비스인가요?</label>
+                <div>
+                    <p>답변</p>
+                </div>
+            </li>
+            <li>
+                <input type="checkbox" id="qna-2">
+                <label for="qna-2">스터디는 누구나 개설할 수 있나요?</label>
+                <div>
+                    <p>답변</p>
+                </div>
+            </li>
+            <li>
+                <input type="checkbox" id="qna-3">
+                <label for="qna-3">스터디 개설에 인원제한 등이 있나요?</label>
+                <div>
+                    <p>답변</p>
+                </div>
+            </li>
+            <li>
+                <input type="checkbox" id="qna-4">
+                <label for="qna-4">스터디 가입은 누구나 가능한가요?</label>
+                <div>
+                    <p>답변</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div id="account">
+        <h1>계정</h1>
+        <ul class="qna">
+            <li>
+                <input type="checkbox" id="qna-1">
+                <label for="qna-1">회원가입은 어떻게 하나요?</label>
+                <div>
+                    <p>답변</p>
+                </div>
+            </li>
+            <li>
+                <input type="checkbox" id="qna-2">
+                <label for="qna-2">아이디와 비밀번호를 잊어버렸는데 어떻게 하나요?</label>
+                <div>
+                    <p>답변</p>
+                </div>
+            </li>
+            <li>
+                <input type="checkbox" id="qna-3">
+                <label for="qna-3">회원탈퇴는 어떻게 하나요?</label>
+                <div>
+                    <p>답변</p>
+                </div>
+            </li>
+            <li>
+                <input type="checkbox" id="qna-4">
+                <label for="qna-4">개인정보 수정은 어떻게 하나요?</label>
+                <div>
+                    <p>답변</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    
 </body>
 </html>

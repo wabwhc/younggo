@@ -75,9 +75,10 @@ app.get('/profile', (req, res) => {
 })
 
 app.get('/board', (req, res) => {
-    let sql = 'select article_id, article_title, useremail, category from articles'
+    let sql = 'select article_id, article_title, useremail, category from articles';
     conn.query(sql, (err, result, filed) => {
-        res.render('board.html', {article : result,username : req.username});
+        res.render('board.html', {article : result, username : req.username});
+        console.log();
     })
 })
 
