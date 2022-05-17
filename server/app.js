@@ -63,7 +63,7 @@ app.get('/profile', (req, res) => {
         let sql = 'select * from users where useremail = ?'
         conn.query(sql, [req.user.useremail],(err, result, filed) => {
             console.log(result)
-            res.render('profile.html', {user : result[0], username : req.user.username});
+            res.render('profile.html', {user : result[0], username : req.user.username, isLogin :req.isLogin});
         })
     }
 })
@@ -71,7 +71,7 @@ app.get('/profile', (req, res) => {
 app.get('/board', (req, res) => {
     let sql = 'select article_id, article_title, useremail, category from articles'
     conn.query(sql, (err, result, filed) => {
-        res.render('board.html', {article : result, username : req.user.username});
+        res.render('board.html', {article : result, username : req.user.username, isLogin :req.isLogin});
     })
 })
 
@@ -107,7 +107,7 @@ app.get('/subjects', (req, res) => {
         results.lessons = result1;
         conn.query(sql2, (err, result2, field2) => {
             results.studys = result2;
-            res.render('subjects.html', {results, username : req.user.username})
+            res.render('subjects.html', {results, username : req.user.username, isLogin :req.isLogin})
         })
     })
 })
