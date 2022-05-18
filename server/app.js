@@ -69,9 +69,19 @@ app.get('/profile', (req, res) => {
 })
 
 app.get('/board', (req, res) => {
+    let article = {};
     let sql = 'select article_id, article_title, useremail, category from articles'
     conn.query(sql, (err, result, filed) => {
-        res.render('board.html', {article : result, username : req.user.username, isLogin :req.isLogin});
+        article.qna = result;
+        let sql2 =
+         "select well_id, well_title, well_author, well_category from wells where well_category = '레슨';" + 
+         "select well_id, well_title, well_author, well_category from wells where well_category = '스터디';" +
+         "select well_id, well_title, well_author, well_category from wells where well_category = '계정';"
+        conn.query(sql2, (err, result2, filed) => {
+            article.wells = result2
+            res.render('board.html', {article, username : req.user.username, isLogin :req.isLogin});
+        })
+
     })
 })
 
