@@ -25,8 +25,11 @@ sql = 'drop table subjects';
 conn.query(sql, ()=>{})
 sql = 'drop table users';
 conn.query(sql, ()=>{})
-
-
+sql = 'drop table wells';
+conn.query(sql, ()=>{})
+//------------ 추가된 테이블 자주묻는 질문
+sql = "create table wells(well_id int(11)  not null auto_increment primary key ,well_title varchar(100), well_reply varchar(500), well_author varchar(100) default '관리자', well_category varchar(100))charset = utf8mb4"
+conn.query(sql, ()=>{})
 //------- 테이블 생성
 sql = 'create table users( useremail varchar(100) not null primary key, password varchar(100) not null,username varchar(100) not null,usercode varchar(100),usercomment varchar(1000), phonenum varchar(100),usercreate_at timestamp not null default current_timestamp(),userdelete_at timestamp  )charset = utf8mb4'
 conn.query(sql, ()=>{})
@@ -93,8 +96,16 @@ for(let i = 1; i <=5 ; i++){
 
 //--------------------------- insert QnQ reply
 
-for(let i = 1; i <=5 ; i++){
-    sql = `insert into articles (useremail, article_content, category, article_title) values ('test${i}@naver.com', '테스트용 질문들 내용${i}', '테스트용 질문들 카테고리${i}', '더미질문제목${i}')`
+for(let i = 1; i <=3 ; i++){
+    sql = `insert into articles (useremail, article_content, category, article_title) values ('test${i}@naver.com', '계정', '테스트용 질문들 카테고리${i}', '더미질문제목${i}')`
+    conn.query(sql, ()=>{});
+}
+for(let i = 4; i <=5 ; i++){
+    sql = `insert into articles (useremail, article_content, category, article_title) values ('test${i}@naver.com', '레슨', '테스트용 질문들 카테고리${i}', '더미질문제목${i}')`
+    conn.query(sql, ()=>{});
+}
+for(let i = 6; i <=9 ; i++){
+    sql = `insert into articles (useremail, article_content, category, article_title) values ('test${i}@naver.com', '스터디', '테스트용 질문들 카테고리${i}', '더미질문제목${i}')`
     conn.query(sql, ()=>{});
 }
 
@@ -102,4 +113,43 @@ for(let i  = 1; i <= 5; i++){
     sql = `insert into replys (useremail, reply_title, reply_content, article_id) values ('apply${i}@naver.com', '테스트용 대답들${i}', '테스트용 대답들${i}', ${i})`
     conn.query(sql, ()=>{});
 }
-console.log('끝')
+
+sql = "insert into wells (well_title, well_reply, well_category) values ('레슨은 어떤 서비스인가요?','레슨하는 거임','레슨')"
+conn.query(sql, ()=>{})
+
+sql = "insert into wells (well_title, well_reply, well_category) values ('레슨은 누구나 개설할 수 있나요?','아마도','레슨')"
+conn.query(sql, ()=>{})
+
+sql = "insert into wells (well_title, well_reply, well_category) values ('레슨 개설에 인원제한 등이 있나요?','생성자가 지정간으함','레슨')"
+conn.query(sql, ()=>{})
+
+sql = "insert into wells (well_title, well_reply, well_category) values ('레슨 가입은 누구나 할 숭 있나요?','ㅇㅇ','레슨')"
+conn.query(sql, ()=>{})
+
+
+sql = "insert into wells (well_title, well_reply, well_category) values ('스터디은 어떤 서비스인가요?','스터디하는 거임','스터디')"
+conn.query(sql, ()=>{})
+
+sql = "insert into wells (well_title, well_reply, well_category) values ('스터디은 누구나 개설할 수 있나요?','아마도','스터디')"
+conn.query(sql, ()=>{})
+
+sql = "insert into wells (well_title, well_reply, well_category) values ('스터디 개설에 인원제한 등이 있나요?','생성자가 지정간으함','스터디')"
+conn.query(sql, ()=>{})
+
+sql = "insert into wells (well_title, well_reply, well_category) values ('스터디 가입은 누구나 할 숭 있나요?','ㅇㅇ','스터디')"
+conn.query(sql, ()=>{})
+
+
+
+
+sql = "insert into wells (well_title, well_reply, well_category) values ('개인정보 수정은 어떻게 하나요?','프로필로 가면될듯','계정')"
+conn.query(sql, ()=>{})
+
+sql = "insert into wells (well_title, well_reply, well_category) values ('아이디와 비밀번호를 잊어버렸는데 어떻게 하나요?','못씀','계정')"
+conn.query(sql, ()=>{})
+
+sql = "insert into wells (well_title, well_reply, well_category) values ('회원탈퇴는 어떻게 하나요?','탈퇴하지마','계정')"
+conn.query(sql, ()=>{})
+
+sql = "insert into wells (well_title, well_reply, well_category) values ('개인정보 보관기간은 언제까지인가요?','모름','계정')"
+conn.query(sql, ()=>{})
