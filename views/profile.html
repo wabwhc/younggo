@@ -2,12 +2,39 @@
 
 {% block content%}
 프로필사진
-<form action="/post" method="post" enctype="multipart/form-data">
-    <img src="" alt="프로필사진" style="display: none;" width="250">
-
+<form id="img-form" action="/post" method="post" enctype="multipart/form-data">
+    <div class="img-preview">
+        <img id="img-preview" src="" style="display: none;" width="250" alt="미리보기">
+        <input id="img-url" type="hidden" name="url">
+    </div>
+    <div>
+        <label id="img-label" for="img">사진 업로드</label>
+        <input id="img" type="file" accept="image/*">
+    </div>
 </form>
+{% if twit.img %}
+<div class="img"><img src="{{img}}" alt="섬네일"></div>
+{% endif %}
 이름<h1>{{user.username}}</h1>
 이메일<h1>{{user.useremail}}</h1>
 코멘트<h1>{{user.usercomment}}</h1>
 전화번호<h1>{{user.phonenum}}</h1>
+<script>
+    if (document.getElementById('img')) {
+        document.getElementById('img').addEventListener('change', function(e) {
+            const formData = new FormData();
+            console.log(this, this.files);
+            formData.append('img', this.files[0]);
+            axios.post('/post/img', formData)
+                .then((res) => {
+                    document.getElementById('img-url').value = res.data.url;
+                    document.getElementById('img-preview').src = res.data.url;
+                    document.getElementById('img-preview').style.display = 'inline';
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        });
+    }
+</script>
 {% endblock %}

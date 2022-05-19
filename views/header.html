@@ -1,1 +1,30 @@
-
+<header>
+    <!-- 영고 로고 이미지 -->
+    <div id="userInfo">
+        <form>
+            <fieldset style="display: inline-block">
+                <legend class="visually-hidden">검색</legend>
+                <div class="search_box">
+                    <input type="text" maxlength="225" tabindex="1"/>
+                    <button type="submit" tabindex="2">
+                        검색
+                    </button>
+                </div>
+            </fieldset>
+            <nav style="display: inline-block">
+                <div class="nav_items">
+                    <ul>
+                        <li><a href="/">후원</a></li>
+                        {% if isLogin %}
+                        <li><a href="/profile">{{username}}님 안녕하세요</a></li>
+                        <li><a onclick="location.href='logout'">로그아웃</a></li>
+                        {% else %}
+                        <li><a onclick="location.href='login'">로그인</a></li>
+                        <li><a onclick="location.href='signup'">회원가입</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </form>
+    </div>
+</header>

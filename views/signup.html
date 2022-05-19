@@ -6,9 +6,12 @@
     <table>
         <tr>
             <td>이메일</td>
-            <td><input type="email" id="useremail" name="useremail" placeholder="이메일" onchange=""></td>
+            <td><input type="email" id="useremail" name="useremail" placeholder="이메일" onchange="emailcheck()"></td>
             <td>
-                <input type="button" onclick="emailcheck()" value="중복확인">
+                <button type="button" formaction="/email" formmethod="post"
+                        onclick="sendEmail()">
+                    이메일인증
+                </button>
             </td>
             <td><span id="emailMsg"></span></td>
         </tr>
@@ -48,7 +51,7 @@
         </tr>
         <tr>
             <td>핸드폰번호</td>
-            <td><input type="text" name="phonenum" id="phonenum" placeholder="'-'없이 입력" onchange="phonecheck()"></td>
+            <td><input type="tel" name="phonenum" id="phonenum" placeholder="'-'없이 입력" onchange="phonecheck()"></td>
             <td><span id="phoneMsg">axios로 휴대폰번호 양식이 맞는지 문구 출력</span></td>
         </tr>
         <tr>
@@ -88,18 +91,27 @@
                 if (login_flag) {
                     emailMsg.innerHTML = "사용할수 있는 이메일 입니다.";
                     emailMsg.style.color = 'green';
-                    emailCheck = true;
+                    return emailCheck = true;
                 } else {
                     emailMsg.innerHTML = "이미 존재하는 이메일 입니다."
                     emailMsg.style.color = 'red';
-                    emailCheck = false;
+                    return emailCheck = false;
                 }
             } else {
                 emailMsg.innerHTML = "이메일을 입력해주세요";
                 emailMsg.style.color = 'red';
             }
+            console.log(emailCheck);
         } catch (err) {
             console.error(err);
+        }
+    }
+    // 이메일 인증
+    sendEmail = (req, res) => {
+        if (emailCheck) {
+            window.open('/email', 'window_name', 'width=430,height=500,location=no,status=no,scrollbars=yes');
+        } else {
+            return alert("이메일을 확인해주세요.");
         }
     }
 

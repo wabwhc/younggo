@@ -11,6 +11,7 @@ const conn = require('./mysqlconn');
 const nunjucks = require('nunjucks');
 //회원가입부분 라우터로 처리 길어질듯 해서
 const signupR = require('./signup');
+const emailRouter = require('./email');
 const e = require('connect-flash');
 //미들웨어
 app.use(express.urlencoded({extended: false}))
@@ -21,6 +22,7 @@ app.use(passport.initialize()); // passport 구동
 app.use(passport.session()); // 세션 연결
 app.use('/api', router)
 app.use('/signup', signupR);
+app.use('/email', emailRouter);
 
 app.set('view engine', 'html');
 nunjucks.configure('views', {
@@ -37,11 +39,11 @@ app.use('/public', express.static(path.join(__dirname, '../views/public')))
 //로그인상태 미들웨어
 //어떤 url이든 로그인 여부 확인후 로그인 되면 req.username에 유저이름
 app.use((req, res, next) => {
-    if(req.user === undefined){
-        req.user = {username:''};
+    if (req.user === undefined) {
+        req.user = {username: ''};
         req.isLogin = false;
         next();
-    }else{
+    } else {
         req.isLogin = true;
         next();
     }
@@ -53,17 +55,17 @@ app.get('/', (req, res) => {
 
 app.get('/main', (req, res) => {
     console.log(req.isLogin)
-    res.render('main.html', {username : req.user.username, isLogin:req.isLogin})
+    res.render('main.html', {username: req.user.username, isLogin: req.isLogin})
 })
 
 app.get('/profile', (req, res) => {
-    if(req.user.username === ''){
+    if (req.user.username === '') {
         res.redirect('/login')
-    }else{
+    } else {
         let sql = 'select * from users where useremail = ?'
-        conn.query(sql, [req.user.useremail],(err, result, filed) => {
+        conn.query(sql, [req.user.useremail], (err, result, filed) => {
             console.log(result)
-            res.render('profile.html', {user : result[0], username : req.user.username});
+            res.render('profile.html', {user: result[0], username: req.user.username, isLogin: req.isLogin});
         })
     }
 })
@@ -71,7 +73,7 @@ app.get('/profile', (req, res) => {
 app.get('/board', (req, res) => {
     let sql = 'select article_id, article_title, useremail, category from articles'
     conn.query(sql, (err, result, filed) => {
-        res.render('board.html', {article : result, username : req.user.username});
+        res.render('board.html', {article: result, username: req.user.username, isLogin: req.isLogin});
     })
 })
 
@@ -82,19 +84,20 @@ app.post('/login', passport.authenticate('local', {
 }))
 
 app.get('/login', (req, res) => {
-    if(req.user.username === ''){
-        res.render('login.html',{ message : req.flash("error")});
-    }else{
+    if (req.user.username === '') {
+        res.render('login.html', {message: req.flash("error")});
+    } else {
         res.redirect('/main')
     }
 })
 
 const {isLoggedIn, isNotloggedIn} = require('./middlewares');
+const {request} = require("express");
 
 app.get('/logout', isLoggedIn, (req, res) => {
     req.logout();
     req.session.destroy();
-    res.redirect('/main');
+    res.redirect('/');
 });
 
 app.get('/subjects', (req, res) => {
@@ -107,7 +110,7 @@ app.get('/subjects', (req, res) => {
         results.lessons = result1;
         conn.query(sql2, (err, result2, field2) => {
             results.studys = result2;
-            res.render('subjects.html', {results, username : req.user.username})
+            res.render('subjects.html', {results, username: req.user.username, isLogin: req.isLogin});
         })
     })
 })
