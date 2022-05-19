@@ -90,13 +90,14 @@ app.get('/board', async(req, res) => {
     let result2 = []
     for(let i = 0; i < 3; i++){
         result2[i] = await Well.findAll({
+            raw:true,
             attributes:['well_id', 'well_title', 'well_category'],
             where: {
                 well_category : `${subject[i]}`
             }
         })
     }
-    console.log(result1)
+    console.log(result2)
     article.wells = result2
     res.render('board.html', {article, username : req.user.username, isLogin :req.isLogin});
 })
