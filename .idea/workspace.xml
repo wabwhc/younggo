@@ -2,20 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e55e143f-2117-43b3-9152-6bce0d238be6" name="변경" comment="chanwool">
-      <change afterPath="$PROJECT_DIR$/models/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/email.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/email.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/models/Well.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/models/apply_lesson.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/models/apply_study.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/models/article.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/models/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/models/lesson.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/models/reply.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/models/study.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/models/subject.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/models/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/post.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/post.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/layout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/views/public/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/signup.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/mysqlconn.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/mysqlconn.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/passport.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/passport.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/signup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/board.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/board.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/subjects.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/subjects.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +76,7 @@
       <workItem from="1652930457651" duration="1185000" />
       <workItem from="1652937393034" duration="4811000" />
       <workItem from="1652954746614" duration="5525000" />
+      <workItem from="1652962437138" duration="195000" />
     </task>
     <task id="LOCAL-00001" summary="chanwool">
       <created>1652093861233</created>

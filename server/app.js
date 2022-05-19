@@ -7,12 +7,25 @@ const pass = require('./passport');
 const passport = require('passport')
 const path = require('path')
 const router = require('./api/router')
-const conn = require('./mysqlconn');
 const nunjucks = require('nunjucks');
+
+const {
+    Well, User, Article,
+    Lesson, Apply_lesson,
+    Apply_study, Study, sequelize
+} = require('./models');
+
+sequelize.sync({force: false})  // 서버 실행시마다 테이블을 재생성할건지에 대한 여부
+    .then(() => {
+        console.log('데이터베이스 연결 성공');
+    })
+    .catch((err) => {
+        console.error(err);
+    });
+
 //회원가입부분 라우터로 처리 길어질듯 해서
 const signupR = require('./signup');
 const emailRouter = require('./email');
-const e = require('connect-flash');
 //미들웨어
 app.use(express.urlencoded({extended: false}))
 app.use(session({
@@ -58,23 +71,42 @@ app.get('/main', (req, res) => {
     res.render('main.html', {username: req.user.username, isLogin: req.isLogin})
 })
 
-app.get('/profile', (req, res) => {
+app.get('/profile', async (req, res) => {
     if (req.user.username === '') {
         res.redirect('/login')
     } else {
-        let sql = 'select * from users where useremail = ?'
-        conn.query(sql, [req.user.useremail], (err, result, filed) => {
-            console.log(result)
-            res.render('profile.html', {user: result[0], username: req.user.username, isLogin: req.isLogin});
+        let result = await User.findAll({
+            raw: true,
+            where: {
+                useremail: req.user.useremail
+            },
+            attributes: ['useremail', 'username', 'usercomment', 'phonenum', 'usercode']
         })
+        res.render('profile.html', {user: result[0], isLogin: req.isLogin});
     }
 })
 
-app.get('/board', (req, res) => {
-    let sql = 'select article_id, article_title, useremail, category from articles'
-    conn.query(sql, (err, result, filed) => {
-        res.render('board.html', {article: result, username: req.user.username, isLogin: req.isLogin});
+app.get('/board', async (req, res) => {
+    let article = {};
+    let result1 = await Article.findAll({
+        raw: true,
+        attributes: ['article_id', 'article_title', 'useremail', 'category']
     })
+    article.qna = result1;
+    let subject = ['레슨', '스터디', '계정']
+    let result2 = []
+    for (let i = 0; i < 3; i++) {
+        result2[i] = await Well.findAll({
+            raw: true,
+            attributes: ['well_id', 'well_title', 'well_category'],
+            where: {
+                well_category: `${subject[i]}`
+            }
+        })
+    }
+    console.log(result2)
+    article.wells = result2
+    res.render('board.html', {article, username: req.user.username, isLogin: req.isLogin});
 })
 
 app.post('/login', passport.authenticate('local', {
@@ -100,19 +132,35 @@ app.get('/logout', isLoggedIn, (req, res) => {
     res.redirect('/');
 });
 
-app.get('/subjects', (req, res) => {
+app.get('/subjects', async (req, res) => {
 
-    let sql1 = 'select * from lessons a join (select count(useremail) count, lesson_id from apply_lesson group by lesson_id) b on a.lesson_id = b.lesson_id';
-    let sql2 = 'select * from studys a join (select count(useremail) count, study_id from apply_study group by study_id) b on a.study_id = b.study_id';
+    let result1 = await Lesson.findAll({
+        include: [{
+            model: Apply_lesson,
+            attributes: [[sequelize.fn('count', '*'), 'count']],
+            group: ['Apply_lesson.lesson_id'],
+            separate: true,
+        }]
+    });
 
-    let results = {}
-    conn.query(sql1, (err, result1, field1) => {
-        results.lessons = result1;
-        conn.query(sql2, (err, result2, field2) => {
-            results.studys = result2;
-            res.render('subjects.html', {results, username: req.user.username, isLogin: req.isLogin});
-        })
+    let result2 = await Study.findAll({
+        include: [{
+            model: Apply_study,
+            attributes: [[sequelize.fn('count', '*'), 'count']],
+            group: ['Apply_study.study_id'],
+            separate: true,
+        }],
     })
+
+    result2 = result2.map(el => el.get({plain: true}))
+    result1 = result1.map(el => el.get({plain: true}))
+
+    let results = {
+        studys: result2,
+        lessons: result1
+    }
+    //현재 신청한 학생수는 apply_lessons[0].count, apply_studies[0].count에 있음 신청학생이 없으면 언디파인뜰듯
+    res.render('subjects.html', {results, username: req.user.username, isLogin: req.isLogin})
 })
 
 app.listen(8080, () => {
