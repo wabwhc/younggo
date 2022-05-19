@@ -8,7 +8,6 @@
 </head>
 <link rel="stylesheet" href="./public/css/board.css">
 <body>
-    {{article[0].article_id}}
     <h1>자주하는 질문</h1>
     <div id="category_title">
         <h1 class="lesson_title">레슨</h1>
@@ -18,114 +17,97 @@
     
     <div id="lesson">
         <ul class="qna">
+            {% for well in article.wells[0] %}
             <li>
-                <input type="checkbox" id="qna-1">
-                <label for="qna-1">레슨은 어떤 서비스인가요?</label>
+                <input type="checkbox" id="qna-{{well.well_id}}">
+                <label for="qna-{{well.well_id}}">{{well.well_title}}</label>
                 <div>
-                    <p>답변</p>
+                    <p>{{well.well_reply}}</p>
                 </div>
             </li>
-            <li>
-                <input type="checkbox" id="qna-2">
-                <label for="qna-2">레슨은 누구나 개설할 수 있나요?</label>
-                <div>
-                    <p>답변</p>
-                </div>
-            </li>
-            <li>
-                <input type="checkbox" id="qna-3">
-                <label for="qna-3">레슨 개설에 인원제한 등이 있나요?</label>
-                <div>
-                    <p>답변</p>
-                </div>
-            </li>
-            <li>
-                <input type="checkbox" id="qna-4">
-                <label for="qna-4">레슨 가입은 누구나 할 수 있나요?</label>
-                <div>
-                    <p>답변</p>
-                </div>
-            </li>
+            {% endfor %}
         </ul>
     </div>
     <div id="study">
         <ul class="qna">
+            {% for well in article.wells[1] %}
             <li>
-                <input type="checkbox" id="qna-1">
-                <label for="qna-1">스터디는 어떤 서비스인가요?</label>
+                <input type="checkbox" id="qna-{{well.well_id}}">
+                <label for="qna-{{well.well_id}}">{{well.well_title}}</label>
                 <div>
-                    <p>답변</p>
+                    <p>{{well.well_reply}}</p>
                 </div>
             </li>
-            <li>
-                <input type="checkbox" id="qna-2">
-                <label for="qna-2">스터디는 누구나 개설할 수 있나요?</label>
-                <div>
-                    <p>답변</p>
-                </div>
-            </li>
-            <li>
-                <input type="checkbox" id="qna-3">
-                <label for="qna-3">스터디 개설에 인원제한 등이 있나요?</label>
-                <div>
-                    <p>답변</p>
-                </div>
-            </li>
-            <li>
-                <input type="checkbox" id="qna-4">
-                <label for="qna-4">스터디 가입은 누구나 가능한가요?</label>
-                <div>
-                    <p>답변</p>
-                </div>
-            </li>
+            {% endfor %}
         </ul>
     </div>
     <div id="account">
         <ul class="qna">
+            {% for well in article.wells[2] %}
             <li>
-                <input type="checkbox" id="qna-1">
-                <label for="qna-1">회원가입은 어떻게 하나요?</label>
+                <input type="checkbox" id="qna-{{well.well_id}}">
+                <label for="qna-{{well.well_id}}">{{well.well_title}}</label>
                 <div>
-                    <p>답변</p>
+                    <p>{{well.well_reply}}</p>
                 </div>
             </li>
-            <li>
-                <input type="checkbox" id="qna-2">
-                <label for="qna-2">아이디와 비밀번호를 잊어버렸는데 어떻게 하나요?</label>
-                <div>
-                    <p>답변</p>
-                </div>
-            </li>
-            <li>
-                <input type="checkbox" id="qna-3">
-                <label for="qna-3">회원탈퇴는 어떻게 하나요?</label>
-                <div>
-                    <p>답변</p>
-                </div>
-            </li>
-            <li>
-                <input type="checkbox" id="qna-4">
-                <label for="qna-4">개인정보 수정은 어떻게 하나요?</label>
-                <div>
-                    <p>답변</p>
-                </div>
-            </li>
+            {% endfor %}
         </ul>
     </div>
     
     <div id="qna_submit">
         <h1>질문 게시판</h1>
-        <button id="input_qna">글쓰기</button>
+        <button class="input_qna">글쓰기</button>
     </div>
-
+    
     <form action="" id="qna_content">
         <input type="text" placeholder="질문 제목" class="qna_write_title"><br>
         <input type="text" placeholder="질문 내용" class="qna_wirte_content"><br>
         <button type="submit">입력</button>
     </form>
     
+    <table id="qna_table">
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+            <th>답변 여부</th>
+        </tr>
+    </table>
+
     <script>
-        document.querySelector("#input_qna").addEventListener('click', (e) => {
+        /* 자주하는 질문 */
+        document.querySelector('.lesson_title').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelector('#lesson').style.display = 'block';
+            document.querySelector('#study').style.display = 'none';
+            document.querySelector('#account').style.display = 'none';
+            document.querySelector('.lesson_title').style.background = '#aaa';
+            document.querySelector('.study_title').style.background = '#fff';
+            document.querySelector('.account_title').style.background = '#fff';
+        });
+        document.querySelector('.study_title').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelector('#study').style.display = 'block';
+            document.querySelector('#lesson').style.display = 'none';
+            document.querySelector('#account').style.display = 'none';
+            document.querySelector('.lesson_title').style.background = '#fff';
+            document.querySelector('.study_title').style.background = '#aaa';
+            document.querySelector('.account_title').style.background = '#fff';
+        });
+        document.querySelector('.account_title').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelector('#account').style.display = 'block';
+            document.querySelector('#lesson').style.display = 'none';
+            document.querySelector('#study').style.display = 'none';
+            document.querySelector('.lesson_title').style.background = '#fff';
+            document.querySelector('.study_title').style.background = '#fff';
+            document.querySelector('.account_title').style.background = '#aaa';
+        });
+        
+        /* 질문 등록 */
+        document.querySelector(".input_qna").addEventListener('click', (e) => {
             e.preventDefault();
             if(document.querySelector("#qna_content").style.display == 'block'){
                 document.querySelector("#qna_content").style.display = 'none';
@@ -133,23 +115,15 @@
                 document.querySelector("#qna_content").style.display = 'block'
             }
         });
-        document.querySelector('.lesson_title').addEventListener('click', (e) => {
+        document.querySelector("#qna_content button").addEventListener('click', (e) => {
             e.preventDefault();
-            document.querySelector('#lesson').style.display = 'block';
-            document.querySelector('#study').style.display = 'none';
-            document.querySelector('#account').style.display = 'none';
-        });
-        document.querySelector('.study_title').addEventListener('click', (e) => {
-            e.preventDefault();
-            document.querySelector('#study').style.display = 'block';
-            document.querySelector('#lesson').style.display = 'none';
-            document.querySelector('#account').style.display = 'none';
-        });
-        document.querySelector('.account_title').addEventListener('click', (e) => {
-            e.preventDefault();
-            document.querySelector('#account').style.display = 'block';
-            document.querySelector('#lesson').style.display = 'none';
-            document.querySelector('#study').style.display = 'none';
+            if(!document.querySelector("#qna_content .qna_write_title").value){
+                return alert("질문 제목을 입력하세요.");
+            }
+            if(!document.querySelector("#qna_content .qna_wirte_content").value){
+                return alert("질문 내용을 입력하세요.");
+            }
+            
         });
     </script>
 </body>

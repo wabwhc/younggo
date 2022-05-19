@@ -1,17 +1,19 @@
-.layout{
-    max-width: 600px;
-    margin: 0 auto;
+* {
+  margin: 0;
+  padding: 0;
 }
 
 #category_title{
   display: flex;
-  margin: 10px 0px 10px 0px;
+  margin: 10px 0px 0px 0px;
   justify-content:left;
+  cursor: pointer;
 }
 
 .lesson_title{
   padding: 10px 25px 10px 25px;
   border: 1px solid #aaa;
+  background: #aaa;
 }
 .lesson_title:hover{
   background-color: #aaa;
@@ -20,6 +22,7 @@
   padding: 10px 25px 10px 25px;
   border: 1px solid #aaa;
 }
+
 .study_title:hover{
   background-color: #aaa;
 }
@@ -31,7 +34,7 @@
   background-color: #aaa;
 }
 
-/* #lesson {
+#lesson {
   display: block;
 }
 #study {
@@ -39,13 +42,15 @@
 }
 #account {
   display: none;
-} */
+}
 
 .qna{
     list-style: none;
-    margin: 0;
-    padding: 0;
+    width: 30%;
+    background: #aaa;
 }
+
+/* 숨기고 열기 */
 .qna > li{
   padding: 10px 0;
   box-sizing: border-box;
@@ -97,19 +102,28 @@
 #qna_submit{
   display: flex;
   align-items: center;
+  margin-top: 10px;
 }
 
 #qna_submit button {
-  height: 50%;
+  width: 63px;
+  height: 40px;
   margin-left: 230px;
+  cursor: pointer;
 }
 
 #qna_content{
   display: none;
 }
 
+#qna_content button {
+  width: 70px;
+  height: 30px;
+}
+
 .qna_write_title{
   width: 30%;
+  height: 25px;
   margin-bottom: 5px;
 }
 
@@ -117,4 +131,11 @@
   height: 150px;
   width: 30%;
   margin-bottom: 5px;
+}
+
+#qna_table{
+  border-top: 1px solid #000;
+}
+#qna_table{
+  margin-right: 30px;
 }

@@ -1,15 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    이름<h1>{{user.username}}</h1>
-    이메일<h1>{{user.useremail}}</h1>
-    코멘트<h1>{{user.usercomment}}</h1>
-    전화번호<h1>{{user.phonenum}}</h1>
-</body>
-</html>
+{% extends 'layout.html' %}
+
+{% block content%}
+프로필사진
+<form action="/post" method="post" enctype="multipart/form-data">
+    <img src="" alt="프로필사진" style="display: none;" width="250">
+
+</form>
+이름<h1>{{user.username}}</h1>
+이메일<h1>{{user.useremail}}</h1>
+코멘트<h1>{{user.usercomment}}</h1>
+전화번호<h1>{{user.phonenum}}</h1>
+{% endblock %}

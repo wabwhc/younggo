@@ -8,21 +8,21 @@ const passport = require('passport')
 const path = require('path')
 const router = require('./api/router')
 const conn = require('./mysqlconn');
-const nunjucks  = require('nunjucks');
+const nunjucks = require('nunjucks');
 //회원가입부분 라우터로 처리 길어질듯 해서
 const signupR = require('./signup');
 const e = require('connect-flash');
 //미들웨어
-app.use(express.urlencoded({extended:false}))
-app.use(session({ 
-    secret: '비밀코드', resave: true, saveUninitialized: false 
+app.use(express.urlencoded({extended: false}))
+app.use(session({
+    secret: '비밀코드', resave: true, saveUninitialized: false
 })); // 세션 활성화
 app.use(passport.initialize()); // passport 구동
 app.use(passport.session()); // 세션 연결
 app.use('/api', router)
 app.use('/signup', signupR);
 
-app.set('view engine', 'njk');
+app.set('view engine', 'html');
 nunjucks.configure('views', {
     express: app,
     autoescape: true,
@@ -63,20 +63,30 @@ app.get('/profile', (req, res) => {
         let sql = 'select * from users where useremail = ?'
         conn.query(sql, [req.user.useremail],(err, result, filed) => {
             console.log(result)
-            res.render('profile.html', {user : result[0], username : req.user.username});
+            res.render('profile.html', {user : result[0], username : req.user.username, isLogin :req.isLogin});
         })
     }
 })
 
 app.get('/board', (req, res) => {
-    let sql = 'select article_id, article_title, useremail, category from articles';
+    let article = {};
+    let sql = 'select article_id, article_title, useremail, category from articles'
     conn.query(sql, (err, result, filed) => {
-        res.render('board.html', {article : result, username : req.user.username});
+        article.qna = result;
+        let sql2 =
+         "select well_id, well_title, well_author, well_category, well_reply from wells where well_category = '레슨';" + 
+         "select well_id, well_title, well_author, well_category, well_reply from wells where well_category = '스터디';" +
+         "select well_id, well_title, well_author, well_category, well_reply from wells where well_category = '계정';"
+        conn.query(sql2, (err, result2, filed) => {
+            article.wells = result2
+            res.render('board.html', {article, username : req.user.username, isLogin :req.isLogin});
+        })
+
     })
 })
 
 app.post('/login', passport.authenticate('local', {
-    successRedirect:'/main',
+    successRedirect: '/main',
     failureRedirect: '/login',
     failureFlash: true
 }))
@@ -89,6 +99,14 @@ app.get('/login', (req, res) => {
     }
 })
 
+const {isLoggedIn, isNotloggedIn} = require('./middlewares');
+
+app.get('/logout', isLoggedIn, (req, res) => {
+    req.logout();
+    req.session.destroy();
+    res.redirect('/main');
+});
+
 app.get('/subjects', (req, res) => {
 
     let sql1 = 'select * from lessons a join (select count(useremail) count, lesson_id from apply_lesson group by lesson_id) b on a.lesson_id = b.lesson_id';
@@ -99,7 +117,7 @@ app.get('/subjects', (req, res) => {
         results.lessons = result1;
         conn.query(sql2, (err, result2, field2) => {
             results.studys = result2;
-            res.render('subjects.html', {results, username : req.user.username})
+            res.render('subjects.html', {results, username : req.user.username, isLogin :req.isLogin})
         })
     })
 })
