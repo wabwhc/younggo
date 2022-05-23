@@ -151,7 +151,7 @@
             signupUsercodeMsg.style.color = 'red';
             signupPhonenumMsg.style.color = 'red';
             signupMsg.style.color = 'red';
-            if (!useremail || !password || !password2 || !username || !usercode || !phonenum) {
+            if (!useremail || !password || !password2 || !username || !phonenum) {
                 event.preventDefault();
                 if (!useremail) {
                     signupEmailMsg.innerHTML = "이메일을 입력해주세요.";
@@ -172,11 +172,7 @@
                 } else {
                     signupNameMsg.innerHTML = "";
                 }
-                if (!usercode) {
-                    signupUsercodeMsg.innerHTML = "유저코드를 입력해주세요.";
-                } else {
-                    signupUsercodeMsg.innerHTML = "";
-                }
+
                 if (!phonenum) {
                     signupPhonenumMsg.innerHTML = "핸드폰번호를 입력해주세요.";
                 } else if (phoneCheck == false) {

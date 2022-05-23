@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const dotenv = require('dotenv')
+
+dotenv.config();
 //const conn = require('./mysqlconn');
 const {User} = require('./models');
 router.get('/', (req, res) => {
@@ -60,10 +63,23 @@ router.post('/', async(req, res) => {
         if (result.length !== 0) {
             res.send('이미 존재하는 계정')
         } else {
-            let sql2 = 'insert into users (useremail, password, username, usercode, phonenum, usercomment) values (?, ?, ?, ?, ?, ?)';
-            conn.query(sql2, [useremail, password, username, usercode, phonenum, usercomment], (err, result, field) => {
-                res.redirect('/login')
-            })
+            //let sql2 = 'insert into users (useremail, password, username, usercode, phonenum, usercomment) values (?, ?, ?, ?, ?, ?)';
+            //conn.query(sql2, [useremail, password, username, usercode, phonenum, usercomment], (err, result, field) => {
+            //    res.redirect('/login')
+            //})
+            User.create({
+                useremail: useremail,
+                password : password,
+                username: username,
+                usercode:usercode,
+                phonenum: phonenum,
+                usercomment: usercomment
+                }
+            ).then(
+                () => {
+                    res.redirect('/login')
+                }
+            )
         }
 
         //let sql = 'select * from users where useremail = ?';
