@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>회원인증</title>
+</head>
+<body>
+<div>이메일 인증 화면입니다</div>
+<form action="/email" method="post">
+    <input type="text" placeholder="이메일 인증" name="{{code}}">
+    <input type="submit" value="이메일 인증" name="{{code}}">
+    <div>{{code}}</div>
+</form>
+</body>
+</html>

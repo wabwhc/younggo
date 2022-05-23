@@ -1,17 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    {{message}}
-    <form action="/login" method="post">
-        <input type="text" name="useremail" placeholder="이메일">
-        <input name="password" placeholder="비밀번호">
-        <button>버튼</button>
-    </form>
-</body>
-</html>
+{% extends 'layout.html' %}
+
+{% block content%}
+<login><h1>로그인입니다.</h1></login>
+<form action="/login" method="post" id="login">
+    <table>
+        <tr>
+            <td>이메일</td>
+            <td><input type="text" name="useremail" id="email" placeholder="이메일"></td>
+            <td><span id="emailMsg"></span></td>
+        </tr>
+        <tr>
+            <td>비밀번호</td>
+            <td><input type="password" name="password" id="password" placeholder="비밀번호"></td>
+            <td><span id="passwordMsg"></span></td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit">로그인</button>
+            </td>
+            <td><span id="loginMsg"></span></td>
+        </tr>
+    </table>
+</form>
+<script src="public/src/login.js"></script>
+{% endblock %}

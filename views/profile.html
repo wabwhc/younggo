@@ -1,15 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    이름<h1>{{user.username}}</h1>
-    이메일<h1>{{user.useremail}}</h1>
-    코멘트<h1>{{user.usercomment}}</h1>
-    전화번호<h1>{{user.phonenum}}</h1>
-</body>
-</html>
+{% extends 'layout.html' %}
+
+{% block content%}
+프로필사진
+<form id="img-form" action="/post" method="post" enctype="multipart/form-data">
+    <div class="img-preview">
+        <img id="img-preview" src="" style="display: none;" width="250" alt="미리보기">
+        <input id="img-url" type="hidden" name="url">
+    </div>
+    <div>
+        <input id="img" type="file" accept="image/*">
+        <button type="submit">사진업로드</button>
+    </div>
+</form>
+<div class="img"><img src="{{userimg}}" alt="프로필사진"></div>
+이름<h1>{{user.username}}</h1>
+이메일<h1>{{user.useremail}}</h1>
+코멘트<h1>{{user.usercomment}}</h1>
+전화번호<h1>{{user.phonenum}}</h1>
+<script>
+    if (document.getElementById('img')) {
+        document.getElementById('img').addEventListener('change', function (event) {
+            const formData = new FormData();
+            console.log(this, this.files);
+            formData.append('img', this.files[0]);
+            axios.post('/post/img', formData)
+                .then((res) => {
+                    document.getElementById('img-url').value = res.data.url;
+                    document.getElementById('img-preview').src = res.data.url;
+                    document.getElementById('img-preview').style.display = 'inline';
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        });
+    }
+</script>
+{% endblock %}

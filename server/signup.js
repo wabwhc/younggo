@@ -1,39 +1,64 @@
 const express = require('express');
 const router = express.Router();
-const conn = require('./mysqlconn');
+const bcrypt = require('bcrypt');
+
+const {User} = require('./models');
 
 router.get('/', (req, res) => {
-    if(req.user === undefined){
-        res.render('signup.html')
-    }else{
+    if (req.user === undefined) {
+        res.render('signup.html', {title: '회원가입'})
+    } else {
         res.redirect('/main')
     }
 })
 
-router.post('/', (req, res) => {
-    let useremail = req.body.useremail;
-    let username = req.body.username;
-    let password = req.body.password;
-    let usercode = req.body.usercode;
-    let phonenum = req.body.phonenum;
-    let usercomment = req.body.usercomment;
-    if(usercode !== process.env.usercode && usercode !== ''){
-        res.send('유저코드이상')
-    }else{
-        let sql = 'select * from users where useremail = ?';
-        conn.query(sql, [useremail], (err, result, fields) => {
-            if(result.length !== 0){
-                res.send('이미 존재하는 계정')
-            }else{
-                let  sql2 = 'insert into users (useremail, password, username, usercode, phonenum, usercomment) values (?, ?, ?, ?, ?, ?)';
-                conn.query(sql2, [useremail, password, username, usercode, phonenum, usercomment], (err, result, field) => {
-                    res.redirect('/login')
-                })
-            }
-
-        })
+let flag = false;
+router.get('/emailCheck', async (req, res) => {
+    let useremail = req.query.useremail;
+    console.log(useremail);
+    let result = await User.findAll({
+        where: {
+            useremail: useremail
+        }
+    })
+    if (result.length !== 0) {
+        flag = false;
+    } else {
+        flag = true;
     }
+    res.json({
+        login: flag, useremail
+    })
 })
+
+router.post('/', async (req, res, next) => {
+    const {useremail, username, password, password2, usercode, phonenum, usercomment} = req.body;
+    if (flag == false) {
+        return res.send('이메일 중복');
+    }
+    if (password != password2) {
+        return res.send('비밀번호 미일치');
+    }
+        try {
+            if (flag == false) {
+                return res.redirect('/join?error=exist');
+            }
+            const hash = await bcrypt.hash(password, 12);
+            await User.create({
+                useremail,
+                username,
+                password: hash,
+                usercode,
+                phonenum,
+                usercomment,
+            });
+            return res.redirect('/login');
+        } catch (err) {
+            console.error(err)
+            return next(err);
+        }
+
+});
 
 
 module.exports = router;
