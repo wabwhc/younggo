@@ -1,13 +1,15 @@
 //모듈
 const express = require('express');
-const app = express();
 const session = require('express-session');
 const flash = require('connect-flash');
 const pass = require('./passport');
-const passport = require('passport')
-const path = require('path')
-const router = require('./api/router')
+const passport = require('passport');
+const path = require('path');
+const router = require('./api/router');
 const nunjucks = require('nunjucks');
+const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
+const app = express();
 
 const {
     Well, User, Article,
@@ -26,10 +28,13 @@ sequelize.sync({force: false})  // 서버 실행시마다 테이블을 재생성
 //회원가입부분 라우터로 처리 길어질듯 해서
 const signupR = require('./signup');
 const emailRouter = require('./email');
+const postRouter = require('./post');
 //미들웨어
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({extended: false}));
 app.use(session({
-    secret: '비밀코드', resave: true, saveUninitialized: false
+    secret: '비밀코드',
+    resave: false,
+    saveUninitialized: false
 })); // 세션 활성화
 app.use(passport.initialize()); // passport 구동
 app.use(passport.session()); // 세션 연결
@@ -48,7 +53,7 @@ pass()
 app.use(flash())
 
 app.use('/public', express.static(path.join(__dirname, '../views/public')))
-
+app.use('/img', express.static(path.join(__dirname, '../uploads')));
 //로그인상태 미들웨어
 //어떤 url이든 로그인 여부 확인후 로그인 되면 req.username에 유저이름
 app.use((req, res, next) => {
@@ -61,7 +66,7 @@ app.use((req, res, next) => {
         next();
     }
 })
-
+app.use('/post', postRouter);
 app.get('/', (req, res) => {
     res.redirect('/main')
 })
@@ -78,11 +83,14 @@ app.get('/profile', async (req, res) => {
         let result = await User.findAll({
             raw: true,
             where: {
-                useremail: req.user.useremail
+                useremail: req.user.useremail,
+                // userimg: req.user.userimg,
             },
-            attributes: ['useremail', 'username', 'usercomment', 'phonenum', 'usercode']
+            attributes: ['useremail', 'username', 'usercomment', 'phonenum', 'usercode'
+                // 'userimg'
+            ]
         })
-        res.render('profile.html', {user: result[0], isLogin: req.isLogin});
+        res.render('profile.html', {user: result[0], username: req.user.username, isLogin: req.isLogin});
     }
 })
 
@@ -109,11 +117,14 @@ app.get('/board', async (req, res) => {
     res.render('board.html', {article, username: req.user.username, isLogin: req.isLogin});
 })
 
-app.post('/login', passport.authenticate('local', {
-    successRedirect: '/main',
-    failureRedirect: '/login',
-    failureFlash: true
-}))
+app.post('/login',
+    passport.authenticate('local',
+        {
+            successRedirect: '/main',
+            failureRedirect: '/login',
+            failureFlash: true
+        }
+    ))
 
 app.get('/login', (req, res) => {
     if (req.user.username === '') {

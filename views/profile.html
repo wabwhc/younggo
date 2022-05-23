@@ -8,20 +8,18 @@
         <input id="img-url" type="hidden" name="url">
     </div>
     <div>
-        <label id="img-label" for="img">사진 업로드</label>
         <input id="img" type="file" accept="image/*">
+        <button type="submit">사진업로드</button>
     </div>
 </form>
-{% if twit.img %}
-<div class="img"><img src="{{img}}" alt="섬네일"></div>
-{% endif %}
+<div class="img"><img src="{{userimg}}" alt="프로필사진"></div>
 이름<h1>{{user.username}}</h1>
 이메일<h1>{{user.useremail}}</h1>
 코멘트<h1>{{user.usercomment}}</h1>
 전화번호<h1>{{user.phonenum}}</h1>
 <script>
     if (document.getElementById('img')) {
-        document.getElementById('img').addEventListener('change', function(e) {
+        document.getElementById('img').addEventListener('change', function (event) {
             const formData = new FormData();
             console.log(this, this.files);
             formData.append('img', this.files[0]);
