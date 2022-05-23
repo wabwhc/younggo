@@ -13,9 +13,11 @@ const {Well, User, Article,
     Lesson, Apply_lesson, 
     Apply_study, Study, sequelize} = require('./models');
 
-sequelize.sync({ force: false })  // 서버 실행시마다 테이블을 재생성할건지에 대한 여부 
-.then(() => { console.log('데이터베이스 연결 성공'); }) 
-.catch((err) => { console.error(err); }); 
+try{
+    sequelize.sync({ force: false })  // 서버 실행시마다 테이블을 재생성할건지에 대한 여부 
+    .then(() => { console.log('데이터베이스 연결 성공'); }) 
+    .catch((err) => { console.error(err); }); 
+}catch(err){}
 
 //회원가입부분 라우터로 처리 길어질듯 해서
 const signupR = require('./signup');
@@ -68,14 +70,19 @@ app.get('/profile', async(req, res) => {
     if(req.user.username === ''){
         res.redirect('/login')
     }else{
-        let result = await User.findAll({
-            raw: true,
-            where:{
-                useremail: req.user.useremail
-            },
-            attributes: ['useremail', 'username', 'usercomment', 'phonenum', 'usercode']
-        })
-        res.render('profile.html', {user : result[0], isLogin :req.isLogin});
+        try{
+            let result = await User.findAll({
+                raw: true,
+                where:{
+                    useremail: req.user.useremail
+                },
+                attributes: ['useremail', 'username', 'usercomment', 'phonenum', 'usercode']
+            })
+            res.render('profile.html', {user : result[0], isLogin :req.isLogin});
+        }catch(err){
+
+        }
+        
     }
 })
 
@@ -89,13 +96,15 @@ app.get('/board', async(req, res) => {
     let subject = ['레슨', '스터디', '계정']
     let result2 = []
     for(let i = 0; i < 3; i++){
-        result2[i] = await Well.findAll({
-            raw:true,
-            attributes:['well_id', 'well_title', 'well_category'],
-            where: {
-                well_category : `${subject[i]}`
-            }
-        })
+        try{
+            result2[i] = await Well.findAll({
+                raw:true,
+                attributes:['well_id', 'well_title', 'well_category'],
+                where: {
+                    well_category : `${subject[i]}`
+                }
+            })
+        }catch(err){}
     }
     console.log(result2)
     article.wells = result2
@@ -125,26 +134,29 @@ app.get('/logout', isLoggedIn, (req, res) => {
 });
 
 app.get('/subjects', async(req, res) => {
-
-    let result1 = await Lesson.findAll({
-        include:[{
-            model: Apply_lesson,
-            attributes:[[sequelize.fn('count','*'),'count']],
-            group: ['Apply_lesson.lesson_id'],
-            separate: true,
-        }]
-    });
-
-    let result2 = await Study.findAll({
-        include:[{
-            model: Apply_study,
-            attributes:[[sequelize.fn('count','*'),'count']],
-            group: ['Apply_study.study_id'],
-            separate: true,
-        }],
-
-    })
+    let result1;
+    let result2;
+    try{
+        result1 = await Lesson.findAll({
+            include:[{
+                model: Apply_lesson,
+                attributes:[[sequelize.fn('count','*'),'count']],
+                group: ['Apply_lesson.lesson_id'],
+                separate: true,
+            }]
+        });
     
+        result2 = await Study.findAll({
+            include:[{
+                model: Apply_study,
+                attributes:[[sequelize.fn('count','*'),'count']],
+                group: ['Apply_study.study_id'],
+                separate: true,
+            }],
+    
+        })
+    }catch(err){}
+
     result2 = result2.map(el => el.get({plain:true}))
     result1 = result1.map(el => el.get({plain:true}))
 
