@@ -133,9 +133,27 @@
   margin-bottom: 5px;
 }
 
-#qna_table{
-  border-top: 1px solid #000;
+caption {
+  display: table-caption;
 }
-#qna_table{
-  margin-right: 30px;
+
+colgroup {
+  display: table-column-group;
+}
+
+table {
+  border-spacing: 0px;
+  font-size: 18px;
+}
+
+#qna_table th {
+  border: 2px solid #000;
+  border-left-width: 0px;
+  border-right-width: 0px;
+}
+
+#qna_table td {
+  text-align: center;
+  background: rgb(246, 246, 246);
+  border-bottom: 1px solid rgb(236, 236, 236);
 }

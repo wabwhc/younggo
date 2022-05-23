@@ -1,9 +1,8 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const conn = require('./mysqlconn')
+const {User} = require('./models');
 
-
-const User = {
+const UserObject = {
 
 }
 module.exports = () => {
@@ -21,22 +20,23 @@ module.exports = () => {
         passwordField: "password",
         session: true,
         },
-        (useremail, password, done) => {
-            User.useremail = useremail;
-            let sql1 = 'select * from users where useremail = ?'
-            conn.query(sql1, [useremail],(err, rows, field) => {
-                let a = rows.length
-                if(a === 1){
-                    if(rows[0].password === password){
-                        User.username = rows[0].username
-                        return done(null, User);
-                    }else{
-                        return done(null, false, { message : '비번이 다름' })
-                    }
-                }else{
-                    return done(null, false, { message : '아이디가 다름' })
+        async(useremail, password, done) => {
+            UserObject.useremail = useremail;
+            let result = await User.findAll({
+                where:{
+                    useremail: useremail
                 }
-            })
+            });
+            if(result.length === 1){
+                if(result[0].password === password){
+                    UserObject.username = result[0].username
+                    return done(null, UserObject);
+                }else{
+                    return done(null, false, { message : '비번이 다름' })
+                }
+            }else{
+                return done(null, false, { message : '아이디가 다름' })
+            }
         }
     ))
 }

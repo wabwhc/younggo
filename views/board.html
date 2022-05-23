@@ -60,21 +60,41 @@
         <button class="input_qna">글쓰기</button>
     </div>
     
-    <form action="" id="qna_content">
+    <form action="/api/board" method="post" id="qna_content">
         <input type="text" placeholder="질문 제목" class="qna_write_title"><br>
         <input type="text" placeholder="질문 내용" class="qna_wirte_content"><br>
         <button type="submit">입력</button>
     </form>
     
-    <table id="qna_table">
-        <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
-            <th>답변 여부</th>
-        </tr>
-    </table>
+    <div style="padding-top: 10px;">
+        <table id="qna_table">
+            <caption style="display: none;"><span>질문 게시판</span></caption>
+            <colgroup>
+                <col style="width: 10%;" >
+                <col style="width: 30%;">
+                <col style="width: 30%;">
+                <col style="width: 10%;">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>답변여부</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in article.qna %}
+                <tr>
+                    <td>{{a.article_id}}</td>
+                    <td>{{a.article_title}}</td>
+                    <td>{{a.useremail}}</td>
+                    <td>여부</td>
+                </tr>
+                {% endfor%}
+            </tbody>
+        </table>
+    </div>
 
     <script>
         /* 자주하는 질문 */
@@ -115,15 +135,20 @@
                 document.querySelector("#qna_content").style.display = 'block'
             }
         });
-        document.querySelector("#qna_content button").addEventListener('click', (e) => {
-            e.preventDefault();
+        document.querySelector("#qna_content button").addEventListener('click', async (e) => {
             if(!document.querySelector("#qna_content .qna_write_title").value){
+                e.preventDefault();
                 return alert("질문 제목을 입력하세요.");
             }
             if(!document.querySelector("#qna_content .qna_wirte_content").value){
+                e.preventDefault();
                 return alert("질문 내용을 입력하세요.");
             }
-            
+            try{
+                
+            }catch(err){
+                console.error(err);
+            }
         });
     </script>
 </body>
