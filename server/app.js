@@ -83,7 +83,7 @@ app.get('/board', async(req, res) => {
     let article = {};
     let result1 = await Article.findAll({
         raw:true,
-        attributes:['article_id','article_title', 'useremail', 'category']
+        attributes:['article_id','article_title', 'useremail', 'category'] // 카테고리 삭제 질문 답 추가 요망
     })
     article.qna = result1;
     let subject = ['레슨', '스터디', '계정']
@@ -91,7 +91,7 @@ app.get('/board', async(req, res) => {
     for(let i = 0; i < 3; i++){
         result2[i] = await Well.findAll({
             raw:true,
-            attributes:['well_id', 'well_title', 'well_category', 'well_reply'],
+            attributes:['well_id', 'well_title', 'well_category', 'well_reply'], // reply 추가
             where: {
                 well_category : `${subject[i]}`
             }

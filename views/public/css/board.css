@@ -133,14 +133,6 @@
   margin-bottom: 5px;
 }
 
-caption {
-  display: table-caption;
-}
-
-colgroup {
-  display: table-column-group;
-}
-
 table {
   border-spacing: 0px;
   font-size: 18px;
