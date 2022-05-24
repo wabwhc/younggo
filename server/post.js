@@ -42,14 +42,17 @@ router.post('/img', isLoggedIn, upload.single('img'), (req, res) => {
 const upload2 = multer();
 router.post('/', isLoggedIn, upload2.none(), async (req, res, next) => {
     try {
-
+        if (req.body.url == '') {
+            req.body.url = 'default';
+        }
         const post = await User.update({
-                userimg: req.body.img,
+                userimg: req.body.url,
             },
             {
                 where: {useremail: req.user.useremail}
             });
-        console.log(req.body.url);
+
+        req.user.userimg = req.body.url;
         res.redirect('/profile');
     } catch (error) {
         console.error(error);

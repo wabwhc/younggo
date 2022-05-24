@@ -2,25 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e55e143f-2117-43b3-9152-6bce0d238be6" name="변경" comment="chanwool">
-      <change afterPath="$PROJECT_DIR$/views/public/src/login.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/public/src/signup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/japan.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/public/css/board.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/public/src/board.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/article.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/user.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/passport.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/passport.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/post.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/post.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/signup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/email.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/email.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/signup.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/board.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/board.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/nav.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/nav.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +20,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="CSS File" />
         <option value="JavaScript File" />
       </list>
     </option>
@@ -47,22 +37,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/CHANWOOL/WebstormProjects/nodebird&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2021.3.2\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/ReactNative/LearnReactNative",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2021.3.2\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\TeamProject\server" />
@@ -92,7 +83,10 @@
       <workItem from="1653123522778" duration="1189000" />
       <workItem from="1653185080453" duration="15316000" />
       <workItem from="1653289303076" duration="2013000" />
-      <workItem from="1653300820170" duration="379000" />
+      <workItem from="1653300820170" duration="4461000" />
+      <workItem from="1653378362225" duration="398000" />
+      <workItem from="1653394429491" duration="27000" />
+      <workItem from="1653396717840" duration="5390000" />
     </task>
     <task id="LOCAL-00001" summary="chanwool">
       <created>1652093861233</created>
@@ -121,6 +115,17 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="chanwool" />
     <option name="LAST_COMMIT_MESSAGE" value="chanwool" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/server/app.js</url>
+          <line>78</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,4 +1,7 @@
 //모듈
+const dotenv = require('dotenv');
+dotenv.config();
+
 const express = require('express');
 const session = require('express-session');
 const flash = require('connect-flash');
@@ -7,7 +10,7 @@ const passport = require('passport');
 const path = require('path');
 const router = require('./api/router');
 const nunjucks = require('nunjucks');
-const dotenv = require('dotenv');
+
 const cookieParser = require('cookie-parser');
 const app = express();
 
@@ -84,12 +87,17 @@ app.get('/profile', async (req, res) => {
             raw: true,
             where: {
                 useremail: req.user.useremail,
-                // userimg: req.user.userimg,
+                userimg: req.user.userimg,
             },
             attributes: ['useremail', 'username', 'usercomment', 'phonenum', 'usercode'
                 // 'userimg'
             ]
         })
+        if (req.user.userimg == 'default') {
+            res.locals.userimg = '/img/default.png';
+        } else {
+            res.locals.userimg = req.user.userimg;
+        }
         res.render('profile.html', {user: result[0], username: req.user.username, isLogin: req.isLogin});
     }
 })
@@ -116,6 +124,19 @@ app.get('/board', async (req, res) => {
     article.wells = result2
     res.render('board.html', {article, username: req.user.username, isLogin: req.isLogin});
 })
+
+app.get('/board/:article_id/content',
+    async (req, res, next) => {
+        try {
+            const content = await Article.findAll({
+                    where: {article_id: req.params.article_id},
+            });
+            res.json(content);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
+    })
 
 app.post('/login',
     passport.authenticate('local',
@@ -172,6 +193,15 @@ app.get('/subjects', async (req, res) => {
     }
     //현재 신청한 학생수는 apply_lessons[0].count, apply_studies[0].count에 있음 신청학생이 없으면 언디파인뜰듯
     res.render('subjects.html', {results, username: req.user.username, isLogin: req.isLogin})
+})
+
+// 현지학기제
+app.get('/japan', async (req, res) => {
+    try {
+        res.render('japan.html', {title: "현지학기제"});
+    } catch (err) {
+        console.error(err)
+    }
 })
 
 app.listen(8080, () => {

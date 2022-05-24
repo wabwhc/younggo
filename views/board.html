@@ -1,13 +1,194 @@
-{% extends 'layout.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q&A</title>
+</head>
+<link rel="stylesheet" href="./public/css/board.css">
+<body>
+<h1>자주하는 질문</h1>
+<div id="category_title">
+    <h1 class="lesson_title">레슨</h1>
+    <h1 class="study_title">스터디</h1>
+    <h1 class="account_title">계정</h1>
+</div>
 
-{% block content%}
-    {% for a in article.qna %}
-    <h1 id="{{a.article_id}}" class="article">{{a.article_title}}</h1>
-    <H4>{{a.category}}</H4>
-    {% endfor%}
-    ----------------------------
-    {% for a in article.wells[0] %}
-    <h1 id="{{a.article_id}}" class="article">{{a.well_title}}</h1>
-    <H4>{{a.well_category}}</H4>
-    {% endfor%}
-{% endblock %}
+<div id="lesson">
+    <ul class="qna">
+        {% for well in article.wells[0] %}
+        <li>
+            <input type="checkbox" id="qna-{{well.well_id}}">
+            <label for="qna-{{well.well_id}}">{{well.well_title}}</label>
+            <div>
+                <p>{{well.well_reply}}</p>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<div id="study">
+    <ul class="qna">
+        {% for well in article.wells[1] %}
+        <li>
+            <input type="checkbox" id="qna-{{well.well_id}}">
+            <label for="qna-{{well.well_id}}">{{well.well_title}}</label>
+            <div>
+                <p>{{well.well_reply}}</p>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<div id="account">
+    <ul class="qna">
+        {% for well in article.wells[2] %}
+        <li>
+            <input type="checkbox" id="qna-{{well.well_id}}">
+            <label for="qna-{{well.well_id}}">{{well.well_title}}</label>
+            <div>
+                <p>{{well.well_reply}}</p>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div id="qna_submit">
+    <h1>질문 게시판</h1>
+    <button class="input_qna">글쓰기</button>
+</div>
+
+<form action="/api/board" method="post" id="qna_content">
+    <input type="text" placeholder="질문 제목" class="qna_write_title"><br>
+    <input type="text" placeholder="질문 내용" class="qna_wirte_content"><br>
+    <button type="submit">입력</button>
+</form>
+
+<div style="padding-top: 10px;">
+    <table id="qna_table">
+        <caption style="display: none;"><span>질문 게시판</span></caption>
+        <colgroup>
+            <col style="width: 10%;">
+            <col style="width: 30%;">
+            <col style="width: 30%;">
+            <!-- <col style="width: 20%;"> -->
+            <!-- <col style="width: 10%;"> -->
+        </colgroup>
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <!-- <th>작성일자</th> -->
+            <!-- <th>답변여부</th> -->
+        </tr>
+        </thead>
+        <tbody id="article_body">
+        {% for a in article.qna %}
+        <tr id="article_{{a.article_id}}">
+            <td>{{a.article_id}}</td>
+            <td>{{a.article_title}}</td>
+            <td>{{a.useremail}}</td>
+            <!-- <td class="article_{{a.article_id}}">{{a.article_at}}</td> -->
+            <!-- <td>여부</td> -->
+            <td id="hiddenTd" hidden>{{a.article_id}}</td>
+        </tr>
+        <tr id="article_{{a.article_id}}_content" style="display: none">
+        </tr>
+        {% endfor%}
+        </tbody>
+    </table>
+</div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    /* 자주하는 질문 */
+    document.querySelector('.lesson_title').addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelector('#lesson').style.display = 'block';
+        document.querySelector('#study').style.display = 'none';
+        document.querySelector('#account').style.display = 'none';
+        document.querySelector('.lesson_title').style.background = '#aaa';
+        document.querySelector('.study_title').style.background = '#fff';
+        document.querySelector('.account_title').style.background = '#fff';
+    });
+    document.querySelector('.study_title').addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelector('#study').style.display = 'block';
+        document.querySelector('#lesson').style.display = 'none';
+        document.querySelector('#account').style.display = 'none';
+        document.querySelector('.lesson_title').style.background = '#fff';
+        document.querySelector('.study_title').style.background = '#aaa';
+        document.querySelector('.account_title').style.background = '#fff';
+    });
+    document.querySelector('.account_title').addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelector('#account').style.display = 'block';
+        document.querySelector('#lesson').style.display = 'none';
+        document.querySelector('#study').style.display = 'none';
+        document.querySelector('.lesson_title').style.background = '#fff';
+        document.querySelector('.study_title').style.background = '#fff';
+        document.querySelector('.account_title').style.background = '#aaa';
+    });
+
+    /* 질문 등록 */
+    document.querySelector(".input_qna").addEventListener('click', (e) => {
+        e.preventDefault();
+        if (document.querySelector("#qna_content").style.display == 'block') {
+            document.querySelector("#qna_content").style.display = 'none';
+        } else {
+            document.querySelector("#qna_content").style.display = 'block'
+        }
+    });
+    document.querySelector("#qna_content button").addEventListener('click', async (e) => {
+        if (!document.querySelector("#qna_content .qna_write_title").value) {
+            e.preventDefault();
+            return alert("질문 제목을 입력하세요.");
+        }
+        if (!document.querySelector("#qna_content .qna_wirte_content").value) {
+            e.preventDefault();
+            return alert("질문 내용을 입력하세요.");
+        }
+        try {
+
+        } catch (err) {
+            console.error(err);
+        }
+    });
+
+    /* 질문 목록 */
+    document.querySelectorAll("#article_body tr").forEach((el) => {
+        el.addEventListener('click', (event) => {
+            const id = el.querySelector('td').textContent;
+            console.log(id);
+            const tr = document.querySelector(`#article_${id}_content`);
+            if (tr.style.display == 'none') {
+                getContent(id);
+            } else {
+                tr.style.display = 'none';
+            }
+        })
+    })
+
+    const getContent = async (id) => {
+        try {
+            const result = await axios.get(`/board/${id}/content`);
+            const contents = result.data;
+            const tr = document.querySelector(`#article_${id}_content`);
+            tr.style.display = 'block';
+            tr.innerHTML = '';
+            console.log(contents);
+            contents.map(content => {
+                let td = document.createElement('td');
+                td.textContent = content.category;
+                tr.appendChild(td);
+            })
+
+        } catch (err) {
+            console.error(err);
+        }
+    }
+</script>
+</body>
+</html>
