@@ -53,7 +53,31 @@ document.querySelector("#qna_content button").addEventListener('click', async (e
 });
 
 /* 질문 목록 */
-document.querySelector("#article_1").addEventListener('click', async (e) => {
-    const a = e.target.id;
-    console.log(a);
-})
+document.querySelectorAll("#article_body tr").forEach((el) => {
+    el.addEventListener('click', (e) => {
+        const id = el.querySelector('td').textContent;
+        console.log(id);
+        getContent(id);
+    })
+});
+
+const getContent = async (id) => {
+    try {
+        if(document.querySelector(`#article_${id}_content td`)){
+            document.querySelector(`#article_${id}_content td`).remove();
+        } else {
+            const result = await axios.get(`/board/${id}/content`);
+            const contents = result.data;
+            const tr = document.querySelector(`#article_${id}_content`);
+            tr.innerHTML = '';
+            console.log(contents);
+            contents.map(content => {
+                let td = document.createElement('td');
+                td.textContent = content.category;
+                tr.appendChild(td);
+            });
+        }
+    } catch (err) {
+        console.error(err);
+    }
+}

@@ -102,6 +102,36 @@ app.get('/board', async(req, res) => {
     res.render('board.html', {article, username : req.user.username, isLogin :req.isLogin});
 });
 
+/* 추가 */
+app.get('/board/:article_id/content',
+    async (req, res, next) => {
+        try {
+            const content = await Article.findAll({
+                    where: {article_id: req.params.article_id},
+            });
+            res.json(content);
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
+});
+
+app.post('/board/createArticle', async (req, res, next) => {
+    try {
+        const {article_title, article_content, category } = req.body;
+        await Article.create({
+            article_title,
+            article_content,
+            useremail: req.user.useremail,
+            category,
+        });
+        return res.redirect('/board');
+    } catch (err) {
+        console.error(err)
+    }
+});
+/* end */
+
 app.post('/login', passport.authenticate('local', {
     successRedirect: '/main',
     failureRedirect: '/login',

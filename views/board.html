@@ -85,14 +85,12 @@
                     <!-- <th>답변여부</th> -->
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="article_body">
                 {% for a in article.qna %}
                 <tr id="article_{{a.article_id}}">
-                        <td>{{a.article_id}}</td>
-                        <td>{{a.article_title}}</td>
-                        <td>{{a.useremail}}</td>
-                    <!-- <td class="article_{{a.article_id}}">{{a.article_at}}</td> -->
-                    <!-- <td>여부</td> -->
+                    <td>{{a.article_id}}</td>
+                    <td>{{a.article_title}}</td>
+                    <td>{{a.useremail}}</td>
                 </tr>
                 <tr id="article_{{a.article_id}}_content">
                     
@@ -101,6 +99,16 @@
             </tbody>
         </table>
     </div>
+    <div id="table_footer">
+        <ul class="table_footer_list">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="public/src/board.js"></script>
 </body>
 </html>
