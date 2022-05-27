@@ -1,3 +1,5 @@
+
+
 // 이메일 중복 체크
 let emailCheck = false;
 emailcheck = async () => {
@@ -7,7 +9,7 @@ emailcheck = async () => {
         if (useremail) {
             let data = await axios.get(`/signup/emailCheck?useremail=${useremail}`);
             console.log(data, '데이터');
-
+            
             login_flag = data.data.login;
             console.log(login_flag, '로그인플래그');
             if (login_flag) {
@@ -51,37 +53,83 @@ pwcheck = () => {
     }
 }
 
+
+// 이메일 인증 체크
+
+let evfcheck = false;
+let sendEvfcode  = '';
+
+const evfbtn = document.querySelector('#evfbtn').addEventListener('click', async () => {
+    console.log("코드 보냄")
+    sendEvfcode = '';
+    for (let i = 0; i < 6; i++)
+        sendEvfcode += Math.floor(Math.random() * 10)
+    const useremail = document.querySelector('#useremail').value;
+    const evfMsg = document.querySelector('#evfMsg');
+    console.log(useremail, "이메일");
+    try {
+        if (useremail) {
+            let data = 
+            await axios({
+                method: "get",
+                url: `/signup/evf`,
+                params: { 
+                    useremail: useremail,
+                    sendEvfcode: sendEvfcode
+                 },
+              });
+        } else {
+            evfMsg.innerHTML = "이메일을 입력해주세요";
+            evfMsg.style.color = 'red';
+        }
+        console.log(evfcheck);
+    } catch (err) {
+        console.error(err);
+    }
+});
+
 // 핸드폰번호 체크
 let phoneCheck = true;
 phonecheck = () => {
-
+    
 }
 
 // 회원가입 체크
 document.querySelector('#userSignup').addEventListener('submit',
-    async (event) => {
-        const useremail = event.target.useremail.value;
-        const password = event.target.password.value;
-        const password2 = event.target.password2.value;
-        const username = event.target.username.value;
-        const usercode = event.target.usercode.value;
-        const phonenum = event.target.phonenum.value;
-        const usercomment = event.target.usercomment.value;
+async (event) => {
+    const useremail = event.target.useremail.value;
+    const password = event.target.password.value;
+    const password2 = event.target.password2.value;
+    const username = event.target.username.value;
+    const usercode = event.target.usercode.value;
+    const phonenum= event.target.phonenum.value;
+    const usercomment = event.target.usercomment.value;
+    const evfcode = event.target.emailverify.value;
+    
+    const signupEmailMsg = document.querySelector('#signupEmailMsg');
+    const signupPasswordMsg = document.querySelector('#signupPasswordMsg');
+    const signupNameMsg = document.querySelector('#signupNameMsg');
+    const signupUsercodeMsg = document.querySelector('#signupUsercodeMsg');
+    const signupPhonenumMsg = document.querySelector('#signupPhonenumMsg');
+    const signupEvfMsg = document.querySelector('#signupEvfMsg');
+    const signupMsg = document.querySelector('#signupMsg');
+    signupEmailMsg.style.color = 'red';
+    signupPasswordMsg.style.color = 'red';
+    signupNameMsg.style.color = 'red';
+    signupUsercodeMsg.style.color = 'red';
+    signupPhonenumMsg.style.color = 'red';
+    signupMsg.style.color = 'red';
 
-        const signupEmailMsg = document.querySelector('#signupEmailMsg');
-        const signupPasswordMsg = document.querySelector('#signupPasswordMsg');
-        const signupNameMsg = document.querySelector('#signupNameMsg');
-        const signupUsercodeMsg = document.querySelector('#signupUsercodeMsg');
-        const signupPhonenumMsg = document.querySelector('#signupPhonenumMsg');
-        const signupMsg = document.querySelector('#signupMsg');
-        signupEmailMsg.style.color = 'red';
-        signupPasswordMsg.style.color = 'red';
-        signupNameMsg.style.color = 'red';
-        signupUsercodeMsg.style.color = 'red';
-        signupPhonenumMsg.style.color = 'red';
-        signupMsg.style.color = 'red';
-        if (!useremail || !password || !password2 || !username || !usercode || !phonenum || !emailCheck || !pwCheck ) {
-            event.preventDefault();
+    console.log(evfcode, "evf코드")
+    console.log(sendEvfcode, "보낸 evf코드")
+    console.log(evfcode == sendEvfcode)
+    console.log(evfcheck, "현재 evfcheck")
+    if (evfcode == sendEvfcode)
+    evfcheck = true;
+    else
+    evfcheck = false;
+    if (!useremail || !password || !password2 || !username || !usercode || !phonenum || !emailCheck || !pwCheck || !evfcheck || !evfcode ) {
+        event.preventDefault();
             if (!useremail) {
                 signupEmailMsg.innerHTML = "이메일을 입력해주세요.";
             } else if (emailCheck == false) {
@@ -113,9 +161,16 @@ document.querySelector('#userSignup').addEventListener('submit',
             } else {
                 signupPhonenumMsg.innerHTML = "";
             }
+            if (!evfcode) {
+                signupEvfMsg.innerHTML = "인증번호를 입력해주세요.";
+            } else if (evfcheck == false) {
+                signupEvfMsg.innerHTML = "인증번호가 다릅니다.";
+            } else {
+                signupEvfMsg.innerHTML = "";
+            }
         } else {
             try {
-
+                
             } catch (err) {
                 signupMsg.innerHTML = "잘못 입력된 정보가 있습니다. 확인해주세요.";
                 console.error(err);

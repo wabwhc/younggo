@@ -57,8 +57,20 @@
             <td></td>
             <td>양식이 다르면 빨간색으로 핸드폰번호를 확인해주세요 같으면 안내X</td>
         </tr>
+        <form action="/signup/evf" method="post">
+            <tr>
+                <td>이메일 인증 번호</td>
+                <td><input type="evf" name="emailverify" id="emailverify" placeholder="이메일 인증번호"></td>
+                <td><input type="button" value="인증번호 받기" id="evfbtn"></td>
+                <td><span id="evfMsg">axios로 인증번호 양식이 맞는지 문구 출력</span></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span id="signupEvfMsg"></span></td>
+            </tr>
+        </form>
         <tr>
-            <td>코멘트</td>
+            <td>코멘트</td> 
             <td><input type="text" name="usercomment" id="usercomment" placeholder="코멘트"></td>
         </tr>
         <tr>

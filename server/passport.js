@@ -18,7 +18,7 @@ module.exports = () => {
             passwordField: "password",
             session: true,
         },
-        async (useremail, password, done) => {
+        async (useremail, password, done) => { //verify function
             try {
                 let UserObj = await User.findOne({
                     where: {useremail}

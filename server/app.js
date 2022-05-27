@@ -117,7 +117,7 @@ app.get('/board', async (req, res) => {
     }
     console.log(result2)
     article.wells = result2
-    res.render('board.html', {article, username: req.user.username, isLogin: req.isLogin});
+    res.render('board.html', {article, username: req.user.username, isLogin: req.isLogin}); 
 })
 
 app.post('/login',
