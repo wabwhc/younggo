@@ -49,6 +49,7 @@ app.use('/public', express.static(path.join(__dirname, '../views/public')))
 app.use((req, res, next) => {
     if(req.user === undefined){
         req.user = {username:''};
+        req.user = {useremail:''}
         req.isLogin = false;
         next();
     }else{
@@ -88,15 +89,28 @@ app.get('/profile', async(req, res) => {
 
 app.get('/board', async(req, res) => {
     let article = {};
-    let result1 = await Article.findAll({
-        raw:true,
-        attributes:['article_id','article_title', 'useremail', 'category']
-    })
-    article.qna = result1;
+    let result1;
     let subject = ['레슨', '스터디', '계정']
     let result2 = []
+
+    let isZoo = true
+    result1 = await Article.count();
+    article.qna = result1;
+    let istrue = await User.findOne({
+        attributes: ['usercode'],
+        where: {
+            useremail : req.user.useremail
+        }
+    })
+
+    if(istrue === null){
+        console.log(132)
+        isZoo = false;
+    }
+    console.log(isZoo)
     for(let i = 0; i < 3; i++){
         try{
+           
             result2[i] = await Well.findAll({
                 raw:true,
                 attributes:['well_id', 'well_title', 'well_category'],
@@ -104,11 +118,12 @@ app.get('/board', async(req, res) => {
                     well_category : `${subject[i]}`
                 }
             })
+            
         }catch(err){}
     }
-    console.log(result2)
+    console.log(req.user.useremail)
     article.wells = result2
-    res.render('board.html', {article, username : req.user.username, isLogin :req.isLogin});
+    res.render('board.html', {article, username : req.user.username, isLogin :req.isLogin, isZoo});
 })
 
 app.post('/login', passport.authenticate('local', {
@@ -118,7 +133,7 @@ app.post('/login', passport.authenticate('local', {
 }))
 
 app.get('/login', (req, res) => {
-    if(req.user.username === ''){
+    if(!req.isLogin){
         res.render('login.html',{ message : req.flash("error")});
     }else{
         res.redirect('/main')
