@@ -48,8 +48,8 @@ app.use('/public', express.static(path.join(__dirname, '../views/public')))
 //어떤 url이든 로그인 여부 확인후 로그인 되면 req.username에 유저이름
 app.use((req, res, next) => {
     if(req.user === undefined){
-        req.user = {username:''};
-        req.user = {useremail:''}
+        req.user = {username:'', useremail:''};
+
         req.isLogin = false;
         next();
     }else{
@@ -92,7 +92,7 @@ app.get('/board', async(req, res) => {
     let result1;
     let subject = ['레슨', '스터디', '계정']
     let result2 = []
-
+    
     let isZoo = true
     result1 = await Article.count();
     article.qna = result1;
@@ -104,7 +104,6 @@ app.get('/board', async(req, res) => {
     })
 
     if(istrue === null){
-        console.log(132)
         isZoo = false;
     }
     console.log(isZoo)
