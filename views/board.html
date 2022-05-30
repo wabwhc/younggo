@@ -1,8 +1,109 @@
 {% extends 'layout.html' %}
 
 {% block content%}
-    {% for a in article %}
-    <h1 id="{{a.article_id}}" class="article">{{a.article_title}}</h1>
-    <H4>{{a.category}}</H4>
-    {% endfor%}
+<h1>자주하는 질문</h1>
+<div id="category_title">
+    <h1 class="lesson_title">레슨</h1>
+    <h1 class="study_title">스터디</h1>
+    <h1 class="account_title">계정</h1>
+</div>
+
+<div id="lesson">
+    <ul class="qna">
+        {% for well in article.wells[0] %}
+        <li>
+            <input type="checkbox" id="qna-{{well.well_id}}">
+            <label for="qna-{{well.well_id}}">{{well.well_title}}</label>
+            <div>
+                <p>{{well.well_reply}}</p>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<div id="study">
+    <ul class="qna">
+        {% for well in article.wells[1] %}
+        <li>
+            <input type="checkbox" id="qna-{{well.well_id}}">
+            <label for="qna-{{well.well_id}}">{{well.well_title}}</label>
+            <div>
+                <p>{{well.well_reply}}</p>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<div id="account">
+    <ul class="qna">
+        {% for well in article.wells[2] %}
+        <li>
+            <input type="checkbox" id="qna-{{well.well_id}}">
+            <label for="qna-{{well.well_id}}">{{well.well_title}}</label>
+            <div>
+                <p>{{well.well_reply}}</p>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div id="qna_submit">
+    <h1>질문 게시판</h1>
+    <button class="input_qna">글쓰기</button>
+</div>
+
+<form action="/api/board" method="post" id="qna_content">
+    <input type="text" placeholder="질문 제목" class="qna_write_title"><br>
+    <input type="text" placeholder="질문 내용" class="qna_wirte_content"><br>
+    <button type="submit">입력</button>
+</form>
+
+<div style="padding-top: 10px;">
+    <table id="qna_table">
+        <caption style="display: none;"><span>질문 게시판</span></caption>
+        <colgroup>
+            <col style="width: 20%;">
+            <col style="width: 40%;">
+            <col style="width: 40%;">
+            <!-- <col style="width: 20%;"> -->
+            <!-- <col style="width: 10%;"> -->
+        </colgroup>
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <!-- <th>작성일자</th> -->
+            <!-- <th>답변여부</th> -->
+        </tr>
+        </thead>
+        <tbody id="article_body">
+        {% for a in article.qna %}
+        <tr id="article_{{a.article_id}}">
+            <td>{{a.article_id}}</td>
+            <td>{{a.article_title}}</td>
+            <td>{{a.useremail}}</td>
+        </tr>
+        <tr id="article_{{a.article_id}}_content">
+        </tr>
+        <tr id="article_{{a.article_id}}_input"></tr>
+        {% endfor%}
+        </tbody>
+    </table>
+</div>
+<div id="table_footer">
+    <ul id="table_footer_list">
+        <li class="list_1" style="background: rgb(228, 228, 228);">1</li>
+        <li class="list_2">2</li>
+        <li class="list_3">3</li>
+        <li class="list_4">4</li>
+        <li class="list_5">5</li>
+        <span>...</span>
+        <li class="list_6">10</li>
+    </ul>
+</div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="public/src/board.js"></script>
+<link rel="stylesheet" href="./public/css/board.css">
 {% endblock %}

@@ -1,1 +1,23 @@
 
+<header>
+    <!-- 영고 로고 이미지 -->
+    <div id="userInfo">
+        <fieldset style="display: inline-block">
+            <div><h1><a href="/">메인페이지</a></h1></div>
+        </fieldset>
+        <nav style="display: inline-block">
+            <div class="nav_items">
+                <ul>
+                    <li><a href="/">후원</a></li>
+                    {% if isLogin %}
+                    <li><a href="/profile">{{username}}님 안녕하세요</a></li>
+                    <li><a onclick="location.href='logout'">로그아웃</a></li>
+                    {% else %}
+                    <li><a onclick="location.href='login'">로그인</a></li>
+                    <li><a onclick="location.href='signup'">회원가입</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>

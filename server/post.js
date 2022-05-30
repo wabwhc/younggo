@@ -3,20 +3,24 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
-const { isLoggedIn } = require('./middlewares');
+const {User} = require('./models')
+
+const {isLoggedIn} = require('./middlewares');
 
 const router = express.Router();
 
+// uploads폴더 유무 확인
 try {
     fs.readdirSync('uploads');
 } catch (error) {
-    console.error('uploads폴더가 없어 uploads폴더를 생성합니다.');
+    console.error('uploads 폴더가 없어 uploads 폴더를 생성합니다.');
     fs.mkdirSync('uploads');
 }
 
+// multer설정
 const upload = multer({
     storage: multer.diskStorage({
-        destination(req, file, cb ) {
+        destination(req, file, cb) {
             cb(null, 'uploads/');
         },
         filename(req, file, cb) {
@@ -24,9 +28,10 @@ const upload = multer({
             cb(null, path.basename(file.originalname, ext) + Date.now() + ext);
         },
     }),
-    limits: { fileSize: 5 * 1024 * 1024 },
+    limits: {fileSize: 5 * 1024 * 1024},
 });
 
+// POST /post/img
 router.post('/img', isLoggedIn, upload.single('img'), (req, res) => {
     console.log(req.file);
     res.json({
@@ -36,18 +41,24 @@ router.post('/img', isLoggedIn, upload.single('img'), (req, res) => {
 
 const upload2 = multer();
 router.post('/', isLoggedIn, upload2.none(), async (req, res, next) => {
-    try{
-    const post = await Post.create({
-        content: req.body.content,
-        img: req.body.url,
-        UserId: req.user.id,
-    });
-    res.redirect('/');
-    } catch(error){
+    try {
+        if (req.body.url == '') {
+            req.body.url = 'default';
+        }
+        const post = await User.update({
+                userimg: req.body.url,
+            },
+            {
+                where: {useremail: req.user.useremail}
+            });
+
+        req.user.userimg = req.body.url;
+        res.redirect('/profile');
+    } catch (error) {
         console.error(error);
         next(error);
     }
 });
 
-
+module.exports = router;
 

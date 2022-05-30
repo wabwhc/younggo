@@ -1,11 +1,9 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const conn = require('./mysqlconn')
+const bcrypt = require('bcrypt');
 
+const {User} = require('./models');
 
-const User = {
-
-}
 module.exports = () => {
 
     passport.serializeUser((user, done) => {
@@ -17,26 +15,28 @@ module.exports = () => {
     });
 
     passport.use(new LocalStrategy({
-        usernameField: 'useremail',
-        passwordField: "password",
-        session: true,
+            usernameField: 'useremail',
+            passwordField: "password",
+            session: true,
         },
-        (useremail, password, done) => {
-            User.useremail = useremail;
-            let sql1 = 'select * from users where useremail = ?'
-            conn.query(sql1, [useremail],(err, rows, field) => {
-                let a = rows.length
-                if(a === 1){
-                    if(rows[0].password === password){
-                        User.username = rows[0].username
-                        return done(null, User);
-                    }else{
-                        return done(null, false, { message : '비번이 다름' })
+        async (useremail, password, done) => {
+            try {
+                let UserObj = await User.findOne({
+                    where: {useremail}
+                });
+                if (UserObj) {
+                    const result = await bcrypt.compare(password, UserObj.password);
+                    if (result) {
+                        done(null, UserObj);
+                    } else {
+                        done(null, false, {message: '비밀번호를 확인해주세요'})
                     }
-                }else{
-                    return done(null, false, { message : '아이디가 다름' })
+                } else {
+                    done(null, false, {message: '가입되지않은 이메일입니다'})
                 }
-            })
-        }
-    ))
+            } catch (err) {
+                console.error(err);
+                done(err);
+            }
+        }));
 }
