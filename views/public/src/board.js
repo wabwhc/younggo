@@ -1,3 +1,6 @@
+const isZoo  = document.querySelector('#isZoo').textContent;
+console.log(isZoo);
+
 /* 자주하는 질문 */
 document.querySelector('.lesson_title').addEventListener('click', (e) => {
     e.preventDefault();
@@ -58,7 +61,6 @@ document.querySelector("#qna_content button").addEventListener('click', async (e
 document.querySelectorAll("#article_body tr").forEach((el) => {
     el.addEventListener('click', (e) => {
         const id = el.querySelector('td').textContent;
-        console.log(id);
         getContent(id);
     })
 });
@@ -66,16 +68,16 @@ document.querySelectorAll("#article_body tr").forEach((el) => {
 const getContent = async (id) => {
     try {
         if(document.querySelector(`#article_${id}_content td`)){
-            document.querySelector(`#article_${id}_content`).style.height = '0px'
+            document.querySelector(`#article_${id}_content`).style.height = '0px';
             document.querySelector(`#article_${id}_content td`).remove();
             document.querySelector(`#article_${id}_content td`).remove();
+            document.querySelector(`#article_${id}_input td`).remove();
         } else {
             const result = await axios.get(`/board/${id}/content`);
             const contents = result.data;
-            const tr = document.querySelector(`#article_${id}_content`);
+            let tr = document.querySelector(`#article_${id}_content`);
             tr.style.height = '100px';
             tr.innerHTML = '';
-            console.log(contents);
             contents.map(content => {
                 let td = document.createElement('td');
                 td.textContent = content.article_content;
@@ -85,8 +87,15 @@ const getContent = async (id) => {
                 td.textContent = content.category;
                 tr.appendChild(td);
             });
-            tr = document.querySelector(`article_${a.article_id}_content`);
+            tr = document.querySelector(`#article_${id}_input`);
             tr.innerHTML = '';
+            td = document.createElement('td');
+            let form = document.createElement('form');
+            let input = document.createElement('input');
+            input.placeholder = '답변 입력';
+            form.appendChild(input);
+            td.appendChild(form);
+            tr.appendChild(td);
         }
     } catch (err) {
         console.error(err);
@@ -98,7 +107,7 @@ const getContent = async (id) => {
 document.querySelectorAll(".table_footer_list").forEach((el) => {
     el.addEventListener('click', (e) => {
         const id = el.querySelector('li').className;
-        reText(id)
+        reText(id);
     });
 });
 

@@ -8,6 +8,7 @@
 </head>
 <link rel="stylesheet" href="./public/css/board.css">
 <body>
+    <span id="isZoo" style="display: none;">{{isZoo}}</span>
     <h1>자주하는 질문</h1>
     <div id="category_title">
         <h1 class="lesson_title">레슨</h1>
@@ -86,7 +87,7 @@
                 </tr>
             </thead>
             <tbody id="article_body">
-                {% for a in article.qna %}
+                <!-- {% for a in article.qna %}
                 <tr id="article_{{a.article_id}}">
                     <td>{{a.article_id}}</td>
                     <td>{{a.article_title}}</td>
@@ -94,23 +95,33 @@
                 </tr>
                 <tr id="article_{{a.article_id}}_content">
                 </tr>
-                <tr id="article_{{a.article_id}}_input"></tr>
-                {% endfor%}
+                <tr id="article_{{a.article_id}}_input">
+                </tr>
+                {% endfor%} -->
+                <tr>
+                    <td>{{article.qna}}</td>
+                    <td>{{isZoo}}</td>
+                </tr>
             </tbody>
         </table>
     </div>
     <div id="table_footer">
         <ul class="table_footer_list">
-            <li class="list_1" style="background: rgb(228, 228, 228);">1</li>
+            
+            <!-- <li class="list_1" style="background: rgb(228, 228, 228);">1</li>
             <li class="list_2">2</li>
             <li class="list_3">3</li>
             <li class="list_4">4</li>
             <li class="list_5">5</li>
             <span>...</span>
-            <li class="list_6">10</li>
+            <li class="list_6">10</li> -->
         </ul>
     </div>
+
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="public/src/board.js"></script>
+    <script>
+        axios.get('http://localhost:8080/test' + '버튼 번호').then(e => console.log(e))
+    </script>
 </body>
 </html>

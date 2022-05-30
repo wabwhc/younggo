@@ -63,7 +63,7 @@ app.get('/main', (req, res) => {
     console.log(req.isLogin)
     res.render('main.html', {username : req.user.username, isLogin:req.isLogin})
 })
-
+app.get('/test',(req, res) => {console.log(1);res.send('hello')})
 app.get('/profile', async(req, res) => {
     if(req.user.username === ''){
         res.redirect('/login')
@@ -79,14 +79,16 @@ app.get('/profile', async(req, res) => {
     }
 })
 
-/* app.get('/board', async(req, res) => {
+app.get('/board', async(req, res) => {
     let article = {};
     let result1;
     let subject = ['레슨', '스터디', '계정']
     let result2 = []
-
-    let isZoo = true
-    result1 = await Article.count();
+    if(req.user.useremail === undefined){
+        req.user.useremail = 'apply1@naver.com'
+    }
+    let isZoo = true;
+    result1 = await Article.count(); // 글 개수
     article.qna = result1;
     let istrue = await User.findOne({
         attributes: ['usercode'],
@@ -116,9 +118,9 @@ app.get('/profile', async(req, res) => {
     console.log(req.user.useremail)
     article.wells = result2
     res.render('board.html', {article, username : req.user.username, isLogin :req.isLogin, isZoo});
-}); */
+});
 
-app.get('/board', async(req, res) => {
+/* app.get('/board', async(req, res) => {
     let article = {};
     let result1 = await Article.findAll({
         raw:true,
@@ -139,7 +141,7 @@ app.get('/board', async(req, res) => {
     console.log(result2)
     article.wells = result2
     res.render('board.html', {article, username : req.user.username, isLogin :req.isLogin});
-});
+}); */
 
 /* 추가 */
 app.get('/board/:article_id/content',
