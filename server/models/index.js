@@ -9,6 +9,7 @@ const Apply_lesson = require('./apply_lesson');
 const Apply_study = require('./apply_study');
 const Subject = require('./subject');
 const Study = require('./study');
+const Japan_info = require('./japan_info');
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -32,6 +33,7 @@ db.Reply = Reply;
 db.Lesson = Lesson;
 db.Apply_lesson = Apply_lesson;
 db.Apply_study = Apply_study;
+db.Japan_info = Japan_info;
 
 User.init(sequelize);
 Article.init(sequelize);
@@ -42,6 +44,7 @@ Apply_study.init(sequelize);
 Apply_lesson.init(sequelize);
 Reply.init(sequelize);
 Lesson.init(sequelize);
+Japan_info.init(sequelize);
 
 User.associate(db);
 
@@ -54,5 +57,7 @@ Lesson.associate(db);
 
 Apply_lesson.associate(db);
 Apply_study.associate(db);
+
+Japan_info.associate(db);
 
 module.exports = db;

@@ -1,9 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e55e143f-2117-43b3-9152-6bce0d238be6" name="변경" comment="chanwool">
+    <list default="true" id="e55e143f-2117-43b3-9152-6bce0d238be6" name="변경" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/tp.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/models/japan_info.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploads/default.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/japan.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/public/css/board.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/public/src/board.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/public/src/login.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/public/src/signup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/passport.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/passport.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/post.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/post.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/signup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/board.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/board.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/layout.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/nav.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/nav.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/views/public/css/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/signup.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -23,16 +48,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/CHANWOOL/WebstormProjects/nodebird&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/CHANWOOL/WebstormProjects/tp/server/models",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\CHANWOOL\WebstormProjects\tp\server\models" />
+      <recent name="C:\Users\CHANWOOL\WebstormProjects\tp\views" />
+      <recent name="C:\Users\CHANWOOL\WebstormProjects\tp\views\public\css" />
+      <recent name="C:\Users\CHANWOOL\WebstormProjects\tp\views\public\src" />
+      <recent name="C:\Users\CHANWOOL\WebstormProjects\tp\server" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="디폴트 작업">
