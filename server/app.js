@@ -107,7 +107,7 @@ app.get('/board', async(req, res) => {
            
             result2[i] = await Well.findAll({
                 raw:true,
-                attributes:['well_id', 'well_title', 'well_category'],
+                attributes:['well_id', 'well_title', 'well_category', 'well_reply'], // well_reply 추가
                 where: {
                     well_category : `${subject[i]}`
                 }
@@ -115,7 +115,6 @@ app.get('/board', async(req, res) => {
             
         }catch(err){}
     }
-    console.log(req.user.useremail)
     article.wells = result2
     res.render('board.html', {article, username : req.user.username, isLogin :req.isLogin, isZoo});
 });

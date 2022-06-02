@@ -8,7 +8,8 @@
 </head>
 <link rel="stylesheet" href="./public/css/board.css">
 <body>
-    <span id="isZoo" style="display: none;">{{isZoo}}</span>
+    <p id="article_qna" style="display: none;">{{article.qna}}</p>
+    <p id="isZoo" style="display: none;">{{isZoo}}</p>
     <h1>자주하는 질문</h1>
     <div id="category_title">
         <h1 class="lesson_title">레슨</h1>
@@ -71,9 +72,10 @@
         <table id="qna_table">
             <caption style="display: none;"><span>질문 게시판</span></caption>
             <colgroup>
-                <col style="width: 20%;">
-                <col style="width: 40%;">
-                <col style="width: 40%;">
+                <col style="width: 10%;">
+                <col style="width: 30%;">
+                <col style="width: 30%;">
+                <col style="width: 30%;">
                 <!-- <col style="width: 20%;"> -->
                 <!-- <col style="width: 10%;"> -->
             </colgroup>
@@ -82,6 +84,7 @@
                     <th>번호</th>
                     <th>제목</th>
                     <th>작성자</th>
+                    <th>질문일자</th>
                     <!-- <th>작성일자</th> -->
                     <!-- <th>답변여부</th> -->
                 </tr>
@@ -98,30 +101,20 @@
                 <tr id="article_{{a.article_id}}_input">
                 </tr>
                 {% endfor%} -->
-                <tr>
-                    <td>{{article.qna}}</td>
-                    <td>{{isZoo}}</td>
-                </tr>
             </tbody>
         </table>
     </div>
-    <div id="table_footer">
-        <ul class="table_footer_list">
-            
-            <!-- <li class="list_1" style="background: rgb(228, 228, 228);">1</li>
-            <li class="list_2">2</li>
-            <li class="list_3">3</li>
-            <li class="list_4">4</li>
-            <li class="list_5">5</li>
-            <span>...</span>
-            <li class="list_6">10</li> -->
-        </ul>
-    </div>
+    <ul id="table_page">
+        <!-- <li class="list_1" style="background: rgb(228, 228, 228);">1</li>
+        <li class="list_2">2</li>
+        <li class="list_3">3</li>
+        <li class="list_4">4</li>
+        <li class="list_5">5</li>
+        <span>...</span>
+        <li class="list_6">10</li> -->
+    </ul>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="public/src/board.js"></script>
-    <script>
-        axios.get('http://localhost:8080/test' + '버튼 번호').then(e => console.log(e))
-    </script>
 </body>
 </html>

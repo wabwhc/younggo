@@ -1,6 +1,3 @@
-const isZoo  = document.querySelector('#isZoo').textContent;
-console.log(isZoo);
-
 /* 자주하는 질문 */
 document.querySelector('.lesson_title').addEventListener('click', (e) => {
     e.preventDefault();
@@ -58,6 +55,44 @@ document.querySelector("#qna_content button").addEventListener('click', async (e
 /* end */
 
 /* 질문 목록 */
+
+const writeButton = async (count) => {
+    try {
+        let page =  Math.ceil(count / 10);
+        console.log(page);
+        let ul = document.querySelector('#table_page');
+        ul.innerHTML = '';
+        let li = document.createElement('li');
+        li.id = 'page_next';
+        li.textContent = '<이전';
+        ul.appendChild(li);
+        for(let i=1; i<=page; i++){
+            li = document.createElement('li');
+            li.id = `list_${i}`;
+            li.textContent = `${i}`;
+            if(i >= 10) {
+                li.style.display = none;
+            }
+            ul.appendChild(li);
+        }
+        li = document.createElement('li');
+        li.id = 'page_back';
+        li.textContent = '다음>';
+        ul.appendChild(li);
+        
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+let count;
+let isZoo;
+(() => {
+    count = document.querySelector('#article_qna');
+    isZoo = document.querySelector('#isZoo');
+    writeButton(count.textContent);
+})();
+
 document.querySelectorAll("#article_body tr").forEach((el) => {
     el.addEventListener('click', (e) => {
         const id = el.querySelector('td').textContent;
@@ -87,15 +122,18 @@ const getContent = async (id) => {
                 td.textContent = content.category;
                 tr.appendChild(td);
             });
-            tr = document.querySelector(`#article_${id}_input`);
-            tr.innerHTML = '';
-            td = document.createElement('td');
-            let form = document.createElement('form');
-            let input = document.createElement('input');
-            input.placeholder = '답변 입력';
-            form.appendChild(input);
-            td.appendChild(form);
-            tr.appendChild(td);
+            if(isZoo){
+                tr = document.querySelector(`#article_${id}_input`);
+                tr.innerHTML = '';
+                td = document.createElement('td');
+                let form = document.createElement('form');
+                let input = document.createElement('input');
+                input.placeholder = '답변 입력';
+                form.appendChild(input);
+                td.appendChild(form);
+                tr.appendChild(td);
+            }
+            
         }
     } catch (err) {
         console.error(err);
@@ -104,22 +142,22 @@ const getContent = async (id) => {
 /* end */
 
 /* 테이블 페이지 */
-document.querySelectorAll(".table_footer_list").forEach((el) => {
+/* document.querySelectorAll("#table_page").forEach((el) => {
     el.addEventListener('click', (e) => {
-        const id = el.querySelector('li').className;
+        const id = el.querySelector('li').id;
         reText(id);
     });
 });
 
 const reText = async (id) => {
     try {
-        const li = document.querySelector(`.${id}`);
+        const li = document.querySelector(`#${id}`);
         console.log(li);
     }
     catch(err) {
         console.log(err);
     }
-}
+} */
 /* end */
 
 /* axios.get($) */
