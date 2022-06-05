@@ -111,14 +111,12 @@ document.querySelector('#userSignup').addEventListener('submit',
         const password = event.target.password.value;
         const password2 = event.target.password2.value;
         const username = event.target.username.value;
-        const usercode = event.target.usercode.value;
         const phonenum = event.target.phonenum.value;
         const evfcode = event.target.emailverify.value;
 
         const signupEmailMsg = document.querySelector('#signupEmailMsg');
         const signupPasswordMsg = document.querySelector('#signupPasswordMsg');
         const signupNameMsg = document.querySelector('#signupNameMsg');
-        const signupUsercodeMsg = document.querySelector('#signupUsercodeMsg');
         const signupPhonenumMsg = document.querySelector('#signupPhonenumMsg');
         const signupEvfMsg = document.querySelector('#signupEvfMsg');
         const signupMsg = document.querySelector('#signupMsg');
@@ -126,7 +124,6 @@ document.querySelector('#userSignup').addEventListener('submit',
         signupEmailMsg.style.color = 'red';
         signupPasswordMsg.style.color = 'red';
         signupNameMsg.style.color = 'red';
-        signupUsercodeMsg.style.color = 'red';
         signupPhonenumMsg.style.color = 'red';
         signupEvfMsg.style.color = 'red';
         signupMsg.style.color = 'red';
@@ -161,11 +158,6 @@ document.querySelector('#userSignup').addEventListener('submit',
                 signupNameMsg.innerHTML = "이름을 입력해주세요.";
             } else {
                 signupNameMsg.innerHTML = "";
-            }
-            if (!usercode) {
-                signupUsercodeMsg.innerHTML = "유저코드를 입력해주세요.";
-            } else {
-                signupUsercodeMsg.innerHTML = "";
             }
             if (!phonenum) {
                 signupPhonenumMsg.innerHTML = "핸드폰번호를 입력해주세요.";

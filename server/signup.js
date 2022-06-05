@@ -87,7 +87,8 @@ router.get('/emailCheck', async (req, res) => {
 })
 
 router.post('/', async (req, res, next) => {
-    const {useremail, username, password, password2, usercode, phonenum, usercomment} = req.body;
+    const {useremail, username, password, password2, phonenum, usercomment} = req.body;
+    let usercode = req.body.usercode;
     if (flag == false) {
         return res.send('이메일 중복');
     }
@@ -97,6 +98,9 @@ router.post('/', async (req, res, next) => {
     try {
         if (flag == false) {
             return res.redirect('/join?error=exist');
+        }
+        if(usercode != process.env.USER_CODE){  // 만약 정해진 usercode가 아니면 ''으로 변경
+            usercode = '';
         }
         const hash = await bcrypt.hash(password, 12);
         await User.create({

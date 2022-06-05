@@ -4,13 +4,13 @@
 <form action="/signup" method="post" id="userSignup">
     <table>
         <tr>
-            <td><span class="material-icons">mail</span></td>
-            <td><input type="text" id="useremail" name="useremail" placeholder="이메일" onchange="emailcheck()"></td>
+            <td>이메일</td>
+            <td><input type="text" id="useremail" name="useremail" placeholder="이메일" onchange="emailcheck()" style="-ms-ime-mode: disabled;"></td>
             <td><span id="emailMsg"></span></td>
         </tr>
         <form action="/signup/evf" method="post">
             <tr>
-                <td>이메일 인증 번호</td>
+                <td></td>
                 <td><input type="evf" name="emailverify" id="emailverify" placeholder="이메일 인증번호"></td>
                 <td><input type="button" value="인증번호 받기" id="evfbtn"></td>
                 <td><span id="signupEvfMsg"></span></td>
@@ -21,11 +21,11 @@
             <td><span id="signupEmailMsg"></span></td>
         </tr>
         <tr>
-            <td><span class="material-icons">password</span></td>
+            <td>비밀번호</td>
             <td><input type="password" name="password" id="password" placeholder="비밀번호" onchange="pwcheck()"></td>
         </tr>
         <tr>
-            <td><span class="material-icons">password</span></td>
+            <td>비밀번호 확인</td>
             <td><input type="password" name="password2" id="password2" placeholder="비밀번호 확인" onchange="pwcheck()">
             </td>
             <td><span id="passwordMsg"></span></td>
@@ -36,7 +36,7 @@
         </tr>
         <tr>
             <td>이름</td>
-            <td><input type="text" name="username" id="username" placeholder="실명"></td>
+            <td><input type="text" name="username" id="username" placeholder="실명" style="ime-mode: active;"></td>
         </tr>
         <tr>
             <td></td>
@@ -47,11 +47,7 @@
             <td><input type="text" name="usercode" placeholder="유저코드"></td>
         </tr>
         <tr>
-            <td></td>
-            <td><span id="signupUsercodeMsg"></span></td>
-        </tr>
-        <tr>
-            <td><span class="material-icons">smartphone</span></td>
+            <td>휴대폰번호</td>
             <td><input type="tel" name="phonenum" id="phonenum" placeholder="'-'없이 입력" onchange="phonecheck()"></td>
         </tr>
         <tr>

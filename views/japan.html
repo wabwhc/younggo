@@ -2,8 +2,16 @@
 
 {% block content%}
 <japan>
-    <div>현지학기제 소개 페이지입니다.</div>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/vBfU2xlZm8o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <h1>현지학기제의 추억을 공유해보아요!!</h1>
+    {% if isLogin %}
+    <form action="/japan/insert" method="post">
+        <input type="text" placeholder="추가하고 싶은 주소를 입력해주세요" name="url">
+        <br>
+        <input type="text" placeholder="영상에 대한 설명 입력" name="content">
+        <input name="uploader" value="{{useremail}}" hidden>
+        <button type="submit">입력</button>
+    </form>
+    {% endif %}
     <div id="youtubeUrl"></div>
 </japan>
 
@@ -16,11 +24,14 @@
             url.innerHTML = '';
             console.log(youtubes);
             youtubes.map(youtube => {
+                console.log(youtube.url);
                 let youtub = document.createElement('li');
                 youtub.innerHTML = youtube.content;
                 url.appendChild(youtub);
                 youtub = document.createElement('li');
-                youtub.innerHTML = youtube.url;
+                youtub.innerHTML = `<iframe id="videoIn" width="560" height="315" src="${youtube.url}" title="YouTube video player"
+                                           frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+                console.log(youtub);
                 url.appendChild(youtub);
             })
         } catch (err) {

@@ -1,14 +1,17 @@
 const Sequelize = require('sequelize');
 
 module.exports = class Japan_info extends Sequelize.Model {
-    static init(sequelize){
+    static init(sequelize) {
         return super.init({
             url: {
                 type: Sequelize.STRING(10000),
             },
             content: {
                 type: Sequelize.STRING(100),
-                allowNull: false,
+                allowNull: true,
+            },
+            uploader: {
+                type: Sequelize.STRING(100),
             }
         }, {
             sequelize,
@@ -22,7 +25,8 @@ module.exports = class Japan_info extends Sequelize.Model {
         })
     }
 
-    static associate(db){
+    static associate(db) {
+        db.Japan_info.belongsTo(db.User, {foreignKey: "uploader", targetKey: 'useremail'})
     }
 
 }

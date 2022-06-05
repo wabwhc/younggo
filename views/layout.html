@@ -7,9 +7,30 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{title}}</title>
     <!--    <link rel="stylesheet" href="public/css/index.css"/>-->
-    <link rel="stylesheet" href="public/css/main.css"/>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- site metas -->
+    <title>{{title}}</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="./public/css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="./public/css/style.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="./public/css/responsive.css">
+    <!-- fevicon -->
+    <link rel="icon" href="./public/images/fevicon.png" type="image/gif"/>
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="./public/css/jquery.mCustomScrollbar.min.css">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+          media="screen">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+
 </head>
 <body>
 <div id="wrap">
@@ -19,7 +40,6 @@
     {% block content%}
     {% endblock %}
 
-    {% include 'nav.html' %}
     {% include 'footer.html' %}
 
 </div>

@@ -44,8 +44,8 @@ module.exports = class User extends Sequelize.Model {
             modelName: 'user',
             tableName: 'users',
             paranoid: false,
-            charset: 'utf8', // 한글 설정 
-            collate: 'utf8_general_ci', 
+            charset: 'utf8', // 한글 설정
+            collate: 'utf8_general_ci',
         })
     }
 
@@ -56,6 +56,7 @@ module.exports = class User extends Sequelize.Model {
         db.User.hasMany(db.Apply_study, {foreignKey:"useremail", sourceKey:'useremail'});
         db.User.hasMany(db.Study, {foreignKey:"useremail", sourceKey:'useremail'});
         db.User.hasMany(db.Lesson, {foreignKey:"useremail", sourceKey:'useremail'});
+        db.User.hasMany(db.Japan_info, {foreignKey:"uploader", sourceKey:'useremail'});
     }
-    
+
 }

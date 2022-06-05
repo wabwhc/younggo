@@ -211,9 +211,9 @@ app.get('/subjects', async (req, res) => {
 })
 
 // 현지학기제
-app.get('/japan', async (req, res) => {
+app.get('/japan', isLoggedIn, async (req, res) => {
     try {
-        res.render('japan.html', {title: "현지학기제"});
+        res.render('japan.html', {title: "현지학기제", useremail: req.user.useremail, isLogin: req.isLogin});
     } catch (err) {
         console.error(err)
     }
@@ -228,6 +228,39 @@ app.get('/japan/youtube', async (req, res, next) => {
         next(err);
     }
 })
+
+app.post('/japan/insert', async (req, res, next) => {
+    try {
+        let {url, content, uploader } = req.body;
+        console.log(req.body);
+        if (!url) {
+            return res.send("<script>alert('영상 주소를 입력해주세요'); window.location.replace('/japan');</script>");
+        }
+        if(!content){
+            return res.send("<script>alert('영상 설명을 입력해주세요'); window.location.replace('/japan');</script>");
+        }
+        const urlCheck = await Japan_info.findOne({
+            where: { url: url },
+        });
+        console.log(urlCheck)
+        if(urlCheck != null) {
+            return res.send("<script>alert('이미 존재하는 영상입니다.'); window.location.replace('/japan');</script>");
+        }
+        console.log(url);
+        const newUrl = url.split('=');
+        url = "https://www.youtube.com/embed/"+newUrl[1];
+        await Japan_info.create({
+            url,
+            content,
+            uploader
+        });
+        console.log(url);
+        return res.redirect('/japan');
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+});
 
 app.listen(8080, () => {
     console.log('http://localhost:8080')
