@@ -1,21 +1,37 @@
 {% extends 'layout.html' %}
 
 {% block content%}
-<div class="img"><img src="{{userimg}}" alt="프로필사진" width="150px"></div>
-<form id="img-form" action="/post" method="post" enctype="multipart/form-data">
-    <div class="img-preview">
-        <img id="img-preview" src="" style="display: none;" width="150" alt="미리보기">
-        <input id="img-url" type="hidden" name="url">
+<div id="contact" class="profile-contact">
+    <div class="container">
+        <p style="font-size: 30px; color: white; text-align: center;">{{username}}님의 프로필</p>
     </div>
-    <div>
-        <input id="img" type="file" accept="image/*">
-        <button type="submit">사진업로드</button>
+    <div class="img" style="float: left; width: 40%">
+        <img src="{{userimg}}" alt="프로필사진" width="150px" style="margin: 10px">
     </div>
-</form>
-이름<h1>{{user.username}}</h1>
-이메일<h1>{{user.useremail}}</h1>
-코멘트<h1>{{user.usercomment}}</h1>
-전화번호<h1>{{user.phonenum}}</h1>
+    {% if updateMod %}
+    <form id="img-form" action="/post" method="post" enctype="multipart/form-data">
+        <div class="img-preview">
+            <img id="img-preview" src="" style="display: none;" width="150" alt="미리보기">
+            <input id="img-url" type="hidden" name="url">
+        </div>
+        <div>
+            <input id="img" type="file" accept="image/*">
+            <button type="submit">사진업로드</button>
+        </div>
+    </form>
+    {% endif %}
+    <div id="user-profile" style="float: right; width: 45%">
+        <p style="font-size: 30px; color: white;">이름</p>
+        <h1>{{user.username}}</h1>
+        <p style="font-size: 30px; color: white;">이메일</p>
+        <h1>{{user.useremail}}</h1>
+        <p style="font-size: 30px; color: white;">코멘트</p>
+        <h1>{{user.usercomment}}</h1>
+        <p style="font-size: 30px; color: white;">전화번호</p>
+        <h1>{{user.phonenum}}</h1>
+    </div>
+</div>
+<div class="clear"></div>
 <script>
     if (document.getElementById('img')) {
         document.getElementById('img').addEventListener('change', function (event) {

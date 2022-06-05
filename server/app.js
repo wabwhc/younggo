@@ -231,24 +231,24 @@ app.get('/japan/youtube', async (req, res, next) => {
 
 app.post('/japan/insert', async (req, res, next) => {
     try {
-        let {url, content, uploader } = req.body;
+        let {url, content, uploader} = req.body;
         console.log(req.body);
         if (!url) {
             return res.send("<script>alert('영상 주소를 입력해주세요'); window.location.replace('/japan');</script>");
         }
-        if(!content){
+        if (!content) {
             return res.send("<script>alert('영상 설명을 입력해주세요'); window.location.replace('/japan');</script>");
         }
         const urlCheck = await Japan_info.findOne({
-            where: { url: url },
+            where: {url: url},
         });
         console.log(urlCheck)
-        if(urlCheck != null) {
+        if (urlCheck != null) {
             return res.send("<script>alert('이미 존재하는 영상입니다.'); window.location.replace('/japan');</script>");
         }
         console.log(url);
         const newUrl = url.split('=');
-        url = "https://www.youtube.com/embed/"+newUrl[1];
+        url = "https://www.youtube.com/embed/" + newUrl[1];
         await Japan_info.create({
             url,
             content,
@@ -261,6 +261,16 @@ app.post('/japan/insert', async (req, res, next) => {
         next(err);
     }
 });
+
+app.get('/slide', async (req, res, next) => {
+    try {
+        const slide = await Japan_info.findAll();
+        res.json(slide);
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+})
 
 app.listen(8080, () => {
     console.log('http://localhost:8080')

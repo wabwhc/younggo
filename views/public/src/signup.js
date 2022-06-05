@@ -43,24 +43,27 @@ emailcheck = async () => {
 
 let evfcheck = false;
 let sendEvfcode = '';
-const evfbtn = document.querySelector('#evfbtn').addEventListener('click', async () => {
+// const evfbtn = document.querySelector('#evfbtn').addEventListener('click', async () => {
+document.querySelector('#evfbtn').addEventListener('click', async () => {
     console.log("코드 보냄")
 
     const useremail = document.querySelector('#useremail').value;
-    const signupEvfMsg = document.querySelector('#signupEvfMsg');
+    const evfMsg = document.querySelector('#evfMsg');
     console.log(useremail, "이메일");
     try {
 
         if (useremail) {
             if (!emailCheck) {
-                return
+                evfMsg.innerHTML = "이메일을 확인해주세요";
+                evfMsg.style.color = 'red';
+                return ;
             }
             const data = await axios.get(`/signup/evf?useremail=${useremail}`);
             sendEvfcode = data.data.sendEvfcode;
             alert('인증번호가 전송되었습니다. 이메일을 확인해주세요');
         } else {
-            signupEvfMsg.innerHTML = "이메일을 확인해주세요";
-            signupEvfMsg.style.color = 'red';
+            evfMsg.innerHTML = "이메일을 확인해주세요";
+            evfMsg.style.color = 'red';
         }
 
         console.log(evfcheck);
@@ -75,11 +78,9 @@ pwcheck = () => {
     const password = document.querySelector('#password').value;
     const password2 = document.querySelector('#password2').value;
     const passwordMsg = document.querySelector('#passwordMsg');
-    const signupPasswordMsg = document.querySelector('#signupPasswordMsg');
     if (password && password2) {
         if (password === password2) {
             passwordMsg.innerHTML = "비밀번호가 일치합니다.";
-            signupPasswordMsg.innerHTML = "";
             passwordMsg.style.color = 'green';
             pwCheck = true;
         } else {
@@ -114,18 +115,18 @@ document.querySelector('#userSignup').addEventListener('submit',
         const phonenum = event.target.phonenum.value;
         const evfcode = event.target.emailverify.value;
 
-        const signupEmailMsg = document.querySelector('#signupEmailMsg');
-        const signupPasswordMsg = document.querySelector('#signupPasswordMsg');
-        const signupNameMsg = document.querySelector('#signupNameMsg');
-        const signupPhonenumMsg = document.querySelector('#signupPhonenumMsg');
-        const signupEvfMsg = document.querySelector('#signupEvfMsg');
+        const emailMsg = document.querySelector('#emailMsg');
+        const passwordMsg = document.querySelector('#passwordMsg');
+        const nameMsg = document.querySelector('#nameMsg');
+        const phonenumMsg = document.querySelector('#phonenumMsg');
+        const evfMsg = document.querySelector('#evfMsg');
         const signupMsg = document.querySelector('#signupMsg');
 
-        signupEmailMsg.style.color = 'red';
-        signupPasswordMsg.style.color = 'red';
-        signupNameMsg.style.color = 'red';
-        signupPhonenumMsg.style.color = 'red';
-        signupEvfMsg.style.color = 'red';
+        emailMsg.style.color = 'red';
+        passwordMsg.style.color = 'red';
+        nameMsg.style.color = 'red';
+        phonenumMsg.style.color = 'red';
+        evfMsg.style.color = 'red';
         signupMsg.style.color = 'red';
 
         console.log(evfcode, "evf코드")
@@ -141,37 +142,37 @@ document.querySelector('#userSignup').addEventListener('submit',
         if (!useremail || !password || !password2 || !username || !usercode || !phonenum || !evfcode || !evfcheck || !emailCheck || !pwCheck || !phoneCheck) {
             event.preventDefault();
             if (!useremail) {
-                signupEmailMsg.innerHTML = "이메일을 입력해주세요.";
+                emailMsg.innerHTML = "이메일을 입력해주세요.";
             } else if (emailCheck == false) {
-                signupEmailMsg.innerHTML = "이메일 중복확인을 해주세요.";
+                emailMsg.innerHTML = "이메일 중복확인을 해주세요.";
             } else {
-                signupEmailMsg.innerHTML = "";
+                emailMsg.innerHTML = "";
             }
             if (!password || !password2) {
-                signupPasswordMsg.innerHTML = "비밀번호를 입력해주세요.";
+                passwordMsg.innerHTML = "비밀번호를 입력해주세요.";
             } else if (pwCheck == false) {
-                signupPasswordMsg.innerHTML = "비밀번호가 다릅니다.";
+                passwordMsg.innerHTML = "비밀번호가 다릅니다.";
             } else {
-                signupPasswordMsg.innerHTML = "";
+                passwordMsg.innerHTML = "";
             }
             if (!username) {
-                signupNameMsg.innerHTML = "이름을 입력해주세요.";
+                nameMsg.innerHTML = "이름을 입력해주세요.";
             } else {
-                signupNameMsg.innerHTML = "";
+                nameMsg.innerHTML = "";
             }
             if (!phonenum) {
-                signupPhonenumMsg.innerHTML = "핸드폰번호를 입력해주세요.";
+                phonenumMsg.innerHTML = "핸드폰번호를 입력해주세요.";
             } else if (phoneCheck == false) {
-                signupPhonenumMsg.innerHTML = "핸드폰번호를 확인해주세요";
+                phonenumMsg.innerHTML = "핸드폰번호를 확인해주세요";
             } else {
-                signupPhonenumMsg.innerHTML = "";
+                phonenumMsg.innerHTML = "";
             }
             if (!evfcode) {
-                signupEvfMsg.innerHTML = "인증번호를 입력해주세요.";
+                evfMsg.innerHTML = "인증번호를 입력해주세요.";
             } else if (evfcheck == false) {
-                signupEvfMsg.innerHTML = "인증번호가 다릅니다.";
+                evfMsg.innerHTML = "인증번호가 다릅니다.";
             } else {
-                signupEvfMsg.innerHTML = "";
+                evfMsg.innerHTML = "";
             }
         } else {
             try {

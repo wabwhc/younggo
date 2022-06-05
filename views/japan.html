@@ -12,32 +12,54 @@
         <button type="submit">입력</button>
     </form>
     {% endif %}
-    <div id="youtubeUrl"></div>
+    <div id="myCarousel" class="carousel slide banner_main" data-ride="carousel">
+        <ol class="carousel-indicators">
+        </ol>
+        <div class="carousel-inner">
+        </div>
+        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
 </japan>
 
 <script>
-    window.onload = async () => {
-        try {
-            const result = await axios.get('/japan/youtube');
-            const youtubes = result.data;
-            const url = document.querySelector('#youtubeUrl');
-            url.innerHTML = '';
-            console.log(youtubes);
-            youtubes.map(youtube => {
-                console.log(youtube.url);
-                let youtub = document.createElement('li');
-                youtub.innerHTML = youtube.content;
-                url.appendChild(youtub);
-                youtub = document.createElement('li');
-                youtub.innerHTML = `<iframe id="videoIn" width="560" height="315" src="${youtube.url}" title="YouTube video player"
-                                           frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
-                console.log(youtub);
-                url.appendChild(youtub);
-            })
-        } catch (err) {
-            console.error(err);
-        }
-    };
+    // window.onload = async () => {
+    //     try {
+    //         const result = await axios.get('/japan/youtube');
+    //         const youtubes = result.data;
+    //         const url = document.querySelector('#youtubeUrl');
+    //         url.innerHTML = '';
+    //         console.log(youtubes);
+    //         youtubes.map(youtube => {
+    //             console.log(youtube.url);
+    //             let youtub = document.createElement('li');
+    //             youtub.innerHTML = youtube.content;
+    //             url.appendChild(youtub);
+    //             youtub = document.createElement('li');
+    //             youtub.innerHTML = `<iframe id="videoIn" width="560" height="315" src="${youtube.url}" title="YouTube video player"
+    //                                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+    //             console.log(youtub);
+    //             url.appendChild(youtub);
+    //         })
+    //     } catch (err) {
+    //         console.error(err);
+    //     }
+    // };
 </script>
-
+<!-- Javascript files-->
+<script src="./public/src/jquery.min.js"></script>
+<script src="./public/src/popper.min.js"></script>
+<script src="./public/src/bootstrap.bundle.min.js"></script>
+<script src="./public/src/jquery-3.0.0.min.js"></script>
+<script src="./public/src/japan.js"></script>
+<!-- sidebar -->
+<script src="./public/src/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="./public/src/custom.js"></script>
+<script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
 {% endblock %}
