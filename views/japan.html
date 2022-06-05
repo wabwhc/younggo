@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block content%}
+<japan>
+    <div>현지학기제 소개 페이지입니다.</div>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/vBfU2xlZm8o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div id="youtubeUrl"></div>
+</japan>
+
+<script>
+    window.onload = async () => {
+        try {
+            const result = await axios.get('/japan/youtube');
+            const youtubes = result.data;
+            const url = document.querySelector('#youtubeUrl');
+            url.innerHTML = '';
+            console.log(youtubes);
+            youtubes.map(youtube => {
+                let youtub = document.createElement('li');
+                youtub.innerHTML = youtube.content;
+                url.appendChild(youtub);
+                youtub = document.createElement('li');
+                youtub.innerHTML = youtube.url;
+                url.appendChild(youtub);
+            })
+        } catch (err) {
+            console.error(err);
+        }
+    };
+</script>
+
+{% endblock %}

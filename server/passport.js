@@ -1,10 +1,9 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcrypt');
+
 const {User} = require('./models');
 
-const UserObject = {
-
-}
 module.exports = () => {
 
     passport.serializeUser((user, done) => {
@@ -16,27 +15,29 @@ module.exports = () => {
     });
 
     passport.use(new LocalStrategy({
-        usernameField: 'useremail',
-        passwordField: "password",
-        session: true,
+            usernameField: 'useremail',
+            passwordField: "password",
+            session: true,
         },
-        async(useremail, password, done) => {
-            UserObject.useremail = useremail;
-            let result = await User.findAll({
-                where:{
-                    useremail: useremail
+        async (useremail, password, done) => {
+            try {
+                let UserObj = await User.findOne({
+                    where: {useremail}
+                });
+                if (UserObj) {
+                    // const result = await bcrypt.compare(password, UserObj.password);
+                    const result = true;
+                    if (result) {
+                        done(null, UserObj);
+                    } else {
+                        done(null, false, {message: '비밀번호를 확인해주세요'})
+                    }
+                } else {
+                    done(null, false, {message: '가입되지않은 이메일입니다'})
                 }
-            });
-            if(result.length === 1){
-                if(result[0].password === password){
-                    UserObject.username = result[0].username
-                    return done(null, UserObject);
-                }else{
-                    return done(null, false, { message : '비번이 다름' })
-                }
-            }else{
-                return done(null, false, { message : '아이디가 다름' })
+            } catch (err) {
+                console.error(err);
+                done(err);
             }
-        }
-    ))
+        }));
 }

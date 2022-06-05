@@ -6,25 +6,17 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{title}}</title>
-    <link rel="stylesheet" href="public/css/index.css"/>
+    <!--    <link rel="stylesheet" href="public/css/index.css"/>-->
+    <link rel="stylesheet" href="public/css/main.css"/>
+    <link rel="stylesheet" href="./public/css/board.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
 <div id="wrap">
-    <header>
-        <a href="/"> 메인페이지로 </a>
-        <div id="userInfo">
-            {% if isLogin %}
-            <a href="/profile">{{username}}님 안녕하세요</a>
-            <a href="/logout">
-                <button>로그아웃</button>
-            </a>
-            {% else %}
-            <button onclick="location.href='login'">로그인</button>
-            <button onclick="location.href='signup'">회원가입</button>
-            {% endif %}
-        </div>
-    </header>
+
+    {% include 'header.html' %}
+
     {% block content%}
     {% endblock %}
 

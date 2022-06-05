@@ -55,31 +55,146 @@ document.querySelector("#qna_content button").addEventListener('click', async (e
 /* end */
 
 /* 질문 목록 */
-
-const writeButton = async (count) => {
+let c_page = 0;
+const writePage = async () => {
     try {
-        let page =  Math.ceil(count / 10);
-        console.log(page);
         let ul = document.querySelector('#table_page');
         ul.innerHTML = '';
         let li = document.createElement('li');
-        li.id = 'page_next';
+        li.id = 'page_back';
         li.textContent = '<이전';
-        ul.appendChild(li);
-        for(let i=1; i<=page; i++){
-            li = document.createElement('li');
-            li.id = `list_${i}`;
-            li.textContent = `${i}`;
-            if(i >= 10) {
-                li.style.display = none;
+        li.addEventListener('click', async (e) => {
+            try {
+                if(c_page > 0) {
+                    c_page -= 1;
+                    console.log(c_page);
+                    writePage();
+                    let qna_page = c_page * 10 + 1;
+                    let result = await axios.get(`api/board/click?qna_page=${qna_page}`);
+                    let articles = result.data.apiResult;
+                    writeTitle(articles);
+                }
+            } catch (err) {
+                console.error(err);
             }
+            
+        });
+        ul.appendChild(li);
+        for(let i=1; i<=10; i++){
+            let li = document.createElement('li');
+            li.id = `list_${i}`
+            li.className = `page`;
+            li.textContent = `${i + (10 * c_page)}`;
+            li.addEventListener('click', async (e) => {
+                try {
+                    let qna_page = e.target.textContent;
+                    let result = await axios.get(`api/board/click?qna_page=${qna_page}`);
+                    let articles = result.data.apiResult;
+                    writeTitle(articles);
+                } catch (err) {
+                    console.error(err);
+                }
+            });
             ul.appendChild(li);
         }
         li = document.createElement('li');
-        li.id = 'page_back';
+        li.id = 'page_next';
         li.textContent = '다음>';
+        li.addEventListener('click', async (e) => {
+            try {
+                c_page += 1;
+                console.log(c_page);
+                writePage();
+                let qna_page = c_page * 10 + 1;
+                let result = await axios.get(`api/board/click?qna_page=${qna_page}`);
+                let articles = result.data.apiResult;
+                writeTitle(articles);
+            } catch (err) {
+                console.error(err);
+            }
+            
+            
+        });
         ul.appendChild(li);
-        
+    } catch (err) {
+        console.error(err);
+    }
+    
+}
+
+const writeTitle = async (articles) => {
+    try {
+        let tbody = document.querySelector('#article_body');
+        tbody.innerHTML = '';
+        articles.map((article) => {
+            /* 질문 */
+            let tr = document.createElement('tr');
+            tr.id = `aritcle_${article.article_id}`;
+            let td = document.createElement('td');
+            td.textContent = `${article.article_id}`;
+            tr.appendChild(td);
+            td = document.createElement('td');
+            td.textContent = `${article.article_title}`;
+            tr.appendChild(td);
+            td = document.createElement('td');
+            td.textContent = `${article.useremail}`;
+            tr.appendChild(td);
+            td = document.createElement('td');
+            td.textContent = `${article.article_at}`;
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+            /* 질문 답변 */
+            tr = document.createElement('tr');
+            tr.style.height = '150px';
+            tr.style.display = 'none';
+            tr.id = `article_${article.article_id}_content`;
+            td = document.createElement('td');
+            td.textContent = `${article.category}`;
+            tr.appendChild(td);
+            td = document.createElement('td');
+            td.colSpan = 3;
+            td.textContent = `${article.article_content}`;
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+            /* 질문답 입력 */
+            if(isZoo) {
+                tr = document.createElement('tr');
+                tr.style.height = '100px';
+                tr.id = `article_${article.article_id}_input`;
+                tr.style.display = 'none';
+                td = document.createElement('td');
+                td.colSpan = 4;
+                let form = document.createElement('form');
+                let input = document.createElement('input');
+                input.style.float = 'left';
+                input.style.height = '100px';
+                input.style.width = '400px';
+                input.style.marginLeft = '80px';
+                input.style.textAlign = 'center';
+                input.style.fontSize = '20px';
+                input.placeholder = '답변 입력';
+                let button = document.createElement('button');
+                button.type = 'submit';
+                button.textContent = '입력';
+                button.style.width = '50px';
+                button.style.height = '40px';
+                button.style.marginTop = '30px';
+                form.appendChild(input);
+                form.appendChild(button);
+                td.appendChild(form);
+                tr.appendChild(td);
+                tbody.appendChild(tr);
+            }
+            document.querySelector(`#aritcle_${article.article_id}`).addEventListener('click', (e) => {
+                if(document.querySelector(`#article_${article.article_id}_content`).style.display === 'none'){
+                    document.querySelector(`#article_${article.article_id}_content`).style.display = '';
+                    document.querySelector(`#article_${article.article_id}_input`).style.display = '';
+                } else {
+                    document.querySelector(`#article_${article.article_id}_content`).style.display = 'none';
+                    document.querySelector(`#article_${article.article_id}_input`).style.display = 'none';
+                }
+            });
+        });
     } catch (err) {
         console.error(err);
     }
@@ -87,77 +202,17 @@ const writeButton = async (count) => {
 
 let count;
 let isZoo;
-(() => {
-    count = document.querySelector('#article_qna');
-    isZoo = document.querySelector('#isZoo');
-    writeButton(count.textContent);
-})();
-
-document.querySelectorAll("#article_body tr").forEach((el) => {
-    el.addEventListener('click', (e) => {
-        const id = el.querySelector('td').textContent;
-        getContent(id);
-    })
-});
-
-const getContent = async (id) => {
+( async () => {
     try {
-        if(document.querySelector(`#article_${id}_content td`)){
-            document.querySelector(`#article_${id}_content`).style.height = '0px';
-            document.querySelector(`#article_${id}_content td`).remove();
-            document.querySelector(`#article_${id}_content td`).remove();
-            document.querySelector(`#article_${id}_input td`).remove();
-        } else {
-            const result = await axios.get(`/board/${id}/content`);
-            const contents = result.data;
-            let tr = document.querySelector(`#article_${id}_content`);
-            tr.style.height = '100px';
-            tr.innerHTML = '';
-            contents.map(content => {
-                let td = document.createElement('td');
-                td.textContent = content.article_content;
-                tr.appendChild(td);
-                td = document.createElement('td');
-                td.colSpan = 2;
-                td.textContent = content.category;
-                tr.appendChild(td);
-            });
-            if(isZoo){
-                tr = document.querySelector(`#article_${id}_input`);
-                tr.innerHTML = '';
-                td = document.createElement('td');
-                let form = document.createElement('form');
-                let input = document.createElement('input');
-                input.placeholder = '답변 입력';
-                form.appendChild(input);
-                td.appendChild(form);
-                tr.appendChild(td);
-            }
-            
-        }
+        count = document.querySelector('#article_qna').textContent;
+        isZoo = document.querySelector('#isZoo').textContent;
+        writePage();
+
+        let qna_page = 1;
+        let result = await axios.get(`api/board/click?qna_page=${qna_page}`);
+        let articles = result.data.apiResult;
+        writeTitle(articles);
     } catch (err) {
         console.error(err);
     }
-}
-/* end */
-
-/* 테이블 페이지 */
-/* document.querySelectorAll("#table_page").forEach((el) => {
-    el.addEventListener('click', (e) => {
-        const id = el.querySelector('li').id;
-        reText(id);
-    });
-});
-
-const reText = async (id) => {
-    try {
-        const li = document.querySelector(`#${id}`);
-        console.log(li);
-    }
-    catch(err) {
-        console.log(err);
-    }
-} */
-/* end */
-
-/* axios.get($) */
+})();

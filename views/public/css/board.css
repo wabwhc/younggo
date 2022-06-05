@@ -150,14 +150,8 @@ table {
   border-bottom: 1px solid rgb(236, 236, 236);
 }
 
-.table_footer_list {
-  margin: 10px 50px 10px 0px;
-}
-
 #table_page li {
   display: inline-block;
-  /* width: 30px;
-  height: 25px; */
   font-size: 20px;
   text-align: center;
   cursor: pointer;

@@ -143,7 +143,7 @@ app.get('/board', async(req, res) => {
 }); */
 
 /* 추가 */
-app.get('/board/:article_id/content',
+/* app.get('/board/:article_id/content',
     async (req, res, next) => {
         try {
             const content = await Article.findAll({
@@ -169,7 +169,7 @@ app.post('/board/createArticle', async (req, res, next) => {
     } catch (err) {
         console.error(err)
     }
-});
+}); */
 /* end */
 
 app.post('/login', passport.authenticate('local', {
