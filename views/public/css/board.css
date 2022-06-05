@@ -7,6 +7,9 @@
   display: flex;
   margin: 10px 0px 0px 0px;
   justify-content:left;
+}
+
+#category_title h1:nth-child(n) {
   cursor: pointer;
 }
 
@@ -45,9 +48,9 @@
 }
 
 .qna{
-    list-style: none;
-    width: 30%;
-    background: #aaa;
+  list-style: none;
+  width: 30%;
+  background: #aaa;
 }
 
 /* 숨기고 열기 */

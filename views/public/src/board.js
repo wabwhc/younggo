@@ -80,35 +80,44 @@ const writePage = async () => {
             
         });
         ul.appendChild(li);
+        let j = 0;
         for(let i=1; i<=10; i++){
-            let li = document.createElement('li');
-            li.id = `list_${i}`
-            li.className = `page`;
-            li.textContent = `${i + (10 * c_page)}`;
-            li.addEventListener('click', async (e) => {
-                try {
-                    let qna_page = e.target.textContent;
-                    let result = await axios.get(`api/board/click?qna_page=${qna_page}`);
-                    let articles = result.data.apiResult;
-                    writeTitle(articles);
-                } catch (err) {
-                    console.error(err);
-                }
-            });
-            ul.appendChild(li);
+            if(((100 * c_page) + (j * 10) + (i)) <= page) {
+                console.log((100 * c_page) + (j * 10) + (i));
+                console.log(page);
+                let li = document.createElement('li');
+                li.id = `list_${i}`
+                li.className = `page`;
+                li.textContent = `${i + (10 * c_page)}`;
+                li.addEventListener('click', async (e) => {
+                    try {
+                        let qna_page = e.target.textContent;
+                        let result = await axios.get(`api/board/click?qna_page=${qna_page}`);
+                        let articles = result.data.apiResult;
+                        writeTitle(articles);
+                    } catch (err) {
+                        console.error(err);
+                    }
+                });
+                ul.appendChild(li);
+                j++;
+            }
+            
         }
         li = document.createElement('li');
         li.id = 'page_next';
         li.textContent = '다음>';
         li.addEventListener('click', async (e) => {
             try {
-                c_page += 1;
-                console.log(c_page);
-                writePage();
-                let qna_page = c_page * 10 + 1;
-                let result = await axios.get(`api/board/click?qna_page=${qna_page}`);
-                let articles = result.data.apiResult;
-                writeTitle(articles);
+                if((c_page + 1) * 100 < page) {
+                    c_page += 1;
+                    writePage();
+                    let qna_page = c_page * 10 + 1;
+                    let result = await axios.get(`api/board/click?qna_page=${qna_page}`);
+                    let articles = result.data.apiResult;
+                    writeTitle(articles);
+                }
+                
             } catch (err) {
                 console.error(err);
             }
@@ -200,11 +209,11 @@ const writeTitle = async (articles) => {
     }
 }
 
-let count;
+let page;
 let isZoo;
 ( async () => {
     try {
-        count = document.querySelector('#article_qna').textContent;
+        page = document.querySelector('#article_qna').textContent;
         isZoo = document.querySelector('#isZoo').textContent;
         writePage();
 
