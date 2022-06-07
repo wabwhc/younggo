@@ -6,29 +6,40 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{title}}</title>
-    <link rel="stylesheet" href="public/css/index.css"/>
+    <!--    <link rel="stylesheet" href="public/css/index.css"/>-->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- site metas -->
+    <title>{{title}}</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="./public/css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="./public/css/style.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="./public/css/responsive.css">
+    <!-- fevicon -->
+    <link rel="icon" href="./public/images/fevicon.png" type="image/gif"/>
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="./public/css/jquery.mCustomScrollbar.min.css">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+          media="screen">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+
 </head>
 <body>
 <div id="wrap">
-    <header>
-        <a href="/"> 메인페이지로 </a>
-        <div id="userInfo">
-            {% if isLogin %}
-            <a href="/profile">{{username}}님 안녕하세요</a>
-            <a href="/logout">
-                <button>로그아웃</button>
-            </a>
-            {% else %}
-            <button onclick="location.href='login'">로그인</button>
-            <button onclick="location.href='signup'">회원가입</button>
-            {% endif %}
-        </div>
-    </header>
+
+    {% include 'header.html' %}
+
     {% block content%}
     {% endblock %}
 
-    {% include 'nav.html' %}
     {% include 'footer.html' %}
 
 </div>

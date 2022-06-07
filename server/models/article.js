@@ -37,8 +37,8 @@ module.exports = class Article extends Sequelize.Model {
             modelName: 'article',
             tableName: 'articles',
             paranoid: false,
-            charset: 'utf8', // 한글 설정 
-            collate: 'utf8_general_ci', 
+            charset: 'utf8', // 한글 설정
+            collate: 'utf8_general_ci',
         })
     }
 

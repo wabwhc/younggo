@@ -1,13 +1,99 @@
 {% extends 'layout.html' %}
 
 {% block content%}
-    {% for a in article.qna %}
-    <h1 id="{{a.article_id}}" class="article">{{a.article_title}}</h1>
-    <H4>{{a.category}}</H4>
-    {% endfor%}
-    ----------------------------
-    {% for a in article.wells[0] %}
-    <h1 id="{{a.article_id}}" class="article">{{a.well_title}}</h1>
-    <H4>{{a.well_category}}</H4>
-    {% endfor%}
+<p id="article_qna" style="display: none;">{{article.qna}}</p>
+<p id="isZoo" style="display: none;">{{isZoo}}</p>
+
+<h1>자주하는 질문</h1>
+<div id="category_title">
+    <h1 class="lesson_title">레슨</h1>
+    <h1 class="study_title">스터디</h1>
+    <h1 class="account_title">계정</h1>
+</div>
+
+<div id="lesson">
+    <ul class="qna">
+        {% for well in article.wells[0] %}
+        <li>
+            <input type="checkbox" id="qna-{{well.well_id}}">
+            <label for="qna-{{well.well_id}}">{{well.well_title}}</label>
+            <div>
+                <p>{{well.well_reply}}</p>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<div id="study">
+    <ul class="qna">
+        {% for well in article.wells[1] %}
+        <li>
+            <input type="checkbox" id="qna-{{well.well_id}}">
+            <label for="qna-{{well.well_id}}">{{well.well_title}}</label>
+            <div>
+                <p>{{well.well_reply}}</p>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<div id="account">
+    <ul class="qna">
+        {% for well in article.wells[2] %}
+        <li>
+            <input type="checkbox" id="qna-{{well.well_id}}">
+            <label for="qna-{{well.well_id}}">{{well.well_title}}</label>
+            <div>
+                <p>{{well.well_reply}}</p>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div id="qna_submit">
+    <h1>질문 게시판</h1>
+    <button class="input_qna">글쓰기</button>
+</div>
+
+<form action="/api/board" method="post" id="qna_content">
+    <input type="text" placeholder="질문 제목" class="qna_write_title" name="article_title"><br>
+    <select name="카테고리" required id="input_category" form="qna_content">
+        <option value="">카테고리 선택</option>
+        <option value="레슨">레슨</option>
+        <option value="스터디">스터디</option>
+        <option value="계정">계정</option>
+    </select>
+    <input type="text" placeholder="질문 내용" class="qna_wirte_content" name="article_content"><br>
+    <button type="submit">질문 등록</button>
+</form>
+
+<div style="padding-top: 10px;">
+    <table id="qna_table" style="width: 100%;">
+        <caption style="display: none;"><span>질문 게시판</span></caption>
+        <colgroup>
+            <col style="width: 10%;">
+            <col style="width: 30%;">
+            <col style="width: 30%;">
+            <col style="width: 30%;">
+        </colgroup>
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>질문일자</th>
+        </tr>
+        </thead>
+        <tbody id="article_body">
+        </tbody>
+    </table>
+</div>
+<ul id="table_page" style="width: 100%;">
+
+</ul>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="public/src/board.js"></script>
+<link rel="stylesheet" href="./public/css/board.css">
 {% endblock %}
