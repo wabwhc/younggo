@@ -4,7 +4,7 @@ document.querySelector('.lesson_title').addEventListener('click', (e) => {
     document.querySelector('#lesson').style.display = 'block';
     document.querySelector('#study').style.display = 'none';
     document.querySelector('#account').style.display = 'none';
-    document.querySelector('.lesson_title').style.background = '#aaa';
+    document.querySelector('.lesson_title').style.background = 'rgb(228, 228, 228)';
     document.querySelector('.study_title').style.background = '#fff';
     document.querySelector('.account_title').style.background = '#fff';
 });
@@ -14,7 +14,7 @@ document.querySelector('.study_title').addEventListener('click', (e) => {
     document.querySelector('#lesson').style.display = 'none';
     document.querySelector('#account').style.display = 'none';
     document.querySelector('.lesson_title').style.background = '#fff';
-    document.querySelector('.study_title').style.background = '#aaa';
+    document.querySelector('.study_title').style.background = 'rgb(228, 228, 228)';
     document.querySelector('.account_title').style.background = '#fff';
 });
 document.querySelector('.account_title').addEventListener('click', (e) => {
@@ -24,7 +24,7 @@ document.querySelector('.account_title').addEventListener('click', (e) => {
     document.querySelector('#study').style.display = 'none';
     document.querySelector('.lesson_title').style.background = '#fff';
     document.querySelector('.study_title').style.background = '#fff';
-    document.querySelector('.account_title').style.background = '#aaa';
+    document.querySelector('.account_title').style.background = 'rgb(228, 228, 228)';
 });
 /* end */
 
@@ -38,17 +38,20 @@ document.querySelector(".input_qna").addEventListener('click', (e) => {
     }
 });
 document.querySelector("#qna_content button").addEventListener('click', async (e) => {
-    if(!document.querySelector("#qna_content .qna_write_title").value){
-        e.preventDefault();
-        return alert("질문 제목을 입력하세요.");
-    }
-    if(!document.querySelector("#qna_content .qna_wirte_content").value){
-        e.preventDefault();
-        return alert("질문 내용을 입력하세요.");
-    }
-    try{
-        
-    }catch(err){
+    try {
+        if(isZoo) {
+            if(!document.querySelector("#qna_content .qna_write_title").value){
+                e.preventDefault();
+                return alert("질문 제목을 입력하세요.");
+            }
+            if(!document.querySelector("#qna_content .qna_wirte_content").value){
+                e.preventDefault();
+                return alert("질문 내용을 입력하세요.");
+            }
+        } else {
+            return alert("로그인을 해주세요.")
+        }
+    } catch (err) {
         console.error(err);
     }
 });
@@ -56,6 +59,7 @@ document.querySelector("#qna_content button").addEventListener('click', async (e
 
 /* 질문 목록 */
 let c_page = 0;
+
 const writePage = async () => {
     try {
         let ul = document.querySelector('#table_page');
@@ -80,11 +84,10 @@ const writePage = async () => {
             
         });
         ul.appendChild(li);
-        let j = 0;
         for(let i=1; i<=10; i++){
-            if(((100 * c_page) + (j * 10) + (i)) <= page) {
-                console.log((100 * c_page) + (j * 10) + (i));
-                console.log(page);
+            if((c_page * 10) + i <= Math.ceil((page / 10))) {
+                console.log(c_page * 10 + i);
+                console.log(Math.ceil(page / 10));
                 let li = document.createElement('li');
                 li.id = `list_${i}`
                 li.className = `page`;
@@ -100,9 +103,7 @@ const writePage = async () => {
                     }
                 });
                 ul.appendChild(li);
-                j++;
             }
-            
         }
         li = document.createElement('li');
         li.id = 'page_next';

@@ -16,25 +16,17 @@
 .lesson_title{
   padding: 10px 25px 10px 25px;
   border: 1px solid #aaa;
-  background: #aaa;
+  background: rgb(228, 228, 228);
 }
-.lesson_title:hover{
-  background-color: #aaa;
-}
+
 .study_title{
   padding: 10px 25px 10px 25px;
   border: 1px solid #aaa;
 }
 
-.study_title:hover{
-  background-color: #aaa;
-}
 .account_title{
   padding: 10px 25px 10px 25px;
   border: 1px solid #aaa;
-}
-.account_title:hover{
-  background-color: #aaa;
 }
 
 #lesson {
@@ -49,8 +41,7 @@
 
 .qna{
   list-style: none;
-  width: 30%;
-  background: #aaa;
+  background: rgb(228, 228, 228);
 }
 
 /* 숨기고 열기 */
@@ -105,18 +96,25 @@
 #qna_submit{
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-top: 10px;
 }
 
 #qna_submit button {
   width: 63px;
   height: 40px;
-  margin-left: 230px;
   cursor: pointer;
 }
 
 #qna_content{
   display: none;
+}
+
+#qna_content #input_category {
+  display: block;
+  width: 50%;
+  height: 20px;
+  margin-bottom: 5px;
 }
 
 #qna_content button {
@@ -125,14 +123,14 @@
 }
 
 .qna_write_title{
-  width: 30%;
-  height: 25px;
+  width: 50%;
+  height: 30px;
   margin-bottom: 5px;
 }
 
 .qna_wirte_content{
   height: 150px;
-  width: 30%;
+  width: 50%;
   margin-bottom: 5px;
 }
 
@@ -153,8 +151,13 @@ table {
   border-bottom: 1px solid rgb(236, 236, 236);
 }
 
+
+#table_page {
+  display: inline-flex;
+  justify-content: center;
+}
+
 #table_page li {
-  display: inline-block;
   font-size: 20px;
   text-align: center;
   cursor: pointer;
@@ -163,13 +166,16 @@ table {
 #table_page li:nth-child(n+2){
   width: 30px;
   height: 25px;
+  margin-left: 5px;
 }
 
 #table_page li:nth-last-child(1) {
   width: auto;
   height: auto;
+  margin-left: 5px;
 }
 
 #table_page li:hover {
   text-decoration: underline;
+  color: aquamarine;
 }
