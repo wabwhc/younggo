@@ -42,6 +42,8 @@ body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.80857;
     font-weight: normal;
+    width: 80%;
+    margin: auto;
 }
 
 a {
@@ -248,7 +250,7 @@ button {
     position: fixed;
     z-index: 9999999;
     background: #fff;
-    width: 100%;
+    width: 80%;
     height: 100%;
 }
 
@@ -261,6 +263,7 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: auto;
 }
 
 .loader img {

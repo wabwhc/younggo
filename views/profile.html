@@ -2,11 +2,11 @@
 
 {% block content%}
 <div id="contact" class="profile-contact">
-    <div class="container">
+    <div class="user-profile" style="float: left; width: 100%">
         <p style="font-size: 30px; color: white; text-align: center;">{{username}}님의 프로필</p>
     </div>
     <div class="img" style="float: left; width: 40%">
-        <img src="{{userimg}}" alt="프로필사진" width="150px" style="margin: 10px">
+        <img src="{{userimg}}" alt="프로필사진" width="60%" style="margin: 10px">
     </div>
     {% if updateMod %}
     <form id="img-form" action="/post" method="post" enctype="multipart/form-data">

@@ -100,45 +100,85 @@ app.get('/profile', async (req, res) => {
     }
 })
 
-app.get('/board', async (req, res) => {
+app.get('/board', async(req, res) => {
+    let article = {};
+    let result1;
+    let subject = ['레슨', '스터디', '계정']
+    let result2 = []
+    if(req.user.useremail === undefined){
+        req.user.useremail = 'apply1@naver.com'
+    }
+    let isZoo = true;
+    result1 = await Article.count(); // 글 개수
+    article.qna = result1;
+    let istrue = await User.findOne({
+        attributes: ['usercode'],
+        where: {
+            useremail : req.user.useremail
+        }
+    })
+
+    if(istrue === null){
+        console.log(132)
+        isZoo = false;
+    }
+    console.log(isZoo)
+    for(let i = 0; i < 3; i++){
+        try{
+
+            result2[i] = await Well.findAll({
+                raw:true,
+                attributes:['well_id', 'well_title', 'well_category', 'well_reply'], // well_reply 추가
+                where: {
+                    well_category : `${subject[i]}`
+                }
+            })
+
+        }catch(err){}
+    }
+    article.wells = result2
+    res.render('board.html', {article, username : req.user.username, isLogin :req.isLogin, isZoo});
+});
+
+/* app.get('/board', async(req, res) => {
     let article = {};
     let result1 = await Article.findAll({
-        raw: true,
-        attributes: ['article_id', 'article_title', 'useremail', 'category']
+        raw:true,
+        attributes:['article_id','article_title', 'useremail', 'category'] // 카테고리 삭제 질문 답 추가 요망
     })
     article.qna = result1;
     let subject = ['레슨', '스터디', '계정']
     let result2 = []
-    for (let i = 0; i < 3; i++) {
+    for(let i = 0; i < 3; i++){
         result2[i] = await Well.findAll({
-            raw: true,
-            attributes: ['well_id', 'well_title', 'well_category'],
+            raw:true,
+            attributes:['well_id', 'well_title', 'well_category', 'well_reply'], // reply 추가
             where: {
-                well_category: `${subject[i]}`
+                well_category : `${subject[i]}`
             }
         })
     }
     console.log(result2)
     article.wells = result2
-    res.render('board.html', {article, username: req.user.username, isLogin: req.isLogin});
-})
+    res.render('board.html', {article, username : req.user.username, isLogin :req.isLogin});
+}); */
 
-app.get('/board/:article_id/content',
+/* 추가 */
+/* app.get('/board/:article_id/content',
     async (req, res, next) => {
         try {
             const content = await Article.findAll({
-                where: {article_id: req.params.article_id},
+                    where: {article_id: req.params.article_id},
             });
             res.json(content);
         } catch (err) {
             console.error(err);
             next(err);
         }
-    })
-
+});
 app.post('/board/createArticle', async (req, res, next) => {
     try {
-        const {article_title, article_content, category} = req.body;
+        const {article_title, article_content, category } = req.body;
         await Article.create({
             article_title,
             article_content,
@@ -149,7 +189,8 @@ app.post('/board/createArticle', async (req, res, next) => {
     } catch (err) {
         console.error(err)
     }
-})
+}); */
+/* end */
 
 app.post('/login',
     passport.authenticate('local',

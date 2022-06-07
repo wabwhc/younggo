@@ -43,9 +43,19 @@
     .navigation.navbar {
         padding: 27px 16px 27px 0;
     }
+
     .sign_btn {
-        display: none;
+        padding-left: 0;
     }
+
+    .sign_btn a {
+        padding: 5px 20px;
+        font-size: 15px;
+    }
+
+    /*.sign_btn {*/
+    /*    display: none;*/
+    /*}*/
     .carousel-caption h1 {
         font-size: 35px;
         padding-bottom: 0px;
@@ -102,9 +112,19 @@
     .clients .titlepage span {
         margin-left: 92px;
     }
+
     .sign_btn {
-        display: none;
+        padding-left: 0;
     }
+
+    .sign_btn a {
+        padding: 4px 18px;
+        font-size: 14px;
+    }
+
+    /*.sign_btn {*/
+    /*    display: none;*/
+    /*}*/
     .navigation.navbar {
         float: right;
         display: inherit !important;
@@ -159,8 +179,16 @@
         margin-top: 20px;
     }
     .sign_btn {
-        display: none;
+        padding-left: 0;
     }
+
+    .sign_btn a {
+        padding: 3px 17px;
+        font-size: 14px;
+    }
+    /*.sign_btn {*/
+    /*    display: none;*/
+    /*}*/
     .titlepage h2 {
         font-size: 22px;
         line-height: 32px;
