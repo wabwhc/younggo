@@ -4,12 +4,18 @@
 }
 
 #contact .img{
-    width: 100%;
+    float: left;
+    width: 40%;
     margin: 0.8vw;
 }
 #contact .img img{
     float: left;
-    width: 40%;
+    width: 100%;
+}
+
+#contact #img-form{
+    float: bottom;
+    width: 100%;
 }
 
 #contact .user-profile p {
@@ -20,12 +26,30 @@
 }
 
 .user-box p {
-    font-size: 2vw;
+    font-size: 1.5vw;
     color: black;
     margin:  auto;
 }
 
 .user-box h1 {
-    font-size: 3vw;
+    font-size: 2.3vw;
+    color: white;
+}
+
+.profileBtn{
+    float: right;
+    background-color: black;
+    width: 75px;
+    border-radius: 15px;
+    margin: auto 10px;
+}
+.img .profileBtn {
+    float: right;
+    background-color: black;
+    width: 100%;
+    border-radius: 15px;
+    margin: auto;
+}
+.profileBtn a{
     color: white;
 }

@@ -19,7 +19,7 @@ router.get('/', async (req, res, next) => {
             } else {
                 result.userimg = req.user.userimg;
             }
-            res.render('profile.html', {user: result[0], username: req.user.username, isLogin: req.isLogin});
+            res.render('profileUpdate.html', {user: result[0], username: req.user.username, isLogin: req.isLogin});
         } catch (err) {
             console.error(err);
             next(err);

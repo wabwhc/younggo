@@ -22,7 +22,7 @@ sequelize.sync({force: false})  // 서버 실행시마다 테이블을 재생성
     })
     .catch((err) => {
         console.error(err);
-});
+    });
 
 //회원가입부분 라우터로 처리 길어질듯 해서
 const signupR = require('./signup');
@@ -55,7 +55,7 @@ app.use('/img', express.static(path.join(__dirname, '../uploads')));
 //어떤 url이든 로그인 여부 확인후 로그인 되면 req.username에 유저이름
 app.use((req, res, next) => {
     if (req.user === undefined) {
-        req.user = {username: '',useremail:''};
+        req.user = {username: '', useremail: ''};
         req.isLogin = false;
         next();
     } else {
@@ -66,6 +66,7 @@ app.use((req, res, next) => {
 
 //라우터
 const profile = require('./profile');
+const profileUpdate = require('./profileUpdate');
 const board = require('./board');
 const login = require('./login');
 const subjects = require('./subjects');
@@ -82,9 +83,10 @@ app.get('/main', (req, res) => {
 })
 
 app.use('/profile', profile)
+app.use('/profileUpdate', profileUpdate)
 app.use('/board', board);
 app.use('/login', login);
-app.use('/subjects',subjects);
+app.use('/subjects', subjects);
 
 
 const japan = require('./japan');

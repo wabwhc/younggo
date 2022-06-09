@@ -8,18 +8,6 @@
     <div class="img">
         <img src="{{user.userimg}}" alt="프로필사진">
     </div>
-    {% if updateMod %}
-    <form id="img-form" action="/post" method="post" enctype="multipart/form-data">
-        <div class="img-preview">
-            <img id="img-preview" src="" style="display: none;" width="150" alt="미리보기">
-            <input id="img-url" type="hidden" name="url">
-        </div>
-        <div>
-            <input id="img" type="file" accept="image/*">
-            <button type="submit">사진업로드</button>
-        </div>
-    </form>
-    {% endif %}
     <div id="user-profile" style="float: right; width: 45%; margin: 10px;">
         <div class="user-box">
             <p>이름</p>
@@ -36,6 +24,9 @@
         <div class="user-box">
             <p>코멘트</p>
             <h1>{{user.usercomment}}</h1>
+        </div>
+        <div id="userUpdateBtn">
+            <button class="profileBtn" type="button"><a href="/profileUpdate">수정</a></button>
         </div>
     </div>
 </div>

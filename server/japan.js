@@ -1,9 +1,14 @@
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 const {isLoggedIn, isNotloggedIn} = require('./middlewares');
 router.get('/', isLoggedIn, async (req, res) => {
     try {
-        res.render('japan.html', {title: "현지학기제", useremail: req.user.useremail, isLogin: req.isLogin});
+        res.render('japan.html', {
+            title: "현지학기제",
+            useremail: req.user.useremail,
+            username: req.user.username,
+            isLogin: req.isLogin
+        });
     } catch (err) {
         console.error(err)
     }
