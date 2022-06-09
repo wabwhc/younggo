@@ -39,7 +39,7 @@ document.querySelector(".input_qna").addEventListener('click', (e) => {
 });
 document.querySelector("#qna_content button").addEventListener('click', async (e) => {
     try {
-        if(isZoo) {
+        if(isLogin === 'true') {
             if(!document.querySelector("#qna_content .qna_write_title").value){
                 e.preventDefault();
                 return alert("질문 제목을 입력하세요.");
@@ -71,7 +71,6 @@ const writePage = async () => {
             try {
                 if(c_page > 0) {
                     c_page -= 1;
-                    console.log(c_page);
                     writePage();
                     let qna_page = c_page * 10 + 1;
                     let result = await axios.get(`api/board/click?qna_page=${qna_page}`);
@@ -86,8 +85,6 @@ const writePage = async () => {
         ul.appendChild(li);
         for(let i=1; i<=10; i++){
             if((c_page * 10) + i <= Math.ceil((page / 10))) {
-                console.log(c_page * 10 + i);
-                console.log(Math.ceil(page / 10));
                 let li = document.createElement('li');
                 li.id = `list_${i}`
                 li.className = `page`;
@@ -153,7 +150,7 @@ const writeTitle = async (articles) => {
             td.textContent = `${article.article_at}`;
             tr.appendChild(td);
             tbody.appendChild(tr);
-            /* 질문 답변 */
+            /* 질문 내용 */
             tr = document.createElement('tr');
             tr.style.height = '150px';
             tr.style.display = 'none';
@@ -166,8 +163,21 @@ const writeTitle = async (articles) => {
             td.textContent = `${article.article_content}`;
             tr.appendChild(td);
             tbody.appendChild(tr);
-            /* 질문답 입력 */
-            if(isZoo) {
+            /* 질문 답변 */
+            tr = document.createElement('tr');
+            tr.style.height = '150px';
+            tr.style.display = 'none';
+            tr.id = `article_${article.article_id}_reply`;
+            td = document.createElement('td');
+            td.textContent = '뭐넣지'
+            tr.appendChild(td);
+            td = document.createElement('td');
+            td.colSpan = 3;
+            td.textContent = '답변을 기다리는 중';
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+            /* 질문 답변 입력 */
+            if(isZoo === 'true') {
                 tr = document.createElement('tr');
                 tr.style.height = '100px';
                 tr.id = `article_${article.article_id}_input`;
@@ -175,21 +185,24 @@ const writeTitle = async (articles) => {
                 td = document.createElement('td');
                 td.colSpan = 4;
                 let form = document.createElement('form');
-                let input = document.createElement('input');
-                input.style.float = 'left';
-                input.style.height = '100px';
-                input.style.width = '400px';
-                input.style.marginLeft = '80px';
-                input.style.textAlign = 'center';
-                input.style.fontSize = '20px';
-                input.placeholder = '답변 입력';
+                form.action = "/api/board/ans";
+                form.method = "post";
+                form.name = "reply_content";
+                let textarea = document.createElement('textarea');
+                textarea.style.float = 'left';
+                textarea.style.height = '100px';
+                textarea.style.width = '400px';
+                textarea.style.marginLeft = '80px';
+                textarea.style.textAlign = 'center';
+                textarea.style.fontSize = '20px';
+                textarea.placeholder = '답변 입력';
                 let button = document.createElement('button');
                 button.type = 'submit';
                 button.textContent = '입력';
                 button.style.width = '50px';
                 button.style.height = '40px';
                 button.style.marginTop = '30px';
-                form.appendChild(input);
+                form.appendChild(textarea);
                 form.appendChild(button);
                 td.appendChild(form);
                 tr.appendChild(td);
@@ -198,10 +211,16 @@ const writeTitle = async (articles) => {
             document.querySelector(`#aritcle_${article.article_id}`).addEventListener('click', (e) => {
                 if(document.querySelector(`#article_${article.article_id}_content`).style.display === 'none'){
                     document.querySelector(`#article_${article.article_id}_content`).style.display = '';
-                    document.querySelector(`#article_${article.article_id}_input`).style.display = '';
+                    document.querySelector( `#article_${article.article_id}_reply`).style.display = '';
+                    if(isZoo == 'true') {
+                        document.querySelector(`#article_${article.article_id}_input`).style.display = '';
+                    }
                 } else {
                     document.querySelector(`#article_${article.article_id}_content`).style.display = 'none';
-                    document.querySelector(`#article_${article.article_id}_input`).style.display = 'none';
+                    document.querySelector( `#article_${article.article_id}_reply`).style.display = 'none';
+                    if(isZoo == 'true') {
+                        document.querySelector(`#article_${article.article_id}_input`).style.display = 'none';
+                    }
                 }
             });
         });
@@ -216,6 +235,7 @@ let isZoo;
     try {
         page = document.querySelector('#article_qna').textContent;
         isZoo = document.querySelector('#isZoo').textContent;
+        isLogin = document.querySelector('#isLogin').textContent;
         writePage();
 
         let qna_page = 1;

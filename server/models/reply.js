@@ -9,10 +9,6 @@ module.exports = class Reply extends Sequelize.Model {
                 autoIncrement: true,
                 primaryKey: true,
             },
-            reply_title: {
-                type: Sequelize.STRING(100),
-                allowNull: false,
-            },
             useremail: {
                 type: Sequelize.STRING(100),
             },
@@ -23,14 +19,11 @@ module.exports = class Reply extends Sequelize.Model {
             reply_content: {
                 type: Sequelize.STRING(100),
                 allowNull: false,
+                defaultValue: "답변 대기중",
             },
             reply_at: {
                 type: 'timestamp',
                 defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-                allowNull: false
-            },
-            category: {
-                type: Sequelize.STRING(100),
                 allowNull: false
             },
         }, {

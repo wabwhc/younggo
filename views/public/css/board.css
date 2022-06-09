@@ -114,7 +114,7 @@
   display: block;
   width: 50%;
   height: 20px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 #qna_content button {
@@ -125,7 +125,6 @@
 .qna_write_title{
   width: 50%;
   height: 30px;
-  margin-bottom: 5px;
 }
 
 .qna_wirte_content{
@@ -143,6 +142,7 @@ table {
   border: 2px solid #000;
   border-left-width: 0px;
   border-right-width: 0px;
+  text-align: center;
 }
 
 #qna_table td {

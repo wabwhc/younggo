@@ -7,14 +7,14 @@ const sequelize = require('sequelize');
 
 //게시판
 router.post('/board', async (req, res) => {
-    const {article_title, article_content} = req.body;
+    const {article_title, article_content, article_category} = req.body;
     console.log(req.body);
     try {
         await Article.create({
                 article_title,
                 article_content,
                 useremail: req.user.useremail,
-                category: '카테고리',
+                category: article_category,
             },
             {
                 where: {useremail: req.user.useremail}
@@ -34,7 +34,7 @@ router.get('/board/click', async (req, res, next) => {
         let apiResult = await Article.findAll({
             raw:true,
             attributes:['article_id','article_title', 'useremail', 'category', 'article_content',
-                [sequelize.fn('date_format', sequelize.col('article_at'), '%Y-%m-%d %H:%i:%s'), 'article_at']],
+                [sequelize.fn('date_format', sequelize.col('article_at'), '%Y-%m-%d'), 'article_at']],
             order: [['article_id', 'DESC']],
             limit: 10,
             offset: (qna_page-1) * 10
