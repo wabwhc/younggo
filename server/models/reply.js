@@ -19,6 +19,7 @@ module.exports = class Reply extends Sequelize.Model {
             reply_content: {
                 type: Sequelize.STRING(100),
                 allowNull: false,
+                defaultValue : "답변 대기중"
             },
             reply_at: {
                 type: 'timestamp',
