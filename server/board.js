@@ -7,7 +7,7 @@ router.get('/', async(req, res) => {
     let result1;
     let subject = ['레슨', '스터디', '계정']
     let result2 = []
-    
+
     let isZoo = true
     result1 = await Article.count();
     article.qna = result1;
@@ -21,10 +21,10 @@ router.get('/', async(req, res) => {
     if(istrue === null){
         isZoo = false;
     }
-    
+
     for(let i = 0; i < 3; i++){
         try{
-           
+
             result2[i] = await Well.findAll({
                 raw:true,
                 attributes:['well_id', 'well_title', 'well_category'],
@@ -32,7 +32,7 @@ router.get('/', async(req, res) => {
                     well_category : `${subject[i]}`
                 }
             })
-            
+
         }catch(err){}
     }
     article.wells = result2

@@ -2,18 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e55e143f-2117-43b3-9152-6bce0d238be6" name="변경" comment="chanwool">
+      <change afterPath="$PROJECT_DIR$/views/public/css/profile.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/api/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/article.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/article.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/board.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/board.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/board.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/board.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/japan.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/japan.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/public/css/board.css" beforeDir="false" afterPath="$PROJECT_DIR$/views/public/css/board.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/views/public/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/public/css/responsive.css" beforeDir="false" afterPath="$PROJECT_DIR$/views/public/css/responsive.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/views/public/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/public/src/board.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/public/src/board.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/public/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/views/public/css/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/public/css/owl.carousel.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/views/public/css/owl.carousel.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/signup.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +23,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -82,7 +82,12 @@
       <workItem from="1654411576129" duration="12000" />
       <workItem from="1654411622696" duration="2647000" />
       <workItem from="1654414387008" duration="14337000" />
-      <workItem from="1654598212490" duration="2745000" />
+      <workItem from="1654598212490" duration="3215000" />
+      <workItem from="1654654039111" duration="91000" />
+      <workItem from="1654739568482" duration="4121000" />
+      <workItem from="1654754322267" duration="331000" />
+      <workItem from="1654759783592" duration="1188000" />
+      <workItem from="1654761796752" duration="1551000" />
     </task>
     <task id="LOCAL-00001" summary="chanwool">
       <created>1652093861233</created>

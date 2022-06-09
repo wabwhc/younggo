@@ -2,11 +2,11 @@
 
 {% block content%}
 <div id="contact" class="profile-contact">
-    <div class="user-profile" style="float: left; width: 100%">
-        <p style="font-size: 30px; color: white; text-align: center;">{{username}}님의 프로필</p>
+    <div class="user-profile">
+        <p>{{user.username}}님의 프로필</p>
     </div>
-    <div class="img" style="float: left; width: 40%">
-        <img src="{{userimg}}" alt="프로필사진" width="60%" style="margin: 10px">
+    <div class="img">
+        <img src="{{user.userimg}}" alt="프로필사진">
     </div>
     {% if updateMod %}
     <form id="img-form" action="/post" method="post" enctype="multipart/form-data">
@@ -20,18 +20,27 @@
         </div>
     </form>
     {% endif %}
-    <div id="user-profile" style="float: right; width: 45%">
-        <p style="font-size: 30px; color: white;">이름</p>
-        <h1>{{user.username}}</h1>
-        <p style="font-size: 30px; color: white;">이메일</p>
-        <h1>{{user.useremail}}</h1>
-        <p style="font-size: 30px; color: white;">코멘트</p>
-        <h1>{{user.usercomment}}</h1>
-        <p style="font-size: 30px; color: white;">전화번호</p>
-        <h1>{{user.phonenum}}</h1>
+    <div id="user-profile" style="float: right; width: 45%; margin: 10px;">
+        <div class="user-box">
+            <p>이름</p>
+            <h1>{{user.username}}</h1>
+        </div>
+        <div class="user-box">
+            <p>이메일</p>
+            <h1>{{user.useremail}}</h1>
+        </div>
+        <div class="user-box">
+            <p>전화번호</p>
+            <h1>{{user.phonenum}}</h1>
+        </div>
+        <div class="user-box">
+            <p>코멘트</p>
+            <h1>{{user.usercomment}}</h1>
+        </div>
     </div>
 </div>
 <div class="clear"></div>
+<link rel="stylesheet" href="./public/css/profile.css">
 <script>
     if (document.getElementById('img')) {
         document.getElementById('img').addEventListener('change', function (event) {

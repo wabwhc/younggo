@@ -2,7 +2,7 @@ const pass = require('../passport');
 const express = require('express');
 const passport = require('passport')
 const router  = express.Router();
-const {Article} = require('../models');
+const {Article, Reply} = require('../models');
 const sequelize = require('sequelize');
 
 //게시판
@@ -10,7 +10,7 @@ router.post('/board', async (req, res) => {
     const {article_title, article_content} = req.body;
     console.log(req.body);
     try {
-        await Article.create({
+        const newArticle = await Article.create({
                 article_title,
                 article_content,
                 useremail: req.user.useremail,
@@ -19,6 +19,10 @@ router.post('/board', async (req, res) => {
             {
                 where: {useremail: req.user.useremail}
             });
+
+        const newReply = await Reply.create({
+            article_id: newArticle.article_id
+        });
         return res.redirect('/board');
     } catch (err) {
         console.error(err)
