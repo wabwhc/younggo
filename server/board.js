@@ -18,7 +18,7 @@ router.get('/', async(req, res) => {
         }
     })
 
-    if(istrue === null){
+    if(istrue === null || istrue.usercode === '0'){
         isZoo = false;
     }
     
@@ -36,7 +36,6 @@ router.get('/', async(req, res) => {
         }catch(err){}
     }
     article.wells = result2
-    console.log(req.isLogin, '----------------')
     res.render('board.html', {article, username : req.user.username, isLogin :req.isLogin, isZoo});
 })
 module.exports = router;
