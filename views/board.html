@@ -1,9 +1,9 @@
 {% extends 'layout.html' %}
 
 {% block content%}
-<p id="article_qna" style="display: block;">{{article.qna}}</p>
-<p id="isZoo" style="display: block;">{{isZoo}}</p>
-<p id="isLogin" style="display: block;">{{isLogin}}</p>
+<p id="article_qna" style="display: none;">{{article.qna}}</p>
+<p id="isZoo" style="display: none;">{{isZoo}}</p>
+<p id="isLogin" style="display: none;">{{isLogin}}</p>
 
 <h1>자주하는 질문</h1>
 <div id="category_title">
@@ -73,10 +73,10 @@
     <table id="qna_table" style="width: 100%;">
         <caption style="display: none;"><span>질문 게시판</span></caption>
         <colgroup>
-            <col style="width: 10%;">
-            <col style="width: 30%;">
-            <col style="width: 30%;">
-            <col style="width: 30%;">
+            <col style="width: 15%;">
+            <col style="width: 35%;">
+            <col style="width: 25%;">
+            <col style="width: 25%;">
         </colgroup>
         <thead>
         <tr>

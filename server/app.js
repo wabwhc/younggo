@@ -59,7 +59,7 @@ app.use('/img', express.static(path.join(__dirname, '../uploads')));
 //어떤 url이든 로그인 여부 확인후 로그인 되면 req.username에 유저이름
 app.use((req, res, next) => {
     if (req.user === undefined) {
-        req.user = {username: ''};
+        req.user = {username: '', useremail: ''};
         req.isLogin = false;
         next();
     } else {

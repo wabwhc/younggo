@@ -148,9 +148,8 @@ table {
 #qna_table td {
   text-align: center;
   background: rgb(246, 246, 246);
-  border-bottom: 1px solid rgb(236, 236, 236);
+  border-bottom: 1px solid rgb(70, 70, 70);
 }
-
 
 #table_page {
   display: inline-flex;

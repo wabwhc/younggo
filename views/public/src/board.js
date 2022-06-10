@@ -129,11 +129,11 @@ const writePage = async () => {
 
 }
 
-const writeTitle = async (articles) => {
+const writeTitle = async (articles, replys) => {
     try {
         let tbody = document.querySelector('#article_body');
         tbody.innerHTML = '';
-        articles.map((article) => {
+        articles.map((article, index) => {
             /* 질문 */
             let tr = document.createElement('tr');
             tr.id = `aritcle_${article.article_id}`;
@@ -169,11 +169,11 @@ const writeTitle = async (articles) => {
             tr.style.display = 'none';
             tr.id = `article_${article.article_id}_reply`;
             td = document.createElement('td');
-            td.textContent = '뭐넣지'
+            td.textContent = `${replys[index].useremail}`;
             tr.appendChild(td);
             td = document.createElement('td');
             td.colSpan = 3;
-            td.textContent = '답변을 기다리는 중';
+            td.textContent = `${replys[index].reply_content}`;
             tr.appendChild(td);
             tbody.appendChild(tr);
             /* 질문 답변 입력 */
@@ -187,23 +187,27 @@ const writeTitle = async (articles) => {
                 let form = document.createElement('form');
                 form.action = "/api/board/ans";
                 form.method = "post";
-                form.name = "reply_content";
                 let textarea = document.createElement('textarea');
                 textarea.style.float = 'left';
                 textarea.style.height = '100px';
                 textarea.style.width = '400px';
-                textarea.style.marginLeft = '80px';
                 textarea.style.textAlign = 'center';
                 textarea.style.fontSize = '20px';
                 textarea.placeholder = '답변 입력';
+                textarea.name = 'reply_content';
                 let button = document.createElement('button');
                 button.type = 'submit';
                 button.textContent = '입력';
                 button.style.width = '50px';
                 button.style.height = '40px';
                 button.style.marginTop = '30px';
+                let input = document.createElement('input');
+                input.value = `${article.article_id}`;
+                input.name = 'article_id';
+                input.style.display = 'none';
                 form.appendChild(textarea);
                 form.appendChild(button);
+                form.appendChild(input);
                 td.appendChild(form);
                 tr.appendChild(td);
                 tbody.appendChild(tr);
@@ -241,7 +245,8 @@ let isZoo;
         let qna_page = 1;
         let result = await axios.get(`api/board/click?qna_page=${qna_page}`);
         let articles = result.data.apiResult;
-        writeTitle(articles);
+        let replys = result.data.apiResult2;
+        writeTitle(articles, replys);
     } catch (err) {
         console.error(err);
     }
