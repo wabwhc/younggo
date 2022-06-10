@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e55e143f-2117-43b3-9152-6bce0d238be6" name="변경" comment="chanwool">
-      <change afterPath="$PROJECT_DIR$/server/profileUpdate.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/profileUpdate.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/japan.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/japan.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/post.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/post.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/profileUpdate.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/profileUpdate.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/public/css/profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/views/public/css/profile.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -44,6 +40,7 @@
     "last_opened_file_path": "C:/Users/CHANWOOL/WebstormProjects/tp/views",
     "list.type.of.created.stylesheet": "CSS",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "inlay.hints",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -84,7 +81,10 @@
       <workItem from="1654754322267" duration="331000" />
       <workItem from="1654759783592" duration="1188000" />
       <workItem from="1654761796752" duration="1551000" />
-      <workItem from="1654770829910" duration="5062000" />
+      <workItem from="1654770829910" duration="5284000" />
+      <workItem from="1654862634164" duration="44000" />
+      <workItem from="1654862695610" duration="193000" />
+      <workItem from="1654862947248" duration="7819000" />
     </task>
     <task id="LOCAL-00001" summary="chanwool">
       <created>1652093861233</created>

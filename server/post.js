@@ -42,11 +42,18 @@ router.post('/img', isLoggedIn, upload.single('img'), (req, res) => {
 const upload2 = multer();
 router.post('/', isLoggedIn, upload2.none(), async (req, res, next) => {
     try {
-        if (req.body.url == '') {
-            req.body.url = 'default';
+        if (req.body.url == '' && (req.user.userimg == 'default' || req.user.userimg == 'default.png')) {
+            req.body.url = 'default.png';
+        } else if (req.body.url == '' && req.user.userimg != 'default') {
+            req.body.url = req.user.userimg;
+        }
+        if (req.body.newPhonenum == '') {
+            req.body.newPhonenum = req.user.phonenum;
         }
         const post = await User.update({
                 userimg: req.body.url,
+                phonenum: req.body.newPhonenum,
+                usercomment: req.body.newUsercomment,
             },
             {
                 where: {useremail: req.user.useremail}

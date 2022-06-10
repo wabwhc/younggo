@@ -5,7 +5,7 @@
     <div class="user-profile">
         <p>{{user.username}}님의 프로필</p>
     </div>
-    <form class="main_form" action="/userUpdate" method="post">
+    <form id="userUpdate" class="main_form" action="/post" method="post" enctype="multipart/form-data">
         <div class="img">
             <div class="img-preview">
                 <img id="img-preview" src="{{user.userimg}}" width="100%" alt="미리보기">
@@ -28,16 +28,18 @@
             </div>
             <div class="user-box">
                 <p>전화번호</p>
-                <input class="contactus" type="tel" name="phonenum" placeholder="전화번호를 입력해주세요">
+                <input id="phonenum" class="contactus" type="tel" name="newPhonenum" placeholder=""
+                       value="{{user.phonenum}}"
+                       onchange="phonecheck()">
             </div>
             <div class="user-box">
                 <p>코멘트</p>
-                <textarea class="contactus" type="text" name="usercomment" style="height: 200px; overflow:visible;"
-                          placeholder="코멘트를 입력해주세요"></textarea>
+                <textarea class="contactus" type="text" name="newUsercomment" style="height: 200px; overflow:visible;"
+                >{{user.usercomment}}</textarea>
             </div>
             <div id="userUpdateBtn">
+                <button id="updateBtn" class="profileBtn" type="submit">수정</button>
                 <button class="profileBtn" type="button"><a href="/profile">취소</a></button>
-                <button class="profileBtn" type="submit"><a href="/profile">수정</a></button>
             </div>
     </form>
 </div>
@@ -61,5 +63,41 @@
                     });
         });
     }
+
+    let phoneCheck = true;
+    phonecheck = () => {
+        const phonenum = document.querySelector('#phonenum').value;
+        console.log(phonenum);
+        const firstTel = phonenum.substring(0, 3);
+        if (phonenum == '') {
+            return phoneCheck = false;
+        }
+        if (phonenum.length !== 11) {
+            return phoneCheck = false;
+        } else if (firstTel !== ('010' || '011' || '016' || '017' || '018' || '019')) {
+            return phoneCheck = false
+        }
+
+        return phoneCheck = true;
+    }
+
+    document.querySelector('#userUpdate').addEventListener('submit',
+            async (event) => {
+                const phonenum = event.target.newPhonenum;
+                const comment = event.target.newUsercomment;
+
+                if (!phoneCheck) {
+                    event.preventDefault();
+                    phonenum.value = "";
+                    phonenum.placeholder = "휴대폰 번호를 확인해주세요";
+                } else {
+                    try {
+
+                    } catch (err) {
+                        console.error(err);
+                    }
+
+                }
+            })
 </script>
 {% endblock %}
