@@ -47,9 +47,6 @@ router.post('/', isLoggedIn, upload2.none(), async (req, res, next) => {
         } else if (req.body.url == '' && req.user.userimg != 'default') {
             req.body.url = req.user.userimg;
         }
-        if (req.body.newPhonenum == '') {
-            req.body.newPhonenum = req.user.phonenum;
-        }
         const post = await User.update({
                 userimg: req.body.url,
                 phonenum: req.body.newPhonenum,

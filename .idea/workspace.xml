@@ -4,8 +4,8 @@
     <list default="true" id="e55e143f-2117-43b3-9152-6bce0d238be6" name="변경" comment="chanwool">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/post.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/post.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/profileUpdate.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/profileUpdate.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/public/css/profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/views/public/css/profile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/main.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +84,7 @@
       <workItem from="1654770829910" duration="5284000" />
       <workItem from="1654862634164" duration="44000" />
       <workItem from="1654862695610" duration="193000" />
-      <workItem from="1654862947248" duration="7819000" />
+      <workItem from="1654862947248" duration="8465000" />
     </task>
     <task id="LOCAL-00001" summary="chanwool">
       <created>1652093861233</created>
