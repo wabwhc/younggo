@@ -75,7 +75,9 @@ const writePage = async () => {
                     let qna_page = c_page * 10 + 1;
                     let result = await axios.get(`api/board/click?qna_page=${qna_page}`);
                     let articles = result.data.apiResult;
-                    writeTitle(articles);
+                    let replys = result.data.apiResult2;
+                    let names = result.data.nameArray;
+                    writeTitle(articles, replys, names);
                 }
             } catch (err) {
                 console.error(err);
@@ -94,7 +96,9 @@ const writePage = async () => {
                         let qna_page = e.target.textContent;
                         let result = await axios.get(`api/board/click?qna_page=${qna_page}`);
                         let articles = result.data.apiResult;
-                        writeTitle(articles);
+                        let replys = result.data.apiResult2;
+                        let names = result.data.nameArray;
+                        writeTitle(articles, replys, names);
                     } catch (err) {
                         console.error(err);
                     }
@@ -113,7 +117,9 @@ const writePage = async () => {
                     let qna_page = c_page * 10 + 1;
                     let result = await axios.get(`api/board/click?qna_page=${qna_page}`);
                     let articles = result.data.apiResult;
-                    writeTitle(articles);
+                    let replys = result.data.apiResult2;
+                    let names = result.data.nameArray;
+                    writeTitle(articles, replys, names);
                 }
 
             } catch (err) {

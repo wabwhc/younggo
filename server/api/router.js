@@ -75,13 +75,13 @@ router.get('/board/click', async (req, res, next) => {
         })
         let array = new Array();
         let nameArray = new Array();
-        for(let i = 0; i < 10; i++){
+        for(let i = 0; i < apiResult2.length; i++){
             if (apiResult2[i].useremail == null)
                 array[i] = "Default";
             else 
                 array[i] = apiResult2[i].useremail;
         }
-        for(let i = 0; i < 10; i++){
+        for(let i = 0; i < array.length; i++){
             let apiResult3 = await User.findOne({
                 raw:true,
                 attributes:['username'],
@@ -96,7 +96,5 @@ router.get('/board/click', async (req, res, next) => {
         console.error(err);
     }
 })
-
-
 
 module.exports = router;
