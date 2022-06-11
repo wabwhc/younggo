@@ -25,8 +25,7 @@ module.exports = () => {
                     where: {useremail}
                 });
                 if (UserObj) {
-                    // const result = await bcrypt.compare(password, UserObj.password);
-                    const result = true
+                    const result = await bcrypt.compare(password, UserObj.password);
                     if (result) {
                         done(null, UserObj);
                     } else {

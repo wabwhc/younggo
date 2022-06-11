@@ -102,11 +102,11 @@ router.post('/', async (req, res, next) => {
         if(usercode != process.env.USER_CODE){  // 만약 정해진 usercode가 아니면 ''으로 변경
             usercode = '';
         }
-        // const hash = await bcrypt.hash(password, 12);
+        const hash = await bcrypt.hash(password, 12);
         await User.create({
             useremail,
             username,
-            password,
+            password: hash,
             usercode,
             phonenum,
             usercomment,
