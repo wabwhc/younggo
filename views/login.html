@@ -1,26 +1,24 @@
 {% extends 'layout.html' %}
 
 {% block content%}
-<login><h1>로그인입니다.</h1></login>
-<form action="/login" method="post" id="login">
-    <table>
-        <tr>
-            <td>이메일</td>
-            <td><input type="text" name="useremail" id="email" placeholder="이메일"></td>
-            <td><span id="emailMsg"></span></td>
-        </tr>
-        <tr>
-            <td>비밀번호</td>
-            <td><input type="password" name="password" id="password" placeholder="비밀번호"></td>
-            <td><span id="passwordMsg"></span></td>
-        </tr>
-        <tr>
-            <td>
-                <button type="submit">로그인</button>
-            </td>
-            <td><span id="loginMsg"></span></td>
-        </tr>
-    </table>
-</form>
-<script src="public/src/login.js"></script>
+<login>
+    <div class="contact" style="margin: auto">
+        <div class="col-md-6 offset-md-3">
+            <form action="/login" method="post" id="login" class="main_form">
+                <div class="row">
+                    <div class="col-md-12">
+                        <input class="contactus" type="email" name="useremail" id="email" placeholder="이메일" style="ime-mode: disabled;">
+                    </div>
+                    <div class="col-md-12">
+                        <input class="contactus" type="password" name="password" id="password" placeholder="비밀번호">
+                    </div>
+                    <div class="col-sm-12">
+                        <button class="send_btn" type="submit" > 로그인</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="public/src/login.js"></script>
+</login>
 {% endblock %}

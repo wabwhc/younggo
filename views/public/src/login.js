@@ -3,18 +3,9 @@ document.querySelector('#login').addEventListener('submit',
         const useremail = event.target.useremail.value;
         const password = event.target.password.value;
         const loginMsg = document.querySelector('#loginMsg');
-        const emailMsg = document.querySelector('#emailMsg');
-        const passwordMsg = document.querySelector('#passwordMsg');
         if (useremail && password) {
             try {
-                // emailMsg.innerHTML = "";
-                // passwordMsg.innerHTML = "";
-                // // 만약 email이 없거나 비밀번호가 틀릴결우 아이디 비밀번호를 확인해달라고 메시지 전달
-                // if (emaildata == 없음 || passworddata == 틀릴경우) {
-                //     event.preventDefault();
-                //     loginMsg.innerHTML = "이메일이나 비밀번호를 확인해주세요.";
-                //     loginMsg.style.color = 'red';
-                // }
+
             } catch (err) {
                 console.error(err);
             }

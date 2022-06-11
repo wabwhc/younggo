@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const {User} = require('./models');
 
 module.exports = () => {
+
     passport.serializeUser((user, done) => {
         done(null, user);
     });
@@ -18,7 +19,7 @@ module.exports = () => {
             passwordField: "password",
             session: true,
         },
-        async (useremail, password, done) => { //verify function
+        async (useremail, password, done) => {
             try {
                 let UserObj = await User.findOne({
                     where: {useremail}
@@ -28,16 +29,14 @@ module.exports = () => {
                     if (result) {
                         done(null, UserObj);
                     } else {
-                        done(null, false, {message: '비번이 다름'})
+                        done(null, false, {message: '비밀번호를 확인해주세요'})
                     }
                 } else {
-                    done(null, false, {message: '아이디가 다름'})
+                    done(null, false, {message: '가입되지않은 이메일입니다'})
                 }
             } catch (err) {
                 console.error(err);
                 done(err);
             }
-
-        }
-    ))
+        }));
 }

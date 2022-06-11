@@ -9,27 +9,27 @@ const conn = mysql.createConnection({
 //--------------------------- insert 유저
 for(let i = 1; i <= 10; i++){
     sql = `insert into users (useremail, password, username, usercode, usercomment, phonenum) values ('test${i}@naver.com', 'test', '이름', 0, '더미데이터에요', '010-0100-0000')`
-    conn.query(sql, ()=>{});
+    conn.query(sql, ()=>{});  
 }
 for(let i = 1; i <= 5; i++){
     sql = `insert into users (useremail, password, username, usercode, usercomment, phonenum) values ('apply${i}@naver.com', 'test', '이름', 'zoo', '더미데이터에요', '010-0100-0000')`
-    conn.query(sql, ()=>{});
+    conn.query(sql, ()=>{});  
 }
 //--------------------------- insert 과목
 let sub = ['자바', '자바스크립트', '파이썬', '루비', '일본어']
 for(let i = 0; i < 5; i++){
     sql = `insert into subjects values ('${sub[i]}')`
-    conn.query(sql, ()=>{});
+    conn.query(sql, ()=>{});    
 }
 //--------------------------- insert 레슨 스터디
 for(let i = 0; i < 5; i++){
     sql = `insert into lessons (useremail, subject, lesson_name, lesson_comment, lesson_count) values ('test${i + 1}@naver.com', '${sub[i]}', '${sub[i]}강의','${sub[i]}수업이에요', ${i + 2})`
-    conn.query(sql, ()=>{});
+    conn.query(sql, ()=>{});    
 }
 
 for(let i = 0; i < 5; i++){
     sql = `insert into studys (useremail, subject, study_name, study_comment, study_count) values ('test${i+6}@naver.com', '${sub[i]}', '${sub[i]}스터디','${sub[i]}스터디이에요', ${i + 2})`
-    conn.query(sql, ()=>{});
+    conn.query(sql, ()=>{});    
 }
 
 //--------------------------- insert 신청 레슨 스터디
@@ -45,21 +45,21 @@ for(let i = 1; i <=5 ; i++){
 
 //--------------------------- insert QnQ reply
 
-for(let i = 1; i <=3 ; i++){
-    sql = `insert into articles (useremail, article_content, category, article_title) values ('test${i}@naver.com', '계정', '테스트용 질문들 카테고리${i}', '더미질문제목${i}')`
+for(let i = 1; i <=100 ; i++){
+    sql = `insert into articles (useremail, article_content, category, article_title) values ('test${parseInt(i/11)+1}@naver.com', '테스트용 질문들 카테고리${i}', '계정', '더미질문제목${i}')`
     conn.query(sql, ()=>{});
 }
-for(let i = 4; i <=5 ; i++){
-    sql = `insert into articles (useremail, article_content, category, article_title) values ('test${i}@naver.com', '레슨', '테스트용 질문들 카테고리${i}', '더미질문제목${i}')`
+for(let i = 1; i <=100 ; i++){
+    sql = `insert into articles (useremail, article_content, category, article_title) values ('test${parseInt(i/11)+1}@naver.com', '레슨레슨레슨레슨레슨레슨레슨레슨${i}', '레슨', '더미질문제목${i}')`
     conn.query(sql, ()=>{});
 }
-for(let i = 6; i <=9 ; i++){
-    sql = `insert into articles (useremail, article_content, category, article_title) values ('test${i}@naver.com', '스터디', '테스트용 질문들 카테고리${i}', '더미질문제목${i}')`
+for(let i = 1; i <=100 ; i++){
+    sql = `insert into articles (useremail, article_content, category, article_title) values ('test${parseInt(i/11)+1}@naver.com', '스터디스터디스터디스터디스터디스터디스터디${i}', '스터디', '더미질문제목${i}')`
     conn.query(sql, ()=>{});
 }
 
-for(let i  = 1; i <= 5; i++){
-    sql = `insert into replys (useremail, reply_title, reply_content, article_id) values ('apply${i}@naver.com', '테스트용 대답들${i}', '테스트용 대답들${i}', ${i})`
+for(let i  = 1; i <= 300; i++){
+    sql = `insert into replys (useremail, reply_content, article_id) values ('apply${parseInt(i/80)+ 1}@naver.com', '테스트용 대답들${i}', ${i})`
     conn.query(sql, ()=>{});
 }
 
@@ -85,7 +85,7 @@ conn.query(sql, ()=>{})
 sql = "insert into wells (well_title, well_reply, well_category) values ('스터디 개설에 인원제한 등이 있나요?','생성자가 지정간으함','스터디')"
 conn.query(sql, ()=>{})
 
-sql = "insert into wells (well_title, well_reply, well_category) values ('스터디 가입은 누구나 할 숭 있나요?','ㅇㅇ','스터디')"
+sql = "insert into wells (well_title, well_reply, well_category) values ('스터디 가입은 누구나 할 수 있나요?','ㅇㅇ','스터디')"
 conn.query(sql, ()=>{})
 
 

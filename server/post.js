@@ -31,7 +31,6 @@ const upload = multer({
     limits: {fileSize: 5 * 1024 * 1024},
 });
 
-
 // POST /post/img
 router.post('/img', isLoggedIn, upload.single('img'), (req, res) => {
     console.log(req.file);
@@ -43,15 +42,17 @@ router.post('/img', isLoggedIn, upload.single('img'), (req, res) => {
 const upload2 = multer();
 router.post('/', isLoggedIn, upload2.none(), async (req, res, next) => {
     try {
-        if (req.body.url == '')
+        if (req.body.url == '') {
             req.body.url = 'default';
+        }
         const post = await User.update({
                 userimg: req.body.url,
             },
             {
                 where: {useremail: req.user.useremail}
             });
-            req.user.userimg = req.body.url;
+
+        req.user.userimg = req.body.url;
         res.redirect('/profile');
     } catch (error) {
         console.error(error);
