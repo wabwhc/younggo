@@ -18,7 +18,7 @@ router.get('/', async(req, res) => {
         }
     })
 
-    if(istrue === null){
+    if(istrue === null || istrue.usercode === ''){
         isZoo = false;
     }
 
