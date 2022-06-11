@@ -96,6 +96,11 @@ app.get('/support', (req, res, next) => {
     res.send("<script>alert('후원계좌: 토스뱅크 1000-2781-2395 김찬울');location.href = document.referrer;</script>");
 })
 
+app.get('/application', (req, res, next) => {
+    res.render('application.html', {username: req.user.username, isLogin: req.isLogin})
+})
+
+
 app.get('/slide', async (req, res, next) => {
     try {
         const slide = await Japan_info.findAll();
