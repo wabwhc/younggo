@@ -21,7 +21,7 @@ sequelize.sync({force: false})  // 서버 실행시마다 테이블을 재생성
         console.log('데이터베이스 연결 성공');
     })
     .catch((err) => {
-               console.error(err);
+        console.error(err);
     });
 
 //회원가입부분 라우터로 처리 길어질듯 해서
@@ -92,6 +92,9 @@ app.use('/subjects', subjects);
 const japan = require('./japan');
 app.use('/japan', japan);
 
+app.get('/support', (req, res, next) => {
+    res.send("<script>alert('후원계좌: 토스뱅크 1000-2781-2395 김찬울');location.href = document.referrer;</script>");
+})
 
 app.get('/slide', async (req, res, next) => {
     try {
