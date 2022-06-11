@@ -35,7 +35,7 @@ module.exports = class User extends Sequelize.Model {
             },
             userimg: {
                 type:  Sequelize.STRING(100),
-                defaultValue: 'default'
+                defaultValue: 'default.png'
             }
         }, {
             sequelize,

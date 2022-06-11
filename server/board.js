@@ -18,12 +18,8 @@ router.get('/', async(req, res) => {
             useremail : req.user.useremail
         }
     })
-<<<<<<< HEAD
-    if(istrue === null || istrue.usercode === '0') {
-=======
 
     if(istrue === null || istrue.usercode === '0'){
->>>>>>> 8cfe4690de1323e61f04a7dbf30dcfb2150a6670
         isZoo = false;
     }
 

@@ -14,10 +14,10 @@ router.get('/', async (req, res, next) => {
                 },
                 attributes: ['useremail', 'username', 'usercomment', 'phonenum', 'usercode', 'userimg']
             })
-            if (req.user.userimg == 'default') {
-                result.userimg = '/img/default.png';
+            if (req.user.userimg == 'default.png') {
+                result[0].userimg = '/img/default.png';
             } else {
-                result.userimg = req.user.userimg;
+                result[0].userimg = req.user.userimg;
             }
             res.render('profileUpdate.html', {user: result[0], username: req.user.username, isLogin: req.isLogin});
         } catch (err) {

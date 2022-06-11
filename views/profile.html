@@ -6,7 +6,7 @@
         <p>{{user.username}}님의 프로필</p>
     </div>
     <div class="img">
-        <img src="{{user.userimg}}" alt="프로필사진">
+        <img id="img-preview" src="{{user.userimg}}" alt="프로필사진">
     </div>
     <div id="user-profile" style="float: right; width: 45%; margin: 10px;">
         <div class="user-box">
@@ -26,28 +26,10 @@
             <h1>{{user.usercomment}}</h1>
         </div>
         <div id="userUpdateBtn">
-            <button class="profileBtn" type="button"><a href="/profileUpdate">수정</a></button>
+            <button class="profileBtn" type="butston"><a href="/profileUpdate">수정</a></button>
         </div>
     </div>
 </div>
 <div class="clear"></div>
 <link rel="stylesheet" href="./public/css/profile.css">
-<script>
-    if (document.getElementById('img')) {
-        document.getElementById('img').addEventListener('change', function (event) {
-            const formData = new FormData();
-            console.log(this, this.files);
-            formData.append('img', this.files[0]);
-            axios.post('/post/img', formData)
-                    .then((res) => {
-                        document.getElementById('img-url').value = res.data.url;
-                        document.getElementById('img-preview').src = res.data.url;
-                        document.getElementById('img-preview').style.display = 'inline';
-                    })
-                    .catch((err) => {
-                        console.error(err);
-                    });
-        });
-    }
-</script>
 {% endblock %}

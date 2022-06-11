@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const {isLoggedIn, isNotloggedIn} = require('./middlewares');
+const {Japan_info} = require('./models');
+
 router.get('/', isLoggedIn, async (req, res) => {
     try {
         res.render('japan.html', {

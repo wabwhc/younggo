@@ -21,7 +21,8 @@ router.post('/board', async (req, res) => {
             });
         await Reply.create({
             reply_content: '답변을 기다리는 중입니다.',
-            article_id: newArticle.article_id
+            article_id: newArticle.article_id,
+            useremail: 'default'
         });
         return res.redirect('/board');
     } catch (err) {

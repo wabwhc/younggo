@@ -253,6 +253,7 @@ let isZoo;
         let articles = result.data.apiResult;
         let replys = result.data.apiResult2;
         let names = result.data.nameArray;
+        console.log(names);
         writeTitle(articles, replys, names);
     } catch (err) {
         console.error(err);
