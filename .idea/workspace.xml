@@ -3,18 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e55e143f-2117-43b3-9152-6bce0d238be6" name="변경" comment="chanwool">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/api/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/board.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/board.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/japan.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/japan.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/profileUpdate.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/profileUpdate.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/profileUpdate.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/profileUpdate.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/public/css/profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/views/public/css/profile.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/views/public/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/public/src/board.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/public/src/board.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +87,7 @@
       <workItem from="1654862947248" duration="10861000" />
       <workItem from="1654874631393" duration="49000" />
       <workItem from="1654934007005" duration="7790000" />
-      <workItem from="1654944332351" duration="5848000" />
+      <workItem from="1654944332351" duration="7577000" />
     </task>
     <task id="LOCAL-00001" summary="chanwool">
       <created>1652093861233</created>
