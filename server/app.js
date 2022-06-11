@@ -21,7 +21,7 @@ sequelize.sync({force: false})  // 서버 실행시마다 테이블을 재생성
         console.log('데이터베이스 연결 성공');
     })
     .catch((err) => {
-        console.error(err);
+               console.error(err);
     });
 
 //회원가입부분 라우터로 처리 길어질듯 해서

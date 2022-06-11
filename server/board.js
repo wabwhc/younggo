@@ -11,14 +11,14 @@ router.get('/', async(req, res) => {
     let isZoo = true
     result1 = await Article.count();
     article.qna = result1;
+
     let istrue = await User.findOne({
         attributes: ['usercode'],
         where: {
             useremail : req.user.useremail
         }
     })
-
-    if(istrue === null){
+    if(istrue === null || istrue.usercode === '0') {
         isZoo = false;
     }
 
@@ -27,7 +27,7 @@ router.get('/', async(req, res) => {
 
             result2[i] = await Well.findAll({
                 raw:true,
-                attributes:['well_id', 'well_title', 'well_category'],
+                attributes:['well_id', 'well_title', 'well_category', 'well_reply'],
                 where: {
                     well_category : `${subject[i]}`
                 }
@@ -36,7 +36,6 @@ router.get('/', async(req, res) => {
         }catch(err){}
     }
     article.wells = result2
-    console.log(req.isLogin, '----------------')
     res.render('board.html', {article, username : req.user.username, isLogin :req.isLogin, isZoo});
-})
+});
 module.exports = router;

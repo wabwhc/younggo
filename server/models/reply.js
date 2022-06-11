@@ -19,12 +19,13 @@ module.exports = class Reply extends Sequelize.Model {
             reply_content: {
                 type: Sequelize.STRING(100),
                 allowNull: false,
+                defaultValue: "답변 대기중",
             },
             reply_at: {
                 type: 'timestamp',
                 defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
                 allowNull: false
-            }
+            },
         }, {
             sequelize,
             timestamps: false,
@@ -32,8 +33,8 @@ module.exports = class Reply extends Sequelize.Model {
             modelName: 'reply',
             tableName: 'replys',
             paranoid: false,
-            charset: 'utf8', // 한글 설정 
-            collate: 'utf8_general_ci', 
+            charset: 'utf8', // 한글 설정
+            collate: 'utf8_general_ci',
         })
     }
 
@@ -41,5 +42,5 @@ module.exports = class Reply extends Sequelize.Model {
         db.Reply.belongsTo(db.User, {foreignKey:'useremail', targetKey:'useremail'});
         db.Reply.belongsTo(db.Article, {foreignKey:'article_id', targetKey:'article_id'});
     }
-    
+
 }

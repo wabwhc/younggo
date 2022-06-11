@@ -2,13 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e55e143f-2117-43b3-9152-6bce0d238be6" name="변경" comment="chanwool">
-      <change afterPath="$PROJECT_DIR$/views/public/css/japan.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/public/image/japan1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/public/image/japan2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/table9.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/japan.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/japan.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/views/public/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/api/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/board.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/board.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/reply.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/reply.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/passport.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/passport.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/signup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/board.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/board.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/public/css/board.css" beforeDir="false" afterPath="$PROJECT_DIR$/views/public/css/board.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/public/src/board.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/public/src/board.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +48,7 @@
     "last_opened_file_path": "C:/Users/CHANWOOL/WebstormProjects/tp/views",
     "list.type.of.created.stylesheet": "CSS",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "inlay.hints",
+    "settings.editor.selected.configurable": "terminal",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -88,7 +93,9 @@
       <workItem from="1654770829910" duration="5284000" />
       <workItem from="1654862634164" duration="44000" />
       <workItem from="1654862695610" duration="193000" />
-      <workItem from="1654862947248" duration="10784000" />
+      <workItem from="1654862947248" duration="10861000" />
+      <workItem from="1654874631393" duration="49000" />
+      <workItem from="1654934007005" duration="3032000" />
     </task>
     <task id="LOCAL-00001" summary="chanwool">
       <created>1652093861233</created>
@@ -129,6 +136,10 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="chanwool" />
     <option name="LAST_COMMIT_MESSAGE" value="chanwool" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="regexState">
     <option name="map">
