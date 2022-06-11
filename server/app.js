@@ -100,6 +100,10 @@ app.get('/profile', async (req, res) => {
     }
 })
 
+app.get('/application', (req, res, next) => {
+    res.render('application.html', {username: req.user.username, isLogin: req.isLogin})
+})
+
 app.get('/board', async (req, res) => {
     let article = {};
     let result1 = await Article.findAll({

@@ -209,8 +209,9 @@ audio:not([controls]) {
  * Remove the border on images inside links in IE 10-.
  */
 
-img {
-  border-style: none;
+#developer img {
+  /* border-style: none; */
+  border-radius: 50%;
 }
 
 /**
