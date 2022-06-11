@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e55e143f-2117-43b3-9152-6bce0d238be6" name="변경" comment="chanwool">
-      <change afterPath="$PROJECT_DIR$/table9.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/api/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/board.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/board.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/reply.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/reply.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/passport.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/passport.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/signup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/board.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/board.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/public/css/board.css" beforeDir="false" afterPath="$PROJECT_DIR$/views/public/css/board.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/public/src/board.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/public/src/board.js" afterDir="false" />
-    </list>
+    <list default="true" id="e55e143f-2117-43b3-9152-6bce0d238be6" name="변경" comment="chanwool" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -95,7 +82,7 @@
       <workItem from="1654862695610" duration="193000" />
       <workItem from="1654862947248" duration="10861000" />
       <workItem from="1654874631393" duration="49000" />
-      <workItem from="1654934007005" duration="3032000" />
+      <workItem from="1654934007005" duration="3475000" />
     </task>
     <task id="LOCAL-00001" summary="chanwool">
       <created>1652093861233</created>
