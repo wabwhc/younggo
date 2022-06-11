@@ -20,7 +20,7 @@ router.post('/board', async (req, res) => {
             where: {useremail: req.user.useremail}
         });
         await Reply.create({
-            reply_content: '없음',
+            reply_content: '답변을 기다리는 중입니다.',
             article_id: newArticle.article_id
         });
             return res.redirect('/board');
@@ -28,7 +28,7 @@ router.post('/board', async (req, res) => {
             console.error(err)
             return res.redirect('/board');
         }
-});
+})
 
 //게시물 답변
 router.post('/board/ans', async (req, res) => {
@@ -43,7 +43,6 @@ router.post('/board/ans', async (req, res) => {
             {
             where: {article_id: article_id}
         });
-            console.log(result);
             return res.redirect('/board');
         } catch (err) {
             console.error(err)
@@ -76,8 +75,12 @@ router.get('/board/click', async (req, res, next) => {
         })
         let array = new Array();
         let nameArray = new Array();
-        for(let i = 0; i < 10; i++)
-            array[i] = apiResult2[i].useremail;
+        for(let i = 0; i < 10; i++){
+            if (apiResult2[i].useremail == null)
+                array[i] = "Default";
+            else 
+                array[i] = apiResult2[i].useremail;
+        }
         for(let i = 0; i < 10; i++){
             let apiResult3 = await User.findOne({
                 raw:true,
@@ -92,6 +95,8 @@ router.get('/board/click', async (req, res, next) => {
     }catch(err){
         console.error(err);
     }
-});
+})
+
+
 
 module.exports = router;

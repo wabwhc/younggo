@@ -129,7 +129,7 @@ const writePage = async () => {
 
 }
 
-const writeTitle = async (articles, replys) => {
+const writeTitle = async (articles, replys, names) => {
     try {
         let tbody = document.querySelector('#article_body');
         tbody.innerHTML = '';
@@ -169,7 +169,7 @@ const writeTitle = async (articles, replys) => {
             tr.style.display = 'none';
             tr.id = `article_${article.article_id}_reply`;
             td = document.createElement('td');
-            td.textContent = `${replys[index].useremail}`;
+            td.textContent = `${names[index].username}`;
             tr.appendChild(td);
             td = document.createElement('td');
             td.colSpan = 3;
@@ -246,7 +246,8 @@ let isZoo;
         let result = await axios.get(`api/board/click?qna_page=${qna_page}`);
         let articles = result.data.apiResult;
         let replys = result.data.apiResult2;
-        writeTitle(articles, replys);
+        let names = result.data.nameArray;
+        writeTitle(articles, replys, names);
     } catch (err) {
         console.error(err);
     }
