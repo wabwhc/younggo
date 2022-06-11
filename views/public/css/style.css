@@ -674,7 +674,8 @@ EDIT ON
 }
 
 img:hover + p.arrow_box {
-  display: block;
+    position: relative;
+  display: inline-block;
 }
 
 
