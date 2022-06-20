@@ -1,0 +1,104 @@
+{% extends 'layout.html' %}
+
+{% block content%}
+<div id="contact" class="profile-contact">
+    <div class="user-profile">
+        <p>{{user.username}}님의 프로필</p>
+    </div>
+    <form id="userUpdate" class="main_form" action="/post" method="post" enctype="multipart/form-data">
+        <div class="img">
+            <div class="img-preview">
+                <img id="img-preview" src="{{user.userimg}}" width="100%" alt="미리보기">
+                <input id="img-url" type="hidden" name="url">
+            </div>
+            <div id="img-form">
+                <input id="img" class="profileBtn" type="file" accept="image/*">
+            </div>
+        </div>
+
+        <div id="user-profile" style="float: right; width: 45%; margin: 10px;">
+
+            <div class="user-box">
+                <p>이름</p>
+                <h1>{{user.username}}</h1>
+            </div>
+            <div class="user-box">
+                <p>이메일</p>
+                <h1>{{user.useremail}}</h1>
+            </div>
+            <div class="user-box">
+                <p>전화번호</p>
+                <input id="phonenum" class="contactus" type="tel" name="newPhonenum" placeholder=""
+                       value="{{user.phonenum}}"
+                       onchange="phonecheck()">
+            </div>
+            <div class="user-box">
+                <p>코멘트</p>
+                <textarea class="contactus" type="text" name="newUsercomment" style="height: 200px; overflow:visible;"
+                >{{user.usercomment}}</textarea>
+            </div>
+            <div id="userUpdateBtn">
+                <button id="updateBtn" class="profileBtn" type="submit">수정</button>
+                <button class="profileBtn" type="button"><a href="/profile">취소</a></button>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+<div class="clear"></div>
+<link rel="stylesheet" href="./public/css/profile.css">
+<script>
+    if (document.getElementById('img')) {
+        document.getElementById('img').addEventListener('change', function (event) {
+            const formData = new FormData();
+            console.log(this, this.files);
+            formData.append('img', this.files[0]);
+            axios.post('/post/img', formData)
+                    .then((res) => {
+                        document.getElementById('img-url').value = res.data.url;
+                        document.getElementById('img-preview').src = res.data.url;
+                        document.getElementById('img-preview').style.display = 'inline';
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                    });
+        });
+    }
+
+    let phoneCheck = true;
+    phonecheck = () => {
+        const phonenum = document.querySelector('#phonenum').value;
+        console.log(phonenum);
+        const firstTel = phonenum.substring(0, 3);
+        if (phonenum == '') {
+            return phoneCheck = false;
+        }
+        if (phonenum.length !== 11) {
+            return phoneCheck = false;
+        } else if (firstTel !== ('010' || '011' || '016' || '017' || '018' || '019')) {
+            return phoneCheck = false
+        }
+
+        return phoneCheck = true;
+    }
+
+    document.querySelector('#userUpdate').addEventListener('submit',
+            async (event) => {
+                const phonenum = event.target.newPhonenum;
+                const comment = event.target.newUsercomment;
+
+                if (!phoneCheck) {
+                    event.preventDefault();
+                    phonenum.value = "";
+                    phonenum.placeholder = "휴대폰 번호를 확인해주세요";
+                } else {
+                    try {
+
+                    } catch (err) {
+                        console.error(err);
+                    }
+
+                }
+            })
+</script>
+{% endblock %}
